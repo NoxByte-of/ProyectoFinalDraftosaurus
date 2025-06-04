@@ -1,0 +1,51 @@
+/* Navbar */
+.btn-login {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 4px;
+  padding: 6px 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-login:hover {
+  background-color: #0b5ed7;
+  color: white;
+}
+
+/* Hero (si decides usarlo luego) */
+.hero {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+/* Botones */
+.btn {
+  background-color: #28a745;
+  color: white;
+}
+.btn:hover {
+  background-color: #218838;
+}
+
+/* Sección Partidas */
+.section-partidas h2 {
+  margin-bottom: 1rem;
+}
+
+/* Sección Jugar */
+.section-jugar {
+  height: 100vh; /* Pantalla completa */
+  background-image: url('img/dinosaurio-fondo.jpg'); /* Cambia esto por tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.section-jugar .content {
+  max-width: 600px;
+  padding: 2rem;
+}
+
