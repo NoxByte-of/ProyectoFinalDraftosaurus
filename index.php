@@ -6,9 +6,9 @@
       <div class="row align-items-start">
         <!-- Partidas Recientes -->
         <div class="col-md-6">
-          <h2>Partidas Recientes</h2>
+          <h2>Partidas recientes</h2><br>
           <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered custom-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -51,8 +51,8 @@
         <div class="col-md-6 d-flex flex-column justify-content-center">
           <div class="mb-4 text-center">
             <h2>¡Juega Draftosaurus!</h2>
-            <p>Demuestra que sos el mejor estratega jurásico.</p>
-            <button class="btn mb-2">Jugar ahora!</button>
+            <p>¡Demuestra que eres el mejor estratega jurásico!</p>
+            <button class="btn mb-2">¡Jugar ahora!</button>
           </div>
           <div class="text-center">
             <h2>¡Registra tu partida!</h2>
