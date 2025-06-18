@@ -1,8 +1,17 @@
+html,
 body {
   background-color: #e0ac5e;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
 }
 p {
-  font-family: 'Bubblegum Sans', sans-serif;
+  font-family: "Bubblegum Sans", sans-serif;
   font-size: 20px;
-  color:#642b0a;
+  color: #642b0a;
 }
