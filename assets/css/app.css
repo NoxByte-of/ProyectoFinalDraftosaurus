@@ -1,8 +1,18 @@
 body {
-  background-color: #e0ac5e;
+  background-color: transparent;
+  background-image: url('../img/fondo.png');
+  background-repeat: repeat;
+  background-size: 1000px 1000px;
+  margin: 0;
+  overflow-x: hidden;
 }
 p {
   font-family: 'Bubblegum Sans', sans-serif;
   font-size: 20px;
   color:#642b0a;
+}
+
+h2 {
+  font-family: 'Poetsen One', sans-serif;
+  color: #5f3014;
 }

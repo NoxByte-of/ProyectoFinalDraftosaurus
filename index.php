@@ -124,11 +124,9 @@
         <p>Draftosaurus es un juego de mesa donde los jugadores deben crear el mejor parque jurásico posible. Cada
           jugador selecciona dinosaurios y los coloca estratégicamente en su parque para maximizar su puntaje.</p>
       </div>
-      <div class="col-md-6">
-        <h2>Reglas del juego</h2>
-        <p>El juego se juega en rondas, donde cada jugador elige un dinosaurio de su mano y lo coloca en su parque. Al
-          final de la partida, se cuentan los puntos basados en la disposición de los dinosaurios y sus tipos.</p>
-      </div>
+      <div class="col-md-6 text-center bg-transparent">
+        <h2>Reglas del juego</h2><br>
+        <button onclick="window.location.href='pages/reglas.php'" class="btn">Ver las reglas</button>
     </div>
   </div>
 </main>
