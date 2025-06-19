@@ -63,7 +63,7 @@
           <div class="card shadow rounded-4 border-0">
             <div class="card-body p-4">
               <h1 class="card-title text-center mb-4 text-warning-emphasis">Draftosaurus - Nuevo Seguimiento</h1>
-              <!-- Tiene una alerta hecha con bootstrap para se muestre que es importante ingresarlos en orden, editarlo luego -->
+              <!-- Tiene una alerta hecha con bootstrap para se muestre que es importante ingresarlos en orden, editarlo lueg -->
               <p class="alert alert-danger">Seleccionar cantidad de jugadores con su nombre, ingresarlos en el sentido de
                 la ronda</p>
               <form>
