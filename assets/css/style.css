@@ -1,8 +1,18 @@
 body {
   background-color: #e0ac5e;
-  margin: 0;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+}
+
 
 .btn {
   background-color: #3c6b16;
@@ -10,7 +20,7 @@ body {
   font-family: 'Bubblegum Sans', sans-serif;
   font-size: 20px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  padding: 10px 20px !important;
+  padding: 10px 20px;
 }
 .btn:hover {
   transform: scale(1.02);
@@ -51,8 +61,8 @@ p {
 
 
 .custom-table thead th {
-  background-color: #995c29 !important;
-  color: rgb(255, 236, 208) !important;
+  background-color: #995c29;
+  color: rgb(255, 236, 208);
   font-family: 'Bubblegum Sans', sans-serif;
   text-align: center;
   font-size: 20px;
@@ -61,6 +71,5 @@ p {
 
 .custom-table th,
 .custom-table td {
-  border: 2px solid #532402 !important;
+  border: 2px solid #532402;
 }
-

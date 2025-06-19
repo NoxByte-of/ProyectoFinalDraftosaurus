@@ -1,5 +1,5 @@
-
 .navbar {
+  position: relative;
   height: 100px;
 }
 
@@ -7,20 +7,62 @@
   background-color: rgb(168, 111, 35);
 }
 
+.container-fluid {
+  display: flex !important; /* aseguramos flex para alinear logo y botón */
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.logo-img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  margin-right: 20px;
+  flex-shrink: 0; /* no se achica más */
+  transition: max-width 0.3s ease, margin-right 0.3s ease;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgb(168, 111, 35);
+    z-index: 1050;
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-link,
+  .btn-login {
+    width: 100%;
+    border-radius: 8px;
+    margin: 0;
+  }
+
+  .logo-img {
+    max-width: 100px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .logo-img {
+    max-width: 80px;
+    margin-right: 5px;
+  }
+}
+
 .navbar-nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.nav-link,
-.btn-login {
-  color: #ffffff;
-  font-family: 'Bubblegum Sans', sans-serif;
-  font-size: 20px;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
-  text-align: center;
 }
 
 .nav-link:hover {
@@ -58,44 +100,13 @@
   display: none;
 }
 
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgb(168, 111, 35);
-    padding: 1.5rem 0;
-    z-index: 999;
-    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  }
-
-  .navbar-nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-link,
-  .btn-login {
-    width: 100%;
-    border-radius: 8px;
-    margin: 0;
-  }
-}
-
 .nav-link,
 .btn-login {
-  position: relative; 
+  position: relative;
   color: #ffffff;
   font-family: 'Bubblegum Sans', sans-serif;
   font-size: 20px;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease;
   text-align: center;
-}
-
-.logo-img{
-  width: 200px;
-  height: auto;
-  margin-right: 20px;
 }
