@@ -5,18 +5,19 @@ footer {
   bottom: auto;
   width: 100%;
 }
+
 footer.bg-custom {
-  background-color: #8b6224;
+  background-color: #6e5629;
 }
 
 footer a {
-  color: #ffbf75; /* Color del enlace */
-  text-decoration: none; /* Eliminar el subrayado */
+  color: #ffcc66;
+  text-decoration: none;
 }
 
 footer a:hover {
-  color: #ec8524; 
-  text-decoration: underline; 
+  color: #e67f1a;
+  text-decoration: underline;
 }
 
 footer p {
