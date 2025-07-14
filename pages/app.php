@@ -29,10 +29,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Seguimiento</a>
+            <a class="nav-link" href="app.php">Seguimiento</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Juego</a>
