@@ -2,6 +2,22 @@ footer {
   padding: 30px;
   text-align: center;
   width: 100%;
-  margin-top: auto;
 }
 
+footer.bg-custom {
+  background-color: #6e5629;
+}
+
+footer a {
+  color: #ffcc66;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #e67f1a;
+  text-decoration: underline;
+}
+
+footer p {
+  color: #ffffff;
+}
