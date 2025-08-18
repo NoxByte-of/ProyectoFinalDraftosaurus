@@ -1,0 +1,85 @@
+body {
+  background-color: transparent;
+  background-image: url('../img/fondo2.jpg');
+  background-size: cover;
+  margin: 0;
+  font-family: 'Bubblegum Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.registro-container {
+  background: rgba(201, 167, 104, 0.8);
+  padding: 2rem 3rem;
+  border-radius: 30px;
+  border: 5px solid #856b3d;
+  box-shadow: 0 4px 8px rgba(75, 43, 13, 0.432);
+  max-width: 400px;
+  width: 90%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.registro-container p {
+  font-family: 'Darumadrop One', cursive;
+  color: #ffffff;
+  font-size: 35px;
+  margin-bottom: 50px;
+  text-shadow:
+    -2px -2px 0 #5c1d01,
+     2px -2px 0 #5c1d01,
+    -2px  2px 0 #5c1d01,
+     2px  2px 0 #5c1d01,
+    -2px  0   0 #5c1d01,
+     2px  0   0 #5c1d01,
+     0   -2px 0 #5c1d01,
+     0    2px 0 #5c1d01;
+}
+
+.registro-container input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+  border: 2px solid #642d00;
+  font-size: 18px;
+  box-sizing: border-box;
+  font-family: 'Bubblegum Sans', sans-serif;
+}
+
+.registro-container input:focus {
+  outline: none;
+  border-color: #d35625;
+  box-shadow: 0 0 5px rgba(211, 86, 37, 0.7);
+}
+
+.btn-registro {
+  background-color: #d35625;
+  color: white;
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: 2px solid #641700;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.4s ease;
+  text-shadow:
+    -2px -2px 0 #74341b,
+     2px -2px 0 #74341b,
+    -2px  2px 0 #74341b,
+     2px  2px 0 #74341b,
+    -2px  0   0 #74341b,
+     2px  0   0 #74341b,
+     0   -2px 0 #74341b,
+     0    2px 0 #74341b;
+  width: 100%;
+}
+
+.btn-registro:hover {
+  transform: scale(1.02);
+  background-color: #5c070e;
+  color: #FFD571;
+  border: 2px solid #360707;
+}

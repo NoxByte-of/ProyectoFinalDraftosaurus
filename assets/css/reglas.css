@@ -1,0 +1,86 @@
+h1 {
+  font-family: 'Piedra', cursive;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #61340f,
+     2px -2px 0 #61340f,
+    -2px  2px 0 #61340f,
+     2px  2px 0 #61340f,
+    -2px  0   0 #61340f,
+     2px  0   0 #61340f,
+     0   -2px 0 #61340f,
+     0    2px 0 #61340f;
+}
+
+h2 {
+  font-family: 'Darumadrop One', cursive;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #5a390d,
+     2px -2px 0 #5a390d,
+    -2px  2px 0 #5a390d,
+     2px  2px 0 #5a390d,
+    -2px  0   0 #5a390d,
+     2px  0   0 #5a390d,
+     0   -2px 0 #5a390d,
+     0    2px 0 #5a390d;
+}
+
+p {
+  font-family: 'Bubblegum Sans', cursive;
+  font-size: 24px;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #614a19,
+     2px -2px 0 #614f19,
+    -2px  2px 0 #614f19,
+     2px  2px 0 #614f19,
+    -2px  0   0 #614f19,
+     2px  0   0 #614f19,
+     0   -2px 0 #614f19,
+     0    2px 0 #614f19;
+}
+
+.carousel-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item {
+  background: #c9a768b6;
+  padding: 1rem;
+  width: 80%;
+  box-sizing: border-box;
+  border-radius: 40px;
+  border: 5px solid #856b3d;
+  box-shadow: 0 4px 8px rgba(75, 43, 13, 0.432);
+  margin: 0 auto;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent; 
+  filter: brightness(0.5); 
+}
+
+.carousel-control-prev-icon {
+  background-image: url('../img/izquierda.png');
+  will-change: transform;
+}
+
+.carousel-control-next-icon {
+  background-image: url('../img/derecha.png');
+   will-change: transform;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  filter: brightness(1);
+  transition: filter 1s ease;
+  transform: scale(1.1);
+  transition: transform 0.4s ease;
+}

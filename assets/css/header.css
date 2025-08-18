@@ -1,16 +1,32 @@
-
 .navbar {
-  height: 100px;
+  height: 110px;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .bg-custom {
-  background-color: rgb(168, 111, 35);
+  background-color: #8a4c23c0;
+  background-repeat: repeat;
+  background-size: 1280px 720px;
 }
 
 .navbar-nav {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.nav-link {
+  text-shadow:
+    -2px -2px 0 #533615,
+     2px -2px 0 #533615,
+    -2px  2px 0 #533615,
+     2px  2px 0 #533615,
+    -2px  0   0 #533615,
+     2px  0   0 #533615,
+     0   -2px 0 #533615,
+     0    2px 0 #533615;
 }
 
 .nav-link,
@@ -21,6 +37,7 @@
   padding: 0.5rem 1rem;
   transition: color 0.3s ease;
   text-align: center;
+  position: relative;
 }
 
 .nav-link:hover {
@@ -34,7 +51,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #F4A259;
+  background-color: #ffffff;
   transition: width 0.3s ease;
 }
 
@@ -43,28 +60,53 @@
 }
 
 .btn-login {
-  background-color: #3c6b16;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #d35625;
+  border-radius: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+  text-shadow:
+    -2px -2px 0 #74341b,
+     2px -2px 0 #74341b,
+    -2px  2px 0 #74341b,
+     2px  2px 0 #74341b,
+    -2px  0   0 #74341b,
+     2px  0   0 #74341b,
+     0   -2px 0 #74341b,
+     0    2px 0 #74341b;
+  border: 2px solid #74341b;
+  will-change: transform;
 }
 
 .btn-login:hover {
-  background-color: #3c6b16;
+  background-color: #5c070e !important;
+  border: 2px solid #360707 !important;
+  color: #FFD571;
   transform: scale(1.02);
+  transition: transform 0.4s ease;
 }
 
 .btn-login::after {
   display: none;
 }
 
+.logo-img {
+  max-width: 200px;
+  height: auto;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
 @media (max-width: 991.98px) {
+  .navbar {
+    height: auto;
+    padding: 0.25rem 0.75rem;
+  }
+
   .navbar-collapse {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgb(168, 111, 35);
+    background-color: #4d1a0d;
     padding: 1.5rem 0;
     z-index: 999;
     box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
@@ -81,21 +123,19 @@
     border-radius: 8px;
     margin: 0;
   }
+
+  .logo-img {
+    max-width: 140px;
+    margin-right: 10px;
+  }
+
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem;
+  }
 }
 
-.nav-link,
-.btn-login {
-  position: relative; 
-  color: #ffffff;
-  font-family: 'Bubblegum Sans', sans-serif;
-  font-size: 20px;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
-  text-align: center;
-}
-
-.logo-img{
-  width: 200px;
-  height: auto;
-  margin-right: 20px;
+@media (max-width: 575.98px) {
+  .logo-img {
+    max-width: 160px;
+  }
 }
