@@ -6,6 +6,7 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+
 p {
   font-family: 'Bubblegum Sans', sans-serif;
   font-size: 20px;
@@ -27,9 +28,6 @@ h2 {
 
   overflow: visible; /* permite que elementos se vean fuera */
 }
-
-
-
 
 .dino-container img.draggable {
   position: absolute;
