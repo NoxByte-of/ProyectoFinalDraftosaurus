@@ -1,0 +1,50 @@
+
+/*
+  Animaciones
+
+  Contiene todas las definiciones de @keyframes y los estilos para elementos
+  decorativos y animados.
+  - Animación de la mascota(comentada)
+*/
+
+
+
+@keyframes balanceo {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(1px) translateY(-0.5px); }
+}
+
+@keyframes respiracion {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.005); }
+}
+
+@keyframes balanceo-suave {
+    0% {
+        transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-1deg);
+    }
+}
+
+/* MASCOTA(inactiva)
+#mascota-bienvenida {
+    position: relative; 
+    display: block; 
+    width: 160px; 
+    height: auto;
+    margin: 0.5rem auto 0; 
+    z-index: 10;
+    animation: balanceo-suave 8s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#mascota-bienvenida:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+*/

@@ -1,0 +1,109 @@
+/**
+ estilos para páginas de configuración de ambos modos de juego(modo_juego_digital.html y modo_seguimiento.html)
+ version 1.5 - actualizado a noxbyte
+ */
+
+/* main container de la configuracion */
+.main-configuracion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    max-width: none; 
+    margin-top: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.main-configuracion::before,
+.main-configuracion::after {
+    display: none;
+}
+
+/*  Panel Configuración  */
+.panel-configuracion {
+    background-color: var(--dh-fondo-contenedor); 
+    border: 4px solid var(--color-marron-medio); 
+    border-radius: 20px; 
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 450px; 
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    color: var(--dh-texto-primario-oscuro); 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.panel-configuracion h2 {
+    font-family: var(--dh-fuente-principal);
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    color: var(--color-marron-borde-texto); 
+    border-bottom: none; 
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.panel-configuracion p {
+    font-family: var(--dh-fuente-cuerpo);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: var(--dh-texto-primario-oscuro);
+}
+
+.panel-configuracion p strong {
+    color: var(--color-marron-borde-texto);
+}
+
+
+.botones-configuracion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    margin-top: 1rem;
+}
+
+.panel-configuracion .form-group {
+    margin-bottom: 0;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+.panel-configuracion .form-group label {
+    display: block;
+    margin-bottom: 1rem;
+    font-family: var(--dh-fuente-encabezado);
+    color: var(--color-marron-borde-texto);
+    font-size: 1.2rem;
+}
+
+.panel-configuracion .form-control,
+.panel-configuracion .form-group input[type="text"] {
+    width: 100%;
+    padding: 0.8em 1em;
+    font-family: var(--dh-fuente-cuerpo);
+    font-size: 1rem;
+    color: var(--dh-texto-primario-oscuro);
+    background-color: #FBF3DE;
+    border: 2px solid var(--dh-borde-color);
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.panel-configuracion .form-group input[type="text"] {
+    margin-bottom: 0.75rem;
+}
+
+.panel-configuracion .form-control:focus,
+.panel-configuracion .form-group input[type="text"]:focus {
+    border-color: var(--dh-color-primario);
+    box-shadow: 0 0 0 3px var(--dh-resplandor-foco);
+    outline: none;
+}

@@ -1,0 +1,22 @@
+/*
+  Archivo Principal de Estilos
+
+  importa todos los estilos CSS del proyecto, ordena el codigo.
+  Usar @import para cargar los CSS en cascada
+*/
+
+/* fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Bitter:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&display=swap');
+
+/* módulos de estilos */
+@import url('base.css');
+@import url('components.css');
+@import url('animations.css');
+@import url('menu_principal.css');
+@import url('estilos_configuracion.css');
+@import url('estilos_login.css'); 
+@import url('modo_seguimiento.css');
+@import url('tutorial.css');
+@import url('modo_digital.css');
+@import url('partidas_guardadas.css'); 
+@import url('responsive.css');
