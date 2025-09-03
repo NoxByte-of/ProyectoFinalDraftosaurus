@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> fa87c31 (Commit inicial del proyecto con frontend y base de datos)
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -15,10 +12,7 @@ CREATE TABLE `usuario` (
   `email` varchar(150) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
   `edad` int(3) NOT NULL,
-<<<<<<< HEAD
-=======
   `rol` ENUM('jugador', 'administrador') NOT NULL DEFAULT 'jugador',
->>>>>>> fa87c31 (Commit inicial del proyecto con frontend y base de datos)
   `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
   `idioma_preferido` varchar(50) DEFAULT 'es',
   PRIMARY KEY (`id_usuario`),

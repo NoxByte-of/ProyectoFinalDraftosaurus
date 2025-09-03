@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => iniciarPartida(configPartida.playerCount, configPartida.playerNames), 100);
         sessionStorage.removeItem('draftosaurusGameConfig');
     } else {
-        window.location.href = 'modo_juego_digital.php';
+        window.location.href = 'pages/modo_juego_digital.php';
     }
 });
 
@@ -159,7 +159,7 @@ function reiniciarPartida() {
             iniciarPartida(configuracionInicial.playerCount, configuracionInicial.playerNames);
         }, 350);
     } else {
-        window.location.href = 'modo_juego_digital.html';
+        window.location.href = 'pages/modo_juego_digital.html';
     }
 }
 

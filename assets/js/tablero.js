@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombresJugadores = JSON.parse(localStorage.getItem('jugadoresDraftosaurus'));
             if (!nombresJugadores || nombresJugadores.length === 0) {
                 alert('No se encontraron jugadores. Por favor, configura una partida primero.');
-                window.location.href = 'modo_seguimiento.php';
+                window.location.href = 'pages/modo_seguimiento.php';
                 return;
             }
             estadoJuego.jugadores = nombresJugadores.map(nombre => ({

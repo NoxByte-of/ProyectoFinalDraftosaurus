@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tablero de Juego - Draftosaurus - NoxByte</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header>
@@ -205,9 +205,9 @@
     </template>
     
     
-    <script src="assets/js/comunes.js"></script>
-    <script src="assets/js/motor_juego.js"></script> 
-    <script src="assets/js/tablero.js"></script>
+    <script src="../assets/js/comunes.js"></script>
+    <script src="../assets/js/motor_juego.js"></script> 
+    <script src="../assets/js/tablero.js"></script>
 
     <div id="resultados-modal-overlay" class="modal-overlay">
         <div class="modal-content card-parchment">

@@ -17,19 +17,19 @@
     
      <main class="menu-navegacion">
             <nav>
-                <a href="modo_juego_digital.php" class="btn-menu">
+                <a href="pages/modo_juego_digital.php" class="btn-menu">
                     <span class="texto-boton">¡Jugar Draftosaurus!</span>
                 </a>
-                <a href="modo_seguimiento.php" class="btn-menu">
+                <a href="pages/modo_seguimiento.php" class="btn-menu">
                     <span class="texto-boton">Modo Seguimiento</span>
                 </a>
-                <a href="partidas_guardadas.php" class="btn-menu">
+                <a href="pages/partidas_guardadas.php" class="btn-menu">
                     <span class="texto-boton">Partidas Guardadas</span>
                 </a>
                 <button id="btn-abrir-tutorial" class="btn-menu">
                     <span class="texto-boton">Tutorial</span>
                 </button>     
-                <a href="login.php" class="btn-menu">
+                <a href="pages/login.php" class="btn-menu">
                     <span class="texto-boton">Iniciar Sesión</span>
                 </a>    
                 <button id="btn-quienes-somos" class="btn-menu">

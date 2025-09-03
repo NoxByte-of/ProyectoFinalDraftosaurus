@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro / Inicio de Sesión - Draftosaurus</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header>
@@ -70,7 +70,7 @@
 
         </div>
 
-        <a href="index.php" class="btn-menu btn-volver btn-peligro">Volver al Menú</a>
+        <a href="../index.php" class="btn-menu btn-volver btn-peligro">Volver al Menú</a>
 
     </main>
 
@@ -83,7 +83,7 @@
 
     <div id="notificacion-container"></div>
 
-    <script src="assets/js/comunes.js"></script>
-    <script src="assets/js/login.js"></script>
+    <script src="../assets/js/comunes.js"></script>
+    <script src="../assets/js/login.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Bitter:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body class="digital-body">
     
@@ -33,7 +33,7 @@
                         <div id="board-score" class="puntuacion-total-jugador">Puntuación: <span>0</span></div>
                     </div>
 
-                    <img src="assets/imagenes/tablerodraftosaurus.png" alt="Tablero de Draftosaurus" id="imagen-tablero-digital">
+                    <img src="../assets/imagenes/tablerodraftosaurus.png" alt="Tablero de Draftosaurus" id="imagen-tablero-digital">
                     
                     <div id="contenedor-slots-tablero">
                         <!-- Bosque de la Semejanza  -->
@@ -115,12 +115,12 @@
                 
                 <div id="dice-container-digital">
                     <div id="dice-digital">
-                        <div class="face-digital front"><img src="assets/imagenes/boscoso.png" alt="Cara Bosque"></div>
-                        <div class="face-digital back"><img src="assets/imagenes/banos.png" alt="Cara Baños"></div>
-                        <div class="face-digital right"><img src="assets/imagenes/llanura.png" alt="Cara Pradera"></div>
-                        <div class="face-digital left"><img src="assets/imagenes/cafe.png" alt="Cara Cafetería"></div>
-                        <div class="face-digital top"><img src="assets/imagenes/recintovacio.png" alt="Cara Recinto Vacío"></div>
-                        <div class="face-digital bottom"><img src="assets/imagenes/trex.png" alt="Cara Sin T-Rex"></div>
+                        <div class="face-digital front"><img src="../assets/imagenes/boscoso.png" alt="Cara Bosque"></div>
+                        <div class="face-digital back"><img src="../assets/imagenes/banos.png" alt="Cara Baños"></div>
+                        <div class="face-digital right"><img src="../assets/imagenes/llanura.png" alt="Cara Pradera"></div>
+                        <div class="face-digital left"><img src="../assets/imagenes/cafe.png" alt="Cara Cafetería"></div>
+                        <div class="face-digital top"><img src="../assets/imagenes/recintovacio.png" alt="Cara Recinto Vacío"></div>
+                        <div class="face-digital bottom"><img src="../assets/imagenes/trex.png" alt="Cara Sin T-Rex"></div>
                     </div>
                 </div>
                 
@@ -154,11 +154,10 @@
         </div>
     </div>
     
-    <!-- Contenedor para las notificaciones -->
     <div id="notificacion-container"></div>
 
-    <script src="assets/js/comunes.js"></script>
-    <script src="assets/js/motor_juego.js"></script> 
-    <script src="assets/js/modo_digital.js"></script>
+    <script src="../assets/js/comunes.js"></script>
+    <script src="../assets/js/motor_juego.js"></script> 
+    <script src="../assets/js/modo_digital.js"></script>
 </body>
 </html>

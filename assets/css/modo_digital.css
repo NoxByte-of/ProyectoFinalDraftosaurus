@@ -264,12 +264,12 @@ main#game-container {
 }
 
 /* imágenes dinosaurios */
-#columna-tablero-juego .dino-slot-digital.t-rex { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/tiranosaurio.png'); }
-#columna-tablero-juego .dino-slot-digital.spinosaurus { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/spinosaurio.png'); }
-#columna-tablero-juego .dino-slot-digital.brachiosaurus { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/brachiosaurus.png'); }
-#columna-tablero-juego .dino-slot-digital.triceratops { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/triceratops.png'); }
-#columna-tablero-juego .dino-slot-digital.parasaurolophus { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/parasaurio.png'); }
-#columna-tablero-juego .dino-slot-digital.stegosaurus { background-image: url('/ProyectoFinalDraftosaurus-branch-fabricio/assets/imagenes/estegosaurus.png'); }
+#columna-tablero-juego .dino-slot-digital.t-rex { background-image: url('../imagenes/tiranosaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.spinosaurus { background-image: url('../imagenes/spinosaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.brachiosaurus { background-image: url('../imagenes/brachiosaurus.png'); }
+#columna-tablero-juego .dino-slot-digital.triceratops { background-image: url('../imagenes/triceratops.png'); }
+#columna-tablero-juego .dino-slot-digital.parasaurolophus { background-image: url('../imagenes/parasaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.stegosaurus { background-image: url('../imagenes/estegosaurus.png'); }
 
 
 /* Columna Derecha (Controles: dado, mano de dinosaurios, turnos)  */
