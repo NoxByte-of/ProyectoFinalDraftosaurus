@@ -54,7 +54,7 @@
                 <img src="assets/imagenes/logonoxbyte.png" alt="Logo de Ctrl+Zaurio" class="quienes-somos-logo">
             </div>
             <div class="modal-scrollable-content">
-    <p class="modal-slogan">📧 Contacto: noxbyte.of@gmail.com</p>
+    <p class="modal-slogan">📧 Contacto: <a href="mailto:noxbyte.of@gmail.com">noxbyte.of@gmail.com</a></p>
 
     <p>Somos <strong>NoxByte</strong>, una empresa de desarrollo de software formada por los estudiantes del Instituto Tecnológico de Informática(ITI) Fabricio Figueroa, Bruno Mendez, Georgina Madera, Mateo Suarez y Giuliana Arregui.  </p>
     <p>Nuestra misión es aplicar los conocimientos sobre la informática para desarrollar proyectos creativos y funcionales mediante el trabajo en equipo, el aprendizaje continuo y en enfrentar cada desafío que se nos proponga, tal como nos enseño el Instituto.</p>
