@@ -1,7 +1,7 @@
 /**
   TODA la logica del MODO SEGUIMIENTO para tablero.html
   gestiona el estado completo de la partida
-  version 2.0  codigo digital que tenia + el tablero imagen de draftosaurus 
+  version 2.3 - Corregida y unificada la funcionalidad de click-para-colocar.
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tableroPrincipal = document.getElementById('main-tablero');
     if (tableroPrincipal) {
 
-        // aca guardamos todo lo importante del juego: jugadores, turnos, etc.
+        // Aca guardamos todo lo importante del juego: jugadores, turnos, etc.
         const TIPOS_DINO = window.MotorJuego.TIPOS_DINO;
         let estadoJuego = {
             jugadores: [],
@@ -22,11 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
             manos: {},
             manosOriginales: {},
         };
-        let dinosaurioSeleccionado = null;
+        // Variables para manejar la selección de dinosaurios.
+        let dinosaurioSeleccionado = null; // Guarda el TIPO de dino (ej: 't-rex')
+        let elementoDinoSeleccionado = null; // Guarda el ELEMENTO DOM del dino seleccionado
         let indiceJugadorActivoTablero = 0;
         let scrollInterval = null;
 
-        // para no andar buscando los botones y divs a cada rato, los guardamos aquí
+        // Para no andar buscando los botones y divs a cada rato, los guardamos aquí
         const contenedorPestanas = document.getElementById('tabs-jugadores');
         const contenedorTableros = document.getElementById('tableros-container');
         const plantilla = document.getElementById('plantilla-parque-jugador');
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnCerrarModalHistorial = document.getElementById('btn-cerrar-historial-modal');
         const btnReiniciarPartida = document.getElementById('btn-reiniciar-partida');
 
-        // calcular los puntos, llamar motor del juego
+        // Calcular los puntos, llamar motor del juego
         function calcularPuntuacionTotal(indiceJugador) {
             const jugador = estadoJuego.jugadores[indiceJugador];
             if (!jugador) return;
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             actualizarUIPuntuacion(indiceJugador);
         }
 
-        // todo lo que se ve en la pantalla se maneja desde aca
+        // Todo lo que se ve en la pantalla se maneja desde aca
         function inicializarScrollAlArrastrar() {
             const SCROLL_SPEED = 15;
             const SCROLL_ZONE = 80;
@@ -251,22 +253,52 @@ document.addEventListener('DOMContentLoaded', function() {
                     elementoDino.dataset.dinoType = tipoDino;
                     elementoDino.title = tipoDino.charAt(0).toUpperCase() + tipoDino.slice(1);
                     elementoDino.draggable = true;
+
                     elementoDino.addEventListener('dragstart', (e) => {
                         if (elementoDino.classList.contains('colocado')) {
                             e.preventDefault();
                             return;
                         }
+                        // Limpia la selección por clic si se inicia un arrastre
+                        if (elementoDinoSeleccionado) {
+                            elementoDinoSeleccionado.classList.remove('selected');
+                        }
+                        elementoDinoSeleccionado = null;
+                        
                         e.dataTransfer.setData('text/plain', tipoDino);
                         e.dataTransfer.effectAllowed = 'move';
                         document.body.classList.add('arrastrando');
+                        dinosaurioSeleccionado = tipoDino;
                         actualizarVisualizacionSlots(tipoDino);
                         setTimeout(() => elementoDino.style.opacity = '0.5', 0);
                     });
+                    
                     elementoDino.addEventListener('dragend', () => {
                         document.body.classList.remove('arrastrando');
                         limpiarVisualizacionSlots();
                         elementoDino.style.opacity = '1';
                     });
+
+                    elementoDino.addEventListener('click', () => {
+                        if (elementoDino.classList.contains('colocado')) return;
+
+                        if (elementoDino.classList.contains('selected')) {
+                            elementoDino.classList.remove('selected');
+                            dinosaurioSeleccionado = null;
+                            elementoDinoSeleccionado = null;
+                            limpiarVisualizacionSlots();
+                        } else {
+                            if (elementoDinoSeleccionado) {
+                                elementoDinoSeleccionado.classList.remove('selected');
+                            }
+                            
+                            elementoDino.classList.add('selected');
+                            dinosaurioSeleccionado = tipoDino;
+                            elementoDinoSeleccionado = elementoDino;
+                            actualizarVisualizacionSlots(tipoDino);
+                        }
+                    });
+
                     fragment.appendChild(elementoDino);
                 });
                 dinosManoVirtual.appendChild(fragment);
@@ -328,7 +360,6 @@ document.addEventListener('DOMContentLoaded', function() {
             modalResultadosOverlay.classList.add('visible');
         }
 
-        // mover dinos, pasar de turno, tirar el dado, etc.
         function reiniciarJuego() {
             if (!confirm('¿Estás seguro de que quieres reiniciar la partida? Se perderá todo el progreso actual.')) {
                 return;
@@ -342,6 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
             estadoJuego.manos = {};
             estadoJuego.manosOriginales = {};
             dinosaurioSeleccionado = null;
+            elementoDinoSeleccionado = null;
             indiceJugadorActivoTablero = 0;
             estadoJuego.jugadores.forEach((jugador, index) => {
                 jugador.tablero = {
@@ -486,10 +518,16 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.classList.add(dinosaurioSeleccionado);
             slot.textContent = '';
 
-            const dinoEnManoVisual = dinosManoVirtual.querySelector(`.dino-selector[data-dino-type="${dinosaurioSeleccionado}"]:not(.colocado)`);
-            if (dinoEnManoVisual) dinoEnManoVisual.classList.add('colocado');
+            if (elementoDinoSeleccionado) {
+                elementoDinoSeleccionado.classList.remove('selected');
+                elementoDinoSeleccionado.classList.add('colocado');
+            } else { // Si la colocación vino de un drag & drop
+                const dinoEnManoVisual = dinosManoVirtual.querySelector(`.dino-selector[data-dino-type="${dinosaurioSeleccionado}"]:not(.colocado)`);
+                if (dinoEnManoVisual) dinoEnManoVisual.classList.add('colocado');
+            }
 
             dinosaurioSeleccionado = null;
+            elementoDinoSeleccionado = null;
             limpiarVisualizacionSlots();
             estadoJuego.jugadores.forEach((_, idx) => calcularPuntuacionTotal(idx));
             actualizarEstadoBotonSiguienteTurno();
@@ -718,6 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.parque-container').forEach((parque, i) => parque.classList.toggle('hidden', i !== indiceJugadorActivoTablero));
 
             dinosaurioSeleccionado = null;
+            elementoDinoSeleccionado = null;
             renderizarManoVirtual(indiceJugadorActivoTablero);
             limpiarVisualizacionSlots();
             actualizarVisualizacionRestricciones();
@@ -738,9 +777,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (e.target.classList.contains('slot-valido')) {
                         const tipoDino = e.dataTransfer.getData('text/plain');
                         dinosaurioSeleccionado = tipoDino;
+                        elementoDinoSeleccionado = null; // Limpia por si venía de un click
                         intentarColocarDinosaurio(e.target);
                     }
                     limpiarVisualizacionSlots();
+                });
+                // Event listener para colocar con click
+                contenedorTableros.addEventListener('click', (e) => {
+                    if (dinosaurioSeleccionado && e.target.classList.contains('slot-valido')) {
+                        intentarColocarDinosaurio(e.target);
+                    }
                 });
             }
             if (btnVerHistorial) btnVerHistorial.addEventListener('click', mostrarHistorial);
@@ -774,7 +820,7 @@ document.addEventListener('DOMContentLoaded', function() {
             inicializarScrollAlArrastrar();
         }
 
-        // la función que arranca la partida cuando la página carga
+        // La función que arranca la partida cuando la página carga
         function inicializarJuego() {
             const nombresJugadores = JSON.parse(localStorage.getItem('jugadoresDraftosaurus'));
             if (!nombresJugadores || nombresJugadores.length === 0) {
@@ -803,3 +849,4 @@ document.addEventListener('DOMContentLoaded', function() {
         inicializarJuego();
     }
 });
+

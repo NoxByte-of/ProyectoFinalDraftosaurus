@@ -1,6 +1,6 @@
 /**
  Logica para el Modo Digital
-  version 6.6
+  version 6.8 - Añadida funcionalidad de click-para-colocar para compatibilidad móvil.
  */
 
 //  INICIALIZACION Y CONFIGURACIÓN DEL JUEGO 
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => iniciarPartida(configPartida.playerCount, configPartida.playerNames), 100);
         sessionStorage.removeItem('draftosaurusGameConfig');
     } else {
-        window.location.href = 'pages/modo_juego_digital.php';
+        window.location.href = 'modo_juego_digital.php';
     }
 });
 
@@ -31,8 +31,10 @@ const MAPA_CARAS_DADO = { 'boscosa': 0, 'banos': 1, 'llanura': 2, 'cafeteria': 3
 //  ESTADOS
 let estadoJuego = {};
 let configuracionInicial = {};
-let dinosaurioSiendoArrastrado = null;
-let idDinoArrastrado = null;
+// Variables para manejar la selección de dinosaurios.
+let dinosaurioSiendoArrastrado = null; // Para la especie en drag & drop
+let idDinoArrastrado = null; // Para el ID en drag & drop
+let dinoSeleccionadoInfo = null; // Para la selección por click {id, especie, elemento}
 
 //  FUNCIONES PRINCIPALES DEL JUEGO 
 function iniciarPartida(numeroDeJugadores, nombresJugadores = []) {
@@ -64,7 +66,7 @@ function iniciarPartida(numeroDeJugadores, nombresJugadores = []) {
     document.getElementById('roll-dice-btn').addEventListener('click', manejarLanzamientoDado);
     document.getElementById('tabs-jugadores-digital').addEventListener('click', cambiarVistaJugador);
 
-    configurarListenersDragDrop();
+    configurarListenersDeJuego();
     renderizarTodo();
 }
 
@@ -159,36 +161,45 @@ function reiniciarPartida() {
             iniciarPartida(configuracionInicial.playerCount, configuracionInicial.playerNames);
         }, 350);
     } else {
-        window.location.href = 'pages/modo_juego_digital.html';
+        window.location.href = 'modo_juego_digital.php';
     }
 }
 
 
 //  LÓGICA DE DRAG & DROP Y VALIDACIÓN 
 
-function configurarListenersDragDrop() {
-    const slots = document.querySelectorAll('.dino-slot-digital');
-    slots.forEach(slot => {
-        slot.addEventListener('dragover', e => {
-            if (slot.classList.contains('slot-valido')) {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'move';
-            }
-        });
+function configurarListenersDeJuego() {
+    const contenedorSlots = document.getElementById('contenedor-slots-tablero');
 
-        slot.addEventListener('drop', e => {
+    // Listener para Drag & Drop
+    contenedorSlots.addEventListener('dragover', e => {
+        if (e.target.classList.contains('slot-valido')) {
             e.preventDefault();
-            if (slot.classList.contains('slot-valido')) {
-                manejarSoltar(slot, e);
-            }
-            limpiarResaltadoSlots();
-        });
+            e.dataTransfer.dropEffect = 'move';
+        }
+    });
+
+    contenedorSlots.addEventListener('drop', e => {
+        e.preventDefault();
+        if (e.target.classList.contains('slot-valido')) {
+            const dinoId = e.dataTransfer.getData('text/plain');
+            if (!dinoId || !dinosaurioSiendoArrastrado) return;
+            const dinoInfo = { id: dinoId, especie: dinosaurioSiendoArrastrado };
+            colocarDinosaurio(e.target, dinoInfo);
+        }
+        limpiarResaltadoSlots();
+    });
+
+    // Listener para Click-to-Place
+    contenedorSlots.addEventListener('click', e => {
+        if (dinoSeleccionadoInfo && e.target.classList.contains('slot-valido')) {
+            colocarDinosaurio(e.target, dinoSeleccionadoInfo);
+        }
     });
 }
 
 function manejarArrastre(e) {
     const dinoElemento = e.currentTarget;
-    
     const jugadorActual = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
 
     if (estadoJuego.jugadoresQueHanJugadoEsteTurno.includes(jugadorActual.id) || dinoElemento.classList.contains('colocado')) {
@@ -226,12 +237,10 @@ function manejarFinArrastre(e) {
     limpiarResaltadoSlots();
 }
 
-function manejarSoltar(slot, event) {
-    const dinoId = event.dataTransfer.getData('text/plain');
-    if (!dinoId || !dinosaurioSiendoArrastrado) return;
-
+// Función unificada para colocar dinosaurios (usada por drop y click)
+function colocarDinosaurio(slot, dinoInfo) {
     const jugador = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
-    const indiceDinoEnMano = jugador.mano.findIndex(d => d.id === dinoId);
+    const indiceDinoEnMano = jugador.mano.findIndex(d => d.id === dinoInfo.id);
     
     if (indiceDinoEnMano === -1) return;
 
@@ -245,16 +254,17 @@ function manejarSoltar(slot, event) {
     if(dinoElementoEnMano) {
         dinoElementoEnMano.classList.add('colocado');
         dinoElementoEnMano.draggable = false;
+        dinoElementoEnMano.classList.remove('selected');
     }
+    
+    dinoSeleccionadoInfo = null; // Limpiar selección después de colocar
     
     estadoJuego.jugadoresQueHanJugadoEsteTurno.push(jugador.id);
     
     if (estadoJuego.jugadoresQueHanJugadoEsteTurno.length === estadoJuego.numeroDeJugadores) {
-        // Notificación para el último jugador del turno.
         window.mostrarNotificacion('¡Dino Colocado, comienza nuevo turno!', 'success');
         setTimeout(finalizarTurno, 500);
     } else {
-        // Notificación de espera para los demás jugadores.
         window.mostrarNotificacion('¡Dino colocado! Esperando a los demás jugadores.', 'success');
         
         let proximoIndice = (estadoJuego.indiceJugadorVista + 1) % estadoJuego.numeroDeJugadores;
@@ -495,13 +505,41 @@ function crearElementoDino(dino) {
     dinoEl.addEventListener('dragstart', manejarArrastre);
     dinoEl.addEventListener('dragend', manejarFinArrastre);
 
+    // Lógica para seleccionar con click.
+    dinoEl.addEventListener('click', () => {
+        const jugadorActual = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
+        if (estadoJuego.jugadoresQueHanJugadoEsteTurno.includes(jugadorActual.id) || dinoEl.classList.contains('colocado')) {
+            return;
+        }
+        if (!estadoJuego.restriccionDado) {
+            window.mostrarNotificacion(`¡${estadoJuego.jugadores[estadoJuego.indiceJugadorDado].nombre} debe lanzar el dado!`, 'error');
+            return;
+        }
+
+        // Deseleccionar si se hace clic en el mismo dino
+        if (dinoEl.classList.contains('selected')) {
+            dinoEl.classList.remove('selected');
+            dinoSeleccionadoInfo = null;
+            limpiarResaltadoSlots();
+        } else {
+            // Deseleccionar el anterior si existía
+            if (dinoSeleccionadoInfo && dinoSeleccionadoInfo.elemento) {
+                dinoSeleccionadoInfo.elemento.classList.remove('selected');
+            }
+            
+            // Seleccionar el nuevo
+            dinoEl.classList.add('selected');
+            dinoSeleccionadoInfo = { id: dino.id, especie: dino.especie, elemento: dinoEl };
+            resaltarSlotsValidos(dino.especie);
+        }
+    });
+
     return dinoEl;
 }
 
 function lanzarDadoDigital(indiceCara) {
     const dado = document.getElementById('dice-digital');
     if (!dado) return;
-    // array de rotaciones para mostrar cada cara. 
     const rotaciones = [
         { x: 0, y: 0 },       // 0: boscosa (frontal)
         { x: 0, y: 180 },     // 1: banos (trasera)
@@ -515,3 +553,4 @@ function lanzarDadoDigital(indiceCara) {
     const rotacionObjetivo = rotaciones[indiceCara];
     dado.style.transform = `rotateX(${giroAleatorioX + rotacionObjetivo.x}deg) rotateY(${giroAleatorioY + rotacionObjetivo.y}deg)`;
 }
+

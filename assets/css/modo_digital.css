@@ -1,6 +1,6 @@
 /*
     Estilos específicos para el Modo de Juego Digital.
-    version 7.7 - Mejorada la legibilidad de la pestaña activa.
+    version 7.9 - Añadido estilo para el dino seleccionado con click.
 */
 
 /* Layout Principal y Paneles  */
@@ -121,9 +121,9 @@ main#game-container {
 
 .tab-jugador-digital.active {
     background-color: var(--dh-fondo-contenedor);
-    color: #27ae60; /* <-- CAMBIO CLAVE: Verde más oscuro y legible */
-    font-weight: bold; /* <-- CAMBIO CLAVE: Texto en negrita */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra sutil */
+    color: #27ae60; 
+    font-weight: bold; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); 
 }
 
 /* Estilos de Estado de Turno en Pestañas */
@@ -168,6 +168,7 @@ main#game-container {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer; /* Para indicar que es clickeable */
 }
 
 /* REGLAS DE LAYOUT */
@@ -337,6 +338,12 @@ main#game-container {
     padding: 10px;
     border: none;
 }
+/* Estilo para el dino seleccionado */
+#current-player-hand .dino-selector.selected {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px 3px rgba(200, 90, 43, 0.6);
+    border-color: var(--color-naranja-boton);
+}
 
 #current-player-hand .dino-selector.colocado {
     opacity: 0.3;
@@ -390,3 +397,4 @@ main#game-container {
 body.arrastrando, body.arrastrando * {
     cursor: grabbing !important;
 }
+
