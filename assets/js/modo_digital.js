@@ -1,6 +1,6 @@
 /**
  Logica para el Modo Digital
-  version 6.8 - Añadida funcionalidad de click-para-colocar para compatibilidad móvil.
+ version 6.8 - Añadida funcionalidad de click-para-colocar para que funcione bien el responsive
  */
 
 //  INICIALIZACION Y CONFIGURACIÓN DEL JUEGO 
@@ -31,10 +31,9 @@ const MAPA_CARAS_DADO = { 'boscosa': 0, 'banos': 1, 'llanura': 2, 'cafeteria': 3
 //  ESTADOS
 let estadoJuego = {};
 let configuracionInicial = {};
-// Variables para manejar la selección de dinosaurios.
-let dinosaurioSiendoArrastrado = null; // Para la especie en drag & drop
-let idDinoArrastrado = null; // Para el ID en drag & drop
-let dinoSeleccionadoInfo = null; // Para la selección por click {id, especie, elemento}
+let dinosaurioSiendoArrastrado = null; 
+let idDinoArrastrado = null; 
+let dinoSeleccionadoInfo = null; 
 
 //  FUNCIONES PRINCIPALES DEL JUEGO 
 function iniciarPartida(numeroDeJugadores, nombresJugadores = []) {
@@ -166,12 +165,11 @@ function reiniciarPartida() {
 }
 
 
-//  LÓGICA DE DRAG & DROP Y VALIDACIÓN 
+//  LOGICA DE DRAG & DROP Y VALIDACIÓN 
 
 function configurarListenersDeJuego() {
     const contenedorSlots = document.getElementById('contenedor-slots-tablero');
 
-    // Listener para Drag & Drop
     contenedorSlots.addEventListener('dragover', e => {
         if (e.target.classList.contains('slot-valido')) {
             e.preventDefault();
@@ -190,7 +188,6 @@ function configurarListenersDeJuego() {
         limpiarResaltadoSlots();
     });
 
-    // Listener para Click-to-Place
     contenedorSlots.addEventListener('click', e => {
         if (dinoSeleccionadoInfo && e.target.classList.contains('slot-valido')) {
             colocarDinosaurio(e.target, dinoSeleccionadoInfo);
@@ -237,7 +234,6 @@ function manejarFinArrastre(e) {
     limpiarResaltadoSlots();
 }
 
-// Función unificada para colocar dinosaurios (usada por drop y click)
 function colocarDinosaurio(slot, dinoInfo) {
     const jugador = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
     const indiceDinoEnMano = jugador.mano.findIndex(d => d.id === dinoInfo.id);
@@ -257,7 +253,7 @@ function colocarDinosaurio(slot, dinoInfo) {
         dinoElementoEnMano.classList.remove('selected');
     }
     
-    dinoSeleccionadoInfo = null; // Limpiar selección después de colocar
+    dinoSeleccionadoInfo = null; 
     
     estadoJuego.jugadoresQueHanJugadoEsteTurno.push(jugador.id);
     
@@ -515,19 +511,15 @@ function crearElementoDino(dino) {
             window.mostrarNotificacion(`¡${estadoJuego.jugadores[estadoJuego.indiceJugadorDado].nombre} debe lanzar el dado!`, 'error');
             return;
         }
-
-        // Deseleccionar si se hace clic en el mismo dino
+        // deselecciona si se hace clic en el mismo dino
         if (dinoEl.classList.contains('selected')) {
             dinoEl.classList.remove('selected');
             dinoSeleccionadoInfo = null;
             limpiarResaltadoSlots();
         } else {
-            // Deseleccionar el anterior si existía
             if (dinoSeleccionadoInfo && dinoSeleccionadoInfo.elemento) {
                 dinoSeleccionadoInfo.elemento.classList.remove('selected');
             }
-            
-            // Seleccionar el nuevo
             dinoEl.classList.add('selected');
             dinoSeleccionadoInfo = { id: dino.id, especie: dino.especie, elemento: dinoEl };
             resaltarSlotsValidos(dino.especie);

@@ -1,7 +1,7 @@
 /**
   TODA la logica del MODO SEGUIMIENTO para tablero.html
   gestiona el estado completo de la partida
-  version 2.3 - Corregida y unificada la funcionalidad de click-para-colocar.
+  version 2.3 - click-para-colocar.
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tableroPrincipal = document.getElementById('main-tablero');
     if (tableroPrincipal) {
 
-        // Aca guardamos todo lo importante del juego: jugadores, turnos, etc.
+        // aca guardamos todo lo importante del juego: jugadores, turnos, etc
         const TIPOS_DINO = window.MotorJuego.TIPOS_DINO;
         let estadoJuego = {
             jugadores: [],
@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
             manosOriginales: {},
         };
         // Variables para manejar la selección de dinosaurios.
-        let dinosaurioSeleccionado = null; // Guarda el TIPO de dino (ej: 't-rex')
-        let elementoDinoSeleccionado = null; // Guarda el ELEMENTO DOM del dino seleccionado
+        let dinosaurioSeleccionado = null; 
+        let elementoDinoSeleccionado = null; 
         let indiceJugadorActivoTablero = 0;
         let scrollInterval = null;
 
-        // Para no andar buscando los botones y divs a cada rato, los guardamos aquí
+        // para no andar buscando los botones y divs a cada rato, los guardamos aca
         const contenedorPestanas = document.getElementById('tabs-jugadores');
         const contenedorTableros = document.getElementById('tableros-container');
         const plantilla = document.getElementById('plantilla-parque-jugador');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnCerrarModalHistorial = document.getElementById('btn-cerrar-historial-modal');
         const btnReiniciarPartida = document.getElementById('btn-reiniciar-partida');
 
-        // Calcular los puntos, llamar motor del juego
+        // calcular los puntos, llamar motor del juego
         function calcularPuntuacionTotal(indiceJugador) {
             const jugador = estadoJuego.jugadores[indiceJugador];
             if (!jugador) return;
@@ -820,7 +820,7 @@ document.addEventListener('DOMContentLoaded', function() {
             inicializarScrollAlArrastrar();
         }
 
-        // La función que arranca la partida cuando la página carga
+        // la función que arranca la partida cuando la página carga
         function inicializarJuego() {
             const nombresJugadores = JSON.parse(localStorage.getItem('jugadoresDraftosaurus'));
             if (!nombresJugadores || nombresJugadores.length === 0) {

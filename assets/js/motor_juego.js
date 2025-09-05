@@ -1,5 +1,5 @@
 /**
-Contiene la lógica principal, las reglas y los calculos de puntuación de draftosaurus.
+Contiene lógica principal, las reglas y los calculos de puntuación
   se comparte para ambos modos digital y seguimiento para no  duplicar codigo
  */
 

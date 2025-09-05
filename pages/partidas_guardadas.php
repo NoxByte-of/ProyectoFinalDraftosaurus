@@ -49,7 +49,7 @@
                             <td>27</td>
                             <td>2025-05-25</td>
                         </tr>
-                        <!-- las futuras partidas se añadirán aquí dinámicamente -->
+                        <!-- esto es un boceto, se añaden dinamicamente las partidas en el futuro -->
                     </tbody>
                 </table>
             </div>

@@ -1,6 +1,6 @@
 /**
- * lógica de registro e inicio de sesión,
- * Se comunica con el backend para registrar usuarios e iniciar sesión.
+ * logica de registro e inicio de sesión
+ * comunica con el backend para registrar usuarios e iniciar sesion.
  */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -28,11 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         panelDescripcion.textContent = '¡Únete a la aventura y guarda tu progreso!';
     });
 
-    // --- MANEJO DEL FORMULARIO DE REGISTRO ---
+    //FORMULARIO DE REGISTRO 
     formularioRegistro.addEventListener('submit', (evento) => {
         evento.preventDefault();
 
-        // Validación de campos en el frontend
         const nombreUsuario = document.getElementById('nombre-usuario-registro').value.trim();
         const email = document.getElementById('email').value.trim();
         const edad = document.getElementById('edad').value.trim();
@@ -59,25 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Si las validaciones pasan, preparamos los datos para enviar al backend.
         const datos = new FormData();
         datos.append('nombre_usuario', nombreUsuario);
         datos.append('email', email);
         datos.append('edad', edad);
         datos.append('contrasena', contrasena);
 
-        // Usamos fetch para enviar los datos al script de PHP.
         fetch('../backend/Registro y Login/registro_usuario.php', {
             method: 'POST',
             body: datos
         })
-        .then(response => response.json()) // Convertimos la respuesta del servidor a JSON.
+        .then(response => response.json()) 
         .then(data => {
-            // Mostramos la notificación con el mensaje que nos devuelve el servidor.
             if (data.exito) {
                 mostrarNotificacion(data.mensaje, 'success');
-                formularioRegistro.reset(); // Limpiamos el formulario.
-                enlaceLogin.click(); // Simulamos un clic para cambiar al formulario de login.
+                formularioRegistro.reset(); 
+                enlaceLogin.click(); 
             } else {
                 mostrarNotificacion(data.mensaje, 'error');
             }
@@ -89,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- MANEJO DEL FORMULARIO DE INICIO DE SESIÓN ---
+    //FORMULARIO DE INICIO DE SESION
     formularioLogin.addEventListener('submit', (evento) => {
         evento.preventDefault();
         
@@ -113,10 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.exito) {
                 mostrarNotificacion(data.mensaje, 'success');
-                // Si el login es exitoso, redirigimos al menú principal después de un momento.
                 setTimeout(() => {
                     window.location.href = '../index.php';
-                }, 1500); // 1.5 segundos de espera para que el usuario lea la notificación.
+                }, 1500); 
             } else {
                 mostrarNotificacion(data.mensaje, 'error');
             }
