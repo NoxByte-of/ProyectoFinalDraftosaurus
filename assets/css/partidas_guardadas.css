@@ -12,14 +12,13 @@
     width: 100%;
 }
 
-/* Panel que contiene la tabla */
 .panel-partidas {
     background-color: var(--dh-fondo-contenedor);
     border: 4px solid var(--color-marron-medio);
     border-radius: 20px;
     padding: 2rem;
     width: 100%;
-    max-width: 800px; /* Ancho máximo para la tabla */
+    max-width: 800px; 
     text-align: center;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     color: var(--dh-texto-primario-oscuro);
@@ -31,15 +30,14 @@
     padding-bottom: 1rem;
 }
 
-/* Contenedor de la tabla para permitir scroll en pantallas pequeñas */
 .tabla-container {
-    overflow-x: auto; /* Añade scroll horizontal si la tabla no cabe */
+    overflow-x: auto; 
 }
 
 /* Estilos de la tabla */
 table {
     width: 100%;
-    border-collapse: collapse; /* Une los bordes de las celdas */
+    border-collapse: collapse; 
     margin-top: 1rem;
     font-family: var(--dh-fuente-cuerpo);
 }
@@ -81,7 +79,6 @@ td {
     font-weight: bold;
 }
 
-/* Botón para volver */
 .btn-volver {
     margin-top: 1.5rem;
     width: 100%;

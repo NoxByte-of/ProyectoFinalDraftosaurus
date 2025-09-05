@@ -168,7 +168,7 @@ main#game-container {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    cursor: pointer; /* Para indicar que es clickeable */
+    cursor: pointer; 
 }
 
 /* REGLAS DE LAYOUT */
