@@ -1,7 +1,7 @@
 /*
   Estilos Base
   Contiene los estilos globales del proyecto(se usan en toda la pagina)
-  @version 2.8 - Cambio global de fuentes 
+  version 2.8 - Cambio global de fuentes 
 */
 
 *,
@@ -177,7 +177,7 @@ strong {
 header {
     background: transparent;
     color: var(--dh-texto-sobre-fondo-oscuro);
-    padding: clamp(15px, 4vh, 30px) 25px;
+    padding: 0; 
     text-align: center;
     position: relative;
 }
@@ -231,35 +231,6 @@ section {
 section:last-of-type {
     margin-bottom: 0;
 }
-
-/* ESTILOS DEL FOOTER  */
-footer {
-  padding: 30px;
-  text-align: center;
-  position: relative;
-  bottom: auto;
-  width: 100%;
-}
-
-footer.bg-custom {
-  background-color: #8a4c23c0;
-}
-
-footer a {
-  color: #ffcc66;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  color: #e67f1a;
-  text-decoration: underline;
-}
-
-footer p {
-  color: #ffffff;
-}
-
 
 .hidden {
     display: none !important;

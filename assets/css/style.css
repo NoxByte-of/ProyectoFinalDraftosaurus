@@ -1,22 +1,24 @@
 /*
-  Archivo Principal de Estilos
+Archivo Principal de Estilos
 
-  importa todos los estilos CSS del proyecto, ordena el codigo.
-  @import para cargar los CSS en cascada
+importa todos los estilos CSS del proyecto, ordena el codigo.
+@import para cargar los CSS en cascada
 */
 
 /* fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Piedra&family=Bubblegum+Sans&family=Darumadrop+One&family=Poetsen+One&display=swap');
+@import url('https://www.google.com/search?q=https://fonts.googleapis.com/css2%3Ffamily%3DPiedra%26family%3DBubblegum%2BSans%26family%3DDarumadrop%2BOne%26family%3DPoetsen%2BOne%26display%3Dswap');
 
 /* módulos de estilos */
 @import url('base.css');
 @import url('components.css');
 @import url('animations.css');
+@import url('header.css');
+@import url('footer.css');
 @import url('menu_principal.css');
 @import url('estilos_configuracion.css');
-@import url('estilos_login.css'); 
+@import url('estilos_login.css');
 @import url('modo_seguimiento.css');
 @import url('tutorial.css');
 @import url('modo_digital.css');
-@import url('partidas_guardadas.css'); 
+@import url('partidas_guardadas.css');
 @import url('responsive.css');

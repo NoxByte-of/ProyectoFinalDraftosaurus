@@ -3,17 +3,12 @@
   Estilos para el layout del menú principal en index.html.
   estilos de botones (.btn-menu) fue movido a components.css.
  */
-/*
-
-*/
 .body-centrado { 
-    height: 100%; 
+    min-height: 100vh; 
     margin: 0; 
     padding: 0; 
     display: flex; 
     flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
 }
 
 /* Contenedor Principal  */
@@ -40,7 +35,7 @@
     margin-bottom: 2rem;
 }
 
-/* Menú de Navegación (invisible) */
+/* Menú de Navegación */
 .menu-navegacion {
     background: none;
     backdrop-filter: none;
@@ -51,6 +46,10 @@
     width: 100%;
     max-width: 380px;
     margin-top: 0.5rem;
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
 }
 
 .menu-navegacion::before,
@@ -63,5 +62,4 @@
     flex-direction: column;
     gap: 1rem;
 }
-
 

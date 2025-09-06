@@ -4,7 +4,6 @@
 
   Contiene todas las definiciones de @keyframes y los estilos para elementos
   decorativos y animados.
-  - Animación de la mascota(comentada)
 */
 
 
@@ -30,21 +29,3 @@
         transform: translateY(0) rotate(-1deg);
     }
 }
-
-/* MASCOTA(inactiva)
-#mascota-bienvenida {
-    position: relative; 
-    display: block; 
-    width: 160px; 
-    height: auto;
-    margin: 0.5rem auto 0; 
-    z-index: 10;
-    animation: balanceo-suave 8s ease-in-out infinite;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-#mascota-bienvenida:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-*/

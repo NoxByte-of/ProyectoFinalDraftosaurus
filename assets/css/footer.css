@@ -1,0 +1,31 @@
+/* ESTILOS DEL FOOTER  */
+footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  position: relative;
+  bottom: auto;
+  width: 100%;
+  margin-top: auto; 
+}
+
+
+footer.bg-custom {
+  background-color: #8a4c23c0;
+}
+
+footer a {
+  color: #ffcc66;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #e67f1a;
+  text-decoration: underline;
+}
+
+footer p {
+  color: #ffffff;
+  font-size: 1.1rem; 
+  margin-bottom: 0.5rem; 
+}
