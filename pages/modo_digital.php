@@ -38,6 +38,12 @@
                         <a class="nav-link" href="modo_juego_digital.php">Juego</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="login.php">Registrarse</a>
                     </li>
                     <li class="nav-item">

@@ -37,6 +37,12 @@
                         <a class="nav-link" href="pages/modo_juego_digital.php">Juego</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="pages/login.php">Registrarse</a>
                     </li>
                     <li class="nav-item">
@@ -59,16 +65,8 @@
             </a>
             <a href="pages/partidas_guardadas.php" class="btn-menu">
                 <span class="texto-boton">Partidas Guardadas</span>
-            </a>
-            <button id="btn-abrir-tutorial" class="btn-menu">
-                <span class="texto-boton">Tutorial</span>
-            </button>     
-            <a href="pages/login.php" class="btn-menu">
-                <span class="texto-boton">Iniciar Sesión</span>
-            </a>    
-            <button id="btn-quienes-somos" class="btn-menu">
-                <span class="texto-boton">Sobre NoxByte</span>
-            </button>
+            </a>   
+ 
         </nav>
     </main>
 
