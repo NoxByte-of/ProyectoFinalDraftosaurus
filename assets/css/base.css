@@ -1,7 +1,7 @@
 /*
   Estilos Base
   Contiene los estilos globales del proyecto(se usan en toda la pagina)
-  @version 2.7 - adaptado a noxbyte 
+  @version 2.8 - Cambio global de fuentes 
 */
 
 *,
@@ -64,10 +64,10 @@
     --dh-radio-borde-pildora: 999em;
 
     /* Fuentes letras */
-    --dh-fuente-principal: 'Cinzel Decorative', serif;
-    --dh-fuente-encabezado: 'Bitter', serif;
-    --dh-fuente-cuerpo: 'Merriweather', serif;
-    --dh-fuente-manual: 'Caveat', cursive;
+    --dh-fuente-principal: 'Piedra', cursive;
+    --dh-fuente-encabezado: 'Poetsen One', sans-serif;
+    --dh-fuente-cuerpo: 'Bubblegum Sans', sans-serif;
+    --dh-fuente-manual: 'Darumadrop One', cursive;
 
     /* Colores de Estado */
     --dh-color-peligro: #c0392b;
@@ -234,30 +234,32 @@ section:last-of-type {
 
 /* ESTILOS DEL FOOTER  */
 footer {
-    background-color: transparent; 
-    color: #fff; 
-    padding: 1.5rem 1rem;
-    text-align: center;
-    margin-top: auto;
-    border-top: none; 
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  bottom: auto;
+  width: 100%;
 }
 
-.footer-contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem; 
+footer.bg-custom {
+  background-color: #8a4c23c0;
 }
 
-.footer-contenido p {
-    margin: 0;
-    font-family: var(--dh-fuente-cuerpo);
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--dh-texto-primario); 
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8); 
+footer a {
+  color: #ffcc66;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
+
+footer a:hover {
+  color: #e67f1a;
+  text-decoration: underline;
+}
+
+footer p {
+  color: #ffffff;
+}
+
 
 .hidden {
     display: none !important;

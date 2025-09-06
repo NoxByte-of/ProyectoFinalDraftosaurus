@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draftosaurus - Modo Digital - NoxByte</title>
     
+    <!-- Nuevas Fuentes y Bootstrap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Bitter:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
@@ -137,12 +142,12 @@
         </div>
     </main>
     
-    <footer>
-    <div class="footer-contenido">
-        <p>© 2025 NoxByte. Todos los derechos reservados.</p>
-        <p>Instituto Tecnológico de Informática</p>
-    </div>
-</footer>
+    <footer class="bg-custom text-center text-lg-start mt-5">
+     <div class="container p-4">
+       <p class="mb-1">© <?= date("Y") ?> NoxByte. Todos los derechos reservados.</p>
+       <p class="mb-0">📧 Contacto: <a href="mailto:noxbyte.of@gmail.com">noxbyte.of@gmail.com</a></p>
+      </div>
+    </footer>
 
     <div id="end-game-modal" class="modal-overlay">
         <div class="modal-content card-parchment">
@@ -156,6 +161,7 @@
     
     <div id="notificacion-container"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../assets/js/comunes.js"></script>
     <script src="../assets/js/motor_juego.js"></script> 
     <script src="../assets/js/modo_digital.js"></script>
