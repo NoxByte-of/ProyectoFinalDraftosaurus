@@ -8,13 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registro / Inicio de Sesión - Draftosaurus</title>
 
+<!-- Nuevas Fuentes y Bootstrap -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 
@@ -56,27 +57,11 @@
         <p id="panel-descripcion">¡Guarda tu progreso creando una cuenta!</p>
         
         <form id="formulario-registro" novalidate>
-            <div class="form-group">
-                <label for="nombre-usuario-registro">Nombre de Usuario</label>
-                <input type="text" id="nombre-usuario-registro" class="form-control" required placeholder="Escribe tu nombre de usuario aquí">
-            </div>
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" class="form-control" required placeholder="tucorreo@ejemplo.com">
-            </div>
-            <div class="form-group">
-                <label for="edad">Edad</label>
-        
-                <input type="number" id="edad" class="form-control" required placeholder="Escribe tu edad aquí" min="0">
-            </div>
-            <div class="form-group">
-                <label for="contrasena-registro">Contraseña</label>
-                <input type="password" id="contrasena-registro" class="form-control" required placeholder="Mínimo 8 caracteres">
-            </div>
-            <div class="form-group">
-                <label for="confirmar-contrasena">Confirmar Contraseña</label>
-                <input type="password" id="confirmar-contrasena" class="form-control" required placeholder="Repite tu contraseña">
-            </div>
+            <input type="text" id="nombre-usuario-registro" class="form-control" required placeholder="Nombre de Usuario">
+            <input type="email" id="email" class="form-control" required placeholder="Correo Electrónico">
+            <input type="number" id="edad" class="form-control" required placeholder="Edad" min="0">
+            <input type="password" id="contrasena-registro" class="form-control" required placeholder="Contraseña (mínimo 8 caracteres)">
+            <input type="password" id="confirmar-contrasena" class="form-control" required placeholder="Confirmar contraseña">
 
             <div class="botones-login">
                 <button type="submit" class="btn-menu">Registrarse</button>
@@ -88,14 +73,8 @@
         </form>
 
         <form id="formulario-login" novalidate style="display: none;">
-            <div class="form-group">
-                <label for="nombre-usuario-login">Nombre de Usuario</label>
-                <input type="text" id="nombre-usuario-login" class="form-control" required placeholder="Tu nombre de usuario">
-            </div>
-            <div class="form-group">
-                <label for="contrasena-login">Contraseña</label>
-                <input type="password" id="contrasena-login" class="form-control" required placeholder="Tu contraseña">
-            </div>
+            <input type="text" id="nombre-usuario-login" class="form-control" required placeholder="Nombre de Usuario">
+            <input type="password" id="contrasena-login" class="form-control" required placeholder="Contraseña">
 
             <div class="botones-login">
                 <button type="submit" class="btn-menu">Iniciar Sesión</button>
@@ -121,9 +100,10 @@
 
 <div id="notificacion-container"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/comunes.js"></script>
 <script src="../assets/js/login.js"></script>
 
 </body>
 </html>
+

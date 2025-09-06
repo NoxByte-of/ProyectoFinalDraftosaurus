@@ -57,7 +57,7 @@
                 Juega una partida completa de Draftosaurus directamente en tu dispositivo. ¡Invita a tus amigos y que comience la aventura!
             </p>
             <div class="botones-configuracion">
-                <a href="#" id="btn-iniciar-configuracion" class="btn-menu">Iniciar Configuración</a>
+                <a href="#" id="btn-iniciar-configuracion" class="btn-menu">Iniciar</a>
                 <a href="../index.php" class="btn-menu">Volver al Menú</a>
             </div>
         </div>

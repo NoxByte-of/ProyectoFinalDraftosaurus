@@ -11,7 +11,6 @@
     flex-direction: column; 
 }
 
-/* Contenedor Principal  */
 .contenedor-menu-principal {
     display: flex;
     flex-direction: column;
@@ -22,7 +21,6 @@
     width: 100%;
 }
 
-/* encabezado  */
 .encabezado-principal h1 {
     color: #fff;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
@@ -35,7 +33,6 @@
     margin-bottom: 2rem;
 }
 
-/* Menú de Navegación */
 .menu-navegacion {
     background: none;
     backdrop-filter: none;

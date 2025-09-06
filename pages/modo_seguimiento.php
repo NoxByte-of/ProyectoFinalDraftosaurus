@@ -58,7 +58,7 @@
                 Este modo te permite llevar un registro detallado de tus partidas de Draftosaurus, colocar dinosaurios y calcular las puntuaciones finales.
             </p>
             <div class="botones-configuracion">
-                <a href="#" id="btn-iniciar-configuracion" class="btn-menu">Iniciar Configuración</a>
+                <a href="#" id="btn-iniciar-configuracion" class="btn-menu">Iniciar</a>
                 <a href="../index.php" class="btn-menu">Volver al Menú</a>
             </div>
         </div>
