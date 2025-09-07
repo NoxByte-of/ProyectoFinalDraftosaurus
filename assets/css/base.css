@@ -1,116 +1,12 @@
 /*
-  Estilos Base
-  Contiene los estilos globales del proyecto(se usan en toda la pagina)
-  version 2.8 - Cambio global de fuentes 
+  Estilos Base 
+  estilos específicos que no entran en conflicto con global.css
+  y son usados por los modos de juego.
+  version 3.0
 */
 
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* VARIABLES COLORES  */
-:root {
-    
-    /* Paleta Principal */
-    --color-naranja-boton: #c85a2b; 
-    --color-naranja-boton-hover: #e06a38; 
-    --color-marron-borde-texto: #4a2c16; 
-    --color-marron-medio: #8b6b4f;
-    --color-marron-claro: #c4a68a;
-    --color-marron-muy-claro: #f0e6d5; 
-
-    /* Acento y UI */
-    --dh-color-primario: var(--color-naranja-boton); 
-    --dh-color-secundario: var(--color-marron-borde-texto); 
-    --dh-acento-primario: #e88a37; 
-    --dh-acento-secundario: #a98a6a; 
-
-    /* Fondos */
-    --dh-fondo-principal: var(--color-marron-muy-claro); 
-    --dh-fondo-contenedor: #fdf6e3; 
-    --dh-fondo-seccion: #fbf3de;
-
-    /* Tipografía */
-    --dh-texto-primario: #ffffff; 
-    --dh-texto-primario-oscuro: var(--color-marron-borde-texto); 
-    --dh-texto-secundario: #7a6a5a; 
-    --dh-texto-sobre-fondo-oscuro: #ffffff;
-    --dh-texto-placeholder: #b8a893;
-
-    /* Bordes y Sombras */
-    --dh-borde-color: var(--color-marron-claro); 
-    --dh-borde-fuerte: var(--color-marron-medio); 
-    --dh-borde-interactivo: var(--dh-acento-primario);
-    --dh-sombra-suave: 0 4px 10px rgba(0, 0, 0, 0.3);
-    --dh-sombra-media: 0 8px 25px rgba(0, 0, 0, 0.5);
-    
-    --dh-sombra-texto-borde-marron: 
-        1.5px 1.5px 0 var(--color-marron-borde-texto), 
-        -1.5px -1.5px 0 var(--color-marron-borde-texto), 
-        1.5px -1.5px 0 var(--color-marron-borde-texto), 
-        -1.5px 1.5px 0 var(--color-marron-borde-texto),
-        1px 1px 2px rgba(0,0,0,0.7); 
-    --dh-sombra-texto-encabezado: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    --dh-resplandor-foco: rgba(232, 138, 55, 0.5);
-
-    /* Radios de Borde */
-    --dh-radio-borde-principal: 20px; 
-    --dh-radio-borde-pequeno: 8px;
-    --dh-radio-borde-boton: 12px;
-    --dh-radio-borde-pildora: 999em;
-
-    /* Fuentes letras */
-    --dh-fuente-principal: 'Piedra', cursive;
-    --dh-fuente-encabezado: 'Poetsen One', sans-serif;
-    --dh-fuente-cuerpo: 'Bubblegum Sans', sans-serif;
-    --dh-fuente-manual: 'Darumadrop One', cursive;
-
-    /* Colores de Estado */
-    --dh-color-peligro: #c0392b;
-    --dh-color-peligro-hover: #e74c3c;
-    --dh-color-info: #3498db;
-    --dh-color-info-hover: #5dade2;
-
-    /* Colores de Dinosaurios  */
-    --color-t-rex: #E74C3C;
-    --color-triceratops: #9B59B6;
-    --color-spinosaurus: #F39C12;
-    --color-parasaurolophus: #2ECC71;
-    --color-brachiosaurus: #3498DB;
-    --color-stegosaurus: #7F8C8D;
-}
-
-
-/* ESTILOS GLOBALES */
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--dh-fuente-cuerpo);
-    line-height: 1.7;
-    color: var(--dh-texto-primario-oscuro);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    transition: background-color 0.4s ease, color 0.4s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-image: url('../imagenes/draftosaurusfondo1.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
- 
-
 /* TIPOGRAFÍA  */
-h1, h2, h3, h4, h5, h6 {
+h1, h3, h4, h5, h6 {
     font-family: var(--dh-fuente-encabezado);
     font-weight: 700;
     color: var(--dh-texto-primario-oscuro);
@@ -127,18 +23,12 @@ h1 {
     text-shadow: var(--dh-sombra-texto-borde-marron);
 }
 
-h2 {
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin-bottom: 2rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--dh-borde-color);
-    color: var(--dh-color-secundario); 
-}
+/* h2 global.css */
 
 h3 {
     font-size: clamp(1.3rem, 3vw, 1.6rem);
     margin-bottom: 1rem;
-    color: var(--dh-acento-terciario);
+    color: var(--dh-acento-terciario); 
 }
 
 h4 {
@@ -149,10 +39,7 @@ h4 {
     margin-bottom: 8px;
 }
 
-p {
-    margin-bottom: 1.25rem;
-    color: var(--dh-texto-secundario);
-}
+/* p en global.css */
 
 a {
     text-decoration: none;
@@ -167,7 +54,6 @@ a:hover, a:focus {
     outline: none;
 }
 
-
 strong {
     font-weight: 700;
     color: var(--dh-texto-primario-oscuro);
@@ -180,56 +66,6 @@ header {
     padding: 0; 
     text-align: center;
     position: relative;
-}
-
-header p {
-    font-family: var(--dh-fuente-manual);
-    font-size: 1.3rem;
-    opacity: 0.9;
-    margin-top: 0.25rem;
-    margin-bottom: 0;
-    color: var(--dh-texto-sobre-fondo-oscuro);
-}
-
-.header-controls {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: clamp(15px, 3vw, 30px);
-    display: flex;
-    align-items: center;
-    z-index: 100;
-}
-
-main {
-    flex-grow: 1;
-    width: 100%;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: clamp(20px, 4vw, 40px);
-    background-color: transparent;
-    border-radius: var(--dh-radio-borde-principal);
-    box-shadow: none;
-    border: none;
-    position: relative;
-}
-
-main::before,
-main::after {
-    display: none; 
-}
-
-section {
-    margin-bottom: 30px;
-    padding: clamp(20px, 3vw, 30px);
-    background-color: var(--dh-fondo-seccion);
-    border-radius: var(--dh-radio-borde-pequeno);
-    border: 1px solid var(--dh-borde-color);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-section:last-of-type {
-    margin-bottom: 0;
 }
 
 .hidden {

@@ -1,22 +1,8 @@
 /**
- * tutorial interactivo 
- * version 4.4  z index añadido
+ * Estilos para el tutorial interactivo
+ * Versión 5.0 - rediseño basado en el code de gerogina 
  */
 
-/* Variables y Fuentes (heredadas :root) */
-:root {
-    --tutorial-color-fondo: var(--dh-fondo-contenedor);
-    --tutorial-color-borde: var(--color-marron-medio); 
-    --tutorial-color-texto-principal: var(--color-marron-borde-texto);
-    --tutorial-color-acento-cierre: #e74c3c; 
-    --tutorial-color-texto-secundario: var(--dh-texto-secundario);
-    --tutorial-color-valido: #4CAF50;
-    --tutorial-color-invalido: #F44336;
-    --tutorial-fuente-titulos: 'Cinzel Decorative', serif;
-    --tutorial-fuente-cuerpo: 'Caveat', cursive;
-}
-
-/* main container  */
 .tutorial__superposicion {
     position: fixed;
     inset: 0;
@@ -41,10 +27,9 @@
     width: 90vw;
     max-width: 1200px;
     height: 90vh;
-    background-color: var(--tutorial-color-fondo);
-    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
-    border: 6px solid var(--tutorial-color-borde);
-    border-radius: 12px;
+    background-color: rgba(201, 167, 104, 0.95);
+    border: 5px solid #856b3d;
+    border-radius: 30px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), inset 0 0 25px rgba(0,0,0,0.1);
     position: relative;
     padding: 2rem;
@@ -60,15 +45,27 @@
     opacity: 1;
 }
 
-/* encabezado y botón cerrar  */
-.tutorial__encabezado {
-    text-align: center;
-    font-family: var(--tutorial-fuente-titulos);
-    color: var(--tutorial-color-texto-principal);
+.tutorial__encabezado,
+.tutorial__pantalla h3 {
+    font-family: 'Darumadrop One', cursive;
+    color: #ffffff;
+    text-shadow:
+        -2px -2px 0 #5c1d01, 2px -2px 0 #5c1d01,
+        -2px 2px 0 #5c1d01, 2px 2px 0 #5c1d01,
+        -2px 0 0 #5c1d01, 2px 0 0 #5c1d01,
+        0 -2px 0 #5c1d01, 0 2px 0 #5c1d01;
     font-size: clamp(2rem, 5vw, 2.5rem);
-    border-bottom: 3px double var(--tutorial-color-borde);
+    border-bottom: 3px double var(--dh-borde-fuerte);
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tutorial__pantalla h3 {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
 }
 
 .tutorial__boton-cerrar {
@@ -77,7 +74,7 @@
     right: 15px;
     font-size: 2.5rem;
     font-weight: bold;
-    color: var(--tutorial-color-texto-secundario);
+    color: var(--dh-texto-secundario);
     background: none;
     border: none;
     cursor: pointer;
@@ -85,11 +82,50 @@
 }
 
 .tutorial__boton-cerrar:hover {
-    color: var(--tutorial-color-acento-cierre);
+    color: var(--dh-color-peligro);
     transform: rotate(90deg);
 }
 
-/* Pantalla  */
+.tutorial__pantalla p,
+.tutorial__tooltip p {
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 22px; 
+    color: #ffffff;
+    text-shadow:
+        -2px -2px 0 #753900, 2px -2px 0 #753900,
+        -2px 2px 0 #753900, 2px 2px 0 #753900,
+        -2px 0 0 #753900, 2px 0 0 #753900,
+        0 -2px 0 #753900, 0 2px 0 #753900;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+}
+
+.tutorial__boton {
+  background-color: #d35625;
+  color: white !important;
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s ease;
+  padding: 10px 20px !important;
+  text-shadow:
+    -2px -2px 0 #74341b, 2px -2px 0 #74341b,
+    -2px  2px 0 #74341b, 2px  2px 0 #74341b,
+    -2px  0   0 #74341b, 2px  0   0 #74341b,
+    0   -2px 0 #74341b, 0    2px 0 #74341b;
+  border-radius: 14px;
+  border: 2px solid #74341b;
+  will-change: transform;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tutorial__boton:hover {
+  transform: scale(1.02);
+  background-color: #5c070e !important;
+  color: #FFD571 !important;
+  border: 2px solid #360707 !important;
+}
+
 .tutorial__area-contenido {
     flex-grow: 1;
     position: relative;
@@ -112,21 +148,6 @@
     opacity: 0;
     pointer-events: none;
     display: none !important;
-}
-
-.tutorial__pantalla h3 {
-    font-family: var(--tutorial-fuente-titulos);
-    font-size: 2.2rem;
-    color: var(--tutorial-color-texto-principal);
-    margin-bottom: 1rem;
-}
-
-.tutorial__pantalla p {
-    font-family: var(--tutorial-fuente-cuerpo);
-    font-size: 1.8rem;
-    max-width: 600px;
-    margin-bottom: 1.5rem;
-    color: var(--tutorial-color-texto-secundario);
 }
 
 .tutorial__vista-juego {
@@ -207,11 +228,10 @@
     font-family: var(--dh-fuente-encabezado);
     font-weight: 700;
     font-size: 1.1rem;
-    color: var(--tutorial-color-texto-principal);
+    color: var(--dh-texto-primario-oscuro);
     margin: 0 0 0.5rem 0;
 }
 
-/* mano  */
 .tutorial__mano-dinosaurios {
     display: flex;
     flex-wrap: wrap;
@@ -236,7 +256,6 @@
     transform: scale(1.1);
 }
 
-/* dinosaurios */
 .tutorial__dinosaurio.t-rex { background-image: url('../imagenes/tiranosaurio.png'); }
 .tutorial__dinosaurio.spinosaurus { background-image: url('../imagenes/spinosaurio.png'); }
 .tutorial__dinosaurio.brachiosaurus { background-image: url('../imagenes/brachiosaurus.png'); }
@@ -244,13 +263,11 @@
 .tutorial__dinosaurio.parasaurolophus { background-image: url('../imagenes/parasaurio.png'); }
 .tutorial__dinosaurio.stegosaurus { background-image: url('../imagenes/estegosaurus.png'); }
 
-
-/* textos explicativos */
 .tutorial__caja-resaltado {
     position: fixed;
     z-index: 9998;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
-    border: 3px solid var(--tutorial-color-borde);
+    border: 3px solid var(--color-marron-medio);
     border-radius: 12px;
     pointer-events: none;
     transition: all 0.4s ease-in-out;
@@ -266,20 +283,12 @@
     z-index: 9999;
     width: 100%;
     max-width: 380px;
-    background-color: var(--tutorial-color-fondo);
-    border: 3px solid var(--tutorial-color-borde);
+    background-color: var(--dh-fondo-contenedor);
+    border: 3px solid var(--color-marron-medio);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     transition: all 0.4s ease-in-out;
-}
-
-.tutorial__tooltip p {
-    font-family: var(--tutorial-fuente-cuerpo);
-    font-size: 1.6rem;
-    color: var(--tutorial-color-texto-principal);
-    margin: 0;
-    word-wrap: break-word;
 }
 
 .tutorial__tooltip-navegacion {
@@ -288,37 +297,11 @@
     margin-top: 1rem;
 }
 
-/* Botones Tutorial  */
 #tutorial-start-btn {
     width: auto;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
 }
-
-.tutorial__boton {
-    background: var(--color-naranja-boton);
-    border: 2px solid var(--color-marron-borde-texto);
-    color: var(--dh-texto-primario);
-    padding: 0.8rem 1.8rem;
-    border-radius: 12px;
-    font-family: var(--dh-fuente-encabezado);
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0px 1px 2px rgba(255, 255, 255, 0.4);
-    text-shadow: var(--dh-sombra-texto-borde-marron);
-}
-
-.tutorial__boton:hover {
-    background: var(--color-naranja-boton-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5), inset 0px 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-
-/* interactividad y animaciones */
 
 @keyframes brillo-interactivo {
     0% { box-shadow: 0 0 5px rgba(123, 100, 80, 0.5), inset 0 0 5px rgba(123, 100, 80, 0.2); }
@@ -332,11 +315,10 @@
 
 .tutorial__recinto--objetivo-valido .tutorial__dino-slot {
     background-color: rgba(76, 175, 80, 0.2);
-    border-color: var(--tutorial-color-valido);
+    border-color: #4CAF50;
     border-style: solid;
 }
 
-/* Animación Dado 3D  */
 .tutorial__contenedor-dado {
     perspective: 1200px;
     display: flex;
@@ -357,14 +339,14 @@
     position: absolute;
     width: 80px;
     height: 80px;
-    border: 3px solid var(--tutorial-color-borde);
+    border: 3px solid var(--color-marron-medio);
     background-color: rgba(253, 246, 227, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
     font-weight: bold;
-    color: var(--tutorial-color-texto-principal);
+    color: var(--dh-texto-primario-oscuro);
 }
 
 .tutorial__dado-cara img {

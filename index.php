@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
-<body class="body-centrado">
+<body>
 
 <header class="header">
     <nav class="navbar bg-custom navbar-expand-lg position-relative">
@@ -54,21 +54,85 @@
     </nav>
 </header>
 
+<main class="main-content">
+ <section class="seccion-juego py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-6 text-center mb-4 mb-md-0">
+        <h2>¡Juega Draftosaurus!</h2>
+        <p>¡Demuestra que eres el mejor estratega jurásico y juega a nuestra versión digital de Draftosaurus!</p>
+        <a href="pages/modo_juego_digital.php"><button class="btn">¡Jugar ahora!</button></a>
+      </div>
+      <div class="col-md-6 text-center">
+        <h2>¡Registra tu partida!</h2>
+        <p>Ingresa los detalles de tu partida física con la app de seguimiento para llevar un registro completo.</p>
+        <a href="pages/modo_seguimiento.php"><button class="btn">Registrar ahora</button></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <div class="mx-auto" style="max-width: 900px;">
+            <h2>Partidas recientes</h2><br>
+            <table class="table table-striped table-bordered custom-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Jugador</th>
+                  <th>Puntaje</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>Jugador1</td>
+                  <td>3500</td>
+                  <td>2025-06-01</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td>Jugador2</td>
+                  <td>2800</td>
+                  <td>2025-05-30</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td>Jugador3</td>
+                  <td>3200</td>
+                  <td>2025-05-28</td>
+                </tr>
+                <tr>
+                  <th>4</th>
+                  <td>Jugador4</td>
+                  <td>4000</td>
+                  <td>2025-05-25</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
- <main class="menu-navegacion">
-        <nav>
-            <a href="pages/modo_juego_digital.php" class="btn-menu">
-                <span class="texto-boton">¡Jugar Draftosaurus!</span>
-            </a>
-            <a href="pages/modo_seguimiento.php" class="btn-menu">
-                <span class="texto-boton">Modo Seguimiento</span>
-            </a>
-            <a href="pages/partidas_guardadas.php" class="btn-menu">
-                <span class="texto-boton">Partidas Guardadas</span>
-            </a>   
- 
-        </nav>
-    </main>
+<section class="seccion-informacion py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>¿Cómo jugar?</h2>
+        <p>Draftosaurus es un juego de mesa donde los jugadores deben crear el mejor parque jurásico posible. Cada
+          jugador selecciona dinosaurios y los coloca estratégicamente en su parque para maximizar su puntaje.</p>
+      </div>
+      <div class="col-md-6 text-center bg-transparent">
+        <h2>¡Aprende a Jugar!</h2><br>
+        <!-- El botón ahora abre el modal del tutorial -->
+        <button id="btn-abrir-tutorial-main" class="btn">Ver Tutorial</button>
+    </div>
+  </div>
+</section>
+</main>
 
  <footer class="bg-custom text-center text-lg-start">
      <div class="container p-4">
@@ -163,3 +227,4 @@
 
 </body>
 </html>
+

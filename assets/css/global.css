@@ -1,0 +1,209 @@
+/*
+  NUEVA HOJA DE ESTILOS GLOBALES
+  Contiene la paleta de colores, fuentes y estilos base del nuevo diseño.
+  Versión 2.0 - menu principals de noxbbtye georgna
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Piedra&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
+/*VARIABLES Y COLORES*/
+:root {
+    /* Paleta Principal */
+    --color-naranja-boton: #c85a2b; 
+    --color-naranja-boton-hover: #e06a38; 
+    --color-marron-borde-texto: #4a2c16; 
+    --color-marron-medio: #8b6b4f;
+    --color-marron-claro: #c4a68a;
+    --color-marron-muy-claro: #f0e6d5; 
+
+    /* Acento y UI */
+    --dh-color-primario: var(--color-naranja-boton); 
+    --dh-color-secundario: var(--color-marron-borde-texto); 
+    --dh-acento-primario: #e88a37; 
+    --dh-acento-secundario: #a98a6a; 
+
+    /* Fondos */
+    --dh-fondo-principal: var(--color-marron-muy-claro); 
+    --dh-fondo-contenedor: #fdf6e3; 
+    --dh-fondo-seccion: #fbf3de;
+
+    /* Tipografía */
+    --dh-texto-primario: #ffffff; 
+    --dh-texto-primario-oscuro: var(--color-marron-borde-texto); 
+    --dh-texto-secundario: #7a6a5a; 
+    --dh-texto-sobre-fondo-oscuro: #ffffff;
+    --dh-texto-placeholder: #b8a893;
+
+    /* Bordes y Sombras */
+    --dh-borde-color: var(--color-marron-claro); 
+    --dh-borde-fuerte: var(--color-marron-medio); 
+    --dh-borde-interactivo: var(--dh-acento-primario);
+    --dh-sombra-suave: 0 4px 10px rgba(0, 0, 0, 0.3);
+    --dh-sombra-media: 0 8px 25px rgba(0, 0, 0, 0.5);
+    
+    --dh-sombra-texto-borde-marron: 
+        1.5px 1.5px 0 var(--color-marron-borde-texto), 
+        -1.5px -1.5px 0 var(--color-marron-borde-texto), 
+        1.5px -1.5px 0 var(--color-marron-borde-texto), 
+        -1.5px 1.5px 0 var(--color-marron-borde-texto),
+        1px 1px 2px rgba(0,0,0,0.7); 
+    --dh-sombra-texto-encabezado: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    --dh-resplandor-foco: rgba(232, 138, 55, 0.5);
+
+    /* Bordes*/
+    --dh-radio-borde-principal: 20px; 
+    --dh-radio-borde-pequeno: 8px;
+    --dh-radio-borde-boton: 12px;
+    --dh-radio-borde-pildora: 999em;
+
+    /* Fuentes letras */
+    --dh-fuente-principal: 'Piedra', cursive;
+    --dh-fuente-encabezado: 'Poetsen One', sans-serif;
+    --dh-fuente-cuerpo: 'Bubblegum Sans', sans-serif;
+    --dh-fuente-manual: 'Darumadrop One', cursive;
+
+    /*Colores de Estado */
+    --dh-color-peligro: #c0392b;
+    --dh-color-peligro-hover: #e74c3c;
+    --dh-color-info: #3498db;
+    --dh-color-info-hover: #5dade2;
+
+    /* Colores Dinos  */
+    --color-t-rex: #E74C3C;
+    --color-triceratops: #9B59B6;
+    --color-spinosaurus: #F39C12;
+    --color-parasaurolophus: #2ECC71;
+    --color-brachiosaurus: #3498DB;
+    --color-stegosaurus: #7F8C8D;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*BASE DEL BODY  */
+body {
+  background-color: transparent;
+  background-image: url('../imagenes/draftosaurusfondo1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  overflow-x: hidden;
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh;
+}
+
+/*BOTONES*/
+.btn {
+  background-color: #d35625;
+  color: white !important; 
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s ease;
+  padding: 10px 20px !important;
+  text-shadow:
+    -2px -2px 0 #74341b,
+     2px -2px 0 #74341b,
+    -2px  2px 0 #74341b,
+     2px  2px 0 #74341b,
+    -2px  0   0 #74341b,
+     2px  0   0 #74341b,
+     0   -2px 0 #74341b,
+     0    2px 0 #74341b;
+  border-radius: 14px;
+  border: 2px solid #74341b; 
+  will-change: transform;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+  background-color: #5c070e !important;
+  color: #FFD571 !important;
+  border: 2px solid #360707 !important;
+}
+
+/*ESTILOS TEXTO*/
+h2 {
+  font-family: 'Darumadrop One', cursive;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #5c1d01,
+     2px -2px 0 #5c1d01,
+    -2px  2px 0 #5c1d01,
+     2px  2px 0 #5c1d01,
+    -2px  0   0 #5c1d01,
+     2px  0   0 #5c1d01,
+     0   -2px 0 #5c1d01,
+     0    2px 0 #5c1d01;
+}
+
+p {
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #753900,
+     2px -2px 0 #753900,
+    -2px  2px 0 #753900,
+     2px  2px 0 #753900,
+    -2px  0   0 #753900,
+     2px  0   0 #753900,
+     0   -2px 0 #753900,
+     0    2px 0 #753900;
+}
+
+/*  ESTILOS TABLA */
+.custom-table thead th {
+  background-color: #ca6622 !important;
+  color: rgb(255, 255, 255) !important;
+  font-family: 'Darumadrop One', cursive;
+  text-align: center;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-weight: 200;
+  height: 60px;
+  vertical-align: middle;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 2px solid #683d11 !important;
+}
+
+.custom-table tbody td,
+.custom-table tbody th {
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 19px;
+  text-align: center;
+  color: #885200;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #8dce4c !important;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+  background-color: #b0ff5c !important;
+}
+
+/*SECCIONES DEL MAIN */
+.seccion-juego, .seccion-informacion {
+    background-color: rgba(201, 167, 104, 0.8);
+    padding: 2rem;
+    border-radius: 30px;
+    border: 5px solid #856b3d;
+    box-shadow: 0 4px 8px rgba(75, 43, 13, 0.432);
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+

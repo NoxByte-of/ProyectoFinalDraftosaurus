@@ -1,5 +1,4 @@
-// js/configuracion_digital.js
-// Este evento asegura que todo el HTML se haya cargado antes de ejecutar el script.
+
 document.addEventListener('DOMContentLoaded', function() {
     
     //  Lógica de Configuración de Partida 

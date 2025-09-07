@@ -1,14 +1,24 @@
 /**
- * logica del tutorial 
- * version 5.6  dado arreglado
+ * Lógica del tutorial interactivo
+ * Versión 5.7 - muchos bugs :(... solucionados :D
  */
 document.addEventListener('DOMContentLoaded', () => {
     
     const botonAbrirTutorial = document.getElementById('btn-abrir-tutorial');
     const modalSuperposicion = document.getElementById('tutorial-modal');
 
-    if (!botonAbrirTutorial || !modalSuperposicion) {
-        console.error("No se encontraron los elementos esenciales del tutorial en el DOM.");
+    // BUG FIX BOTONES DUPLICAOS
+    const btnAbrirTutorialMain = document.getElementById('btn-abrir-tutorial-main');
+
+    if (!modalSuperposicion) {
+        console.error("No se encontró el modal del tutorial en el DOM.");
+        return;
+    }
+
+    const botonesAbrir = [botonAbrirTutorial, btnAbrirTutorialMain].filter(btn => btn !== null);
+
+    if (botonesAbrir.length === 0) {
+        console.error("No se encontraron botones para abrir el tutorial.");
         return;
     }
 
@@ -125,7 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (paso.elementoDestacado) {
             const elemento = document.querySelector(paso.elementoDestacado);
             if (elemento) {
-                posicionarAyuda(elemento, paso.texto, cajaResaltadoRecinto);
+                // BUG FIX
+                const cajaCorrecta = paso.elementoDestacado === '#player-hand-area' ? cajaResaltadoMano : cajaResaltadoRecinto;
+                posicionarAyuda(elemento, paso.texto, cajaCorrecta);
                 if (!paso.pantalla || paso.pantalla === pantallaJuego) {
                      panelMano.classList.add('elemento-resaltado-tutorial');
                 }
@@ -226,8 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const contenedorRect = modalSuperposicion.getBoundingClientRect();
 
             let top, left;
-
-            if (elemento.id === 'player-hand-area') {
+            
+            // BUG FIX
+            if (elemento.id === 'player-hand-area' || elemento.id === 'dice-area-tutorial') {
                 top = rect.top + (rect.height / 2) - (tooltipRect.height / 2);
                 left = rect.left - tooltipRect.width - (margen * 2);
                 if (left < contenedorRect.left) {
@@ -267,8 +280,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rotacionFinal = rotaciones[indiceCara];
         dado.style.transform = `rotateX(${giroAleatorioX + rotacionFinal.x}deg) rotateY(${giroAleatorioY + rotacionFinal.y}deg)`;
     }
-
-    botonAbrirTutorial.addEventListener('click', iniciarTutorial);
+    
+    botonesAbrir.forEach(btn => btn.addEventListener('click', iniciarTutorial));
     botonCerrarTutorial.addEventListener('click', cerrarTutorial);
     botonCerrarTutorialFin.addEventListener('click', cerrarTutorial);
     botonIniciarTutorial.addEventListener('click', avanzarPaso);

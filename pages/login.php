@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registro / Inicio de Sesión - Draftosaurus</title>
 
-<!-- Nuevas Fuentes y Bootstrap -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet">
@@ -20,7 +19,7 @@
 <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
-<body>
+<body class="body-login">
 <header class="header">
 <nav class="navbar bg-custom navbar-expand-lg position-relative">
 <div class="container-fluid">
@@ -60,7 +59,7 @@
 <main class="main-login">
     <div class="panel-login">
         <h2 id="panel-titulo">Crear una Cuenta</h2>
-        <p id="panel-descripcion">¡Guarda tu progreso creando una cuenta!</p>
+        <p id="panel-descripcion" class="descripcion-panel">¡Únete a la aventura para guardar tu progreso!</p>
         
         <form id="formulario-registro" novalidate>
             <input type="text" id="nombre-usuario-registro" class="form-control" required placeholder="Nombre de Usuario">
@@ -70,7 +69,7 @@
             <input type="password" id="confirmar-contrasena" class="form-control" required placeholder="Confirmar contraseña">
 
             <div class="botones-login">
-                <button type="submit" class="btn-menu">Registrarse</button>
+                <button type="submit" class="btn-formulario">Registrarse</button>
             </div>
 
             <div class="enlace-cambio">
@@ -83,26 +82,18 @@
             <input type="password" id="contrasena-login" class="form-control" required placeholder="Contraseña">
 
             <div class="botones-login">
-                <button type="submit" class="btn-menu">Iniciar Sesión</button>
+                <button type="submit" class="btn-formulario">Iniciar Sesión</button>
             </div>
 
             <div class="enlace-cambio">
                 <p>¿No tienes una cuenta? <a href="#" id="enlace-registro">Crea una</a></p>
             </div>
         </form>
-
     </div>
 
-    <a href="../index.php" class="btn-menu btn-volver btn-peligro">Volver al Menú</a>
-
+    <a href="../index.php" class="btn-volver">Volver al Menú</a>
 </main>
 
- <footer class="bg-custom text-center text-lg-start mt-5">
-     <div class="container p-4">
-       <p class="mb-1">© <?= date("Y") ?> NoxByte. Todos los derechos reservados.</p>
-       <p class="mb-0">📧 Contacto: <a href="mailto:noxbyte.of@gmail.com">noxbyte.of@gmail.com</a></p>
-      </div>
-    </footer>
 
 <div id="notificacion-container"></div>
 
@@ -112,4 +103,3 @@
 
 </body>
 </html>
-

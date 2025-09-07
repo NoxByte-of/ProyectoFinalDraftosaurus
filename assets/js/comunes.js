@@ -1,6 +1,5 @@
 /**
 código que se comparte en toda la pagina
- Incluye:
  notificaciones
  lógica "sobre noxbyte"(variable quienes somos).
  */

@@ -50,7 +50,7 @@ main#game-container {
     padding-top: 0;
 }
 
-/* Estilos para el encabezado del tablero*/
+/* header del tablero*/
 #board-header-digital {
     display: flex;
     justify-content: space-between;
@@ -197,7 +197,7 @@ main#game-container {
     width: 22%;
 }
 
-/* (solitaria y selva) */
+/* (solitaria y selva 1s) */
 .recinto-digital[data-recinto="reySelva"],
 .recinto-digital[data-recinto="islaSolitaria"] {
      justify-content: center;
@@ -221,7 +221,7 @@ main#game-container {
     height: auto; 
 }
 
-/* 5. Layout específico Trío Frondoso (Pirámide) */
+/* Layout Trío Frondoso (en piramide) */
 .recinto-digital[data-recinto="trioFrondoso"] {
     flex-direction: column;
     justify-content: center;
@@ -338,7 +338,7 @@ main#game-container {
     padding: 10px;
     border: none;
 }
-/* Estilo para el dino seleccionado */
+/* dino seleccionado */
 #current-player-hand .dino-selector.selected {
     transform: scale(1.1);
     box-shadow: 0 0 12px 3px rgba(200, 90, 43, 0.6);
