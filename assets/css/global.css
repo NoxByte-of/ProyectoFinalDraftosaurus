@@ -1,7 +1,7 @@
 /*
   NUEVA HOJA DE ESTILOS GLOBALES
   Contiene la paleta de colores, fuentes y estilos base del nuevo diseño.
-  Versión 2.0 - menu principals de noxbbtye georgna
+  Versión 2.0 - menu principal de noxbyte
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Piedra&display=swap');
@@ -94,7 +94,8 @@ body {
   background-image: url('../imagenes/draftosaurusfondo1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  /* FIX: Cambiado de 'center' a 'center top' para alinear la imagen arriba */
+  background-position: center top; 
   margin: 0;
   overflow-x: hidden;
   display: flex; 
@@ -161,7 +162,7 @@ p {
      0    2px 0 #753900;
 }
 
-/*  ESTILOS TABLA */
+/* ESTILOS TABLA */
 .custom-table thead th {
   background-color: #ca6622 !important;
   color: rgb(255, 255, 255) !important;
@@ -206,4 +207,3 @@ p {
     margin: 2rem auto;
     max-width: 1200px;
 }
-

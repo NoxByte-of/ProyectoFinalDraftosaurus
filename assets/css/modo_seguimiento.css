@@ -1,7 +1,6 @@
 /*
   Archivo de Estilos del Modo Seguimiento
- 
-  version 6.8 - Añadido estilo para el dino seleccionado con click.
+  version 6.9 - Unificación de estilos de texto y color de pestaña activa.
 */
 
 /* --- Layout Principal de Dos Columnas --- */
@@ -98,8 +97,9 @@ strong#jugador-activo-dados {
     align-items: stretch; 
 }
 
+/* FIX: Se unifica el estilo de los títulos de los paneles */
 .control-grupo h4 {
-    font-family: var(--dh-fuente-principal);
+    font-family: var(--dh-fuente-encabezado); /* Se usa la fuente de encabezado correcta */
     font-size: 1.3rem; 
     color: var(--color-marron-borde-texto);
     margin-top: 0;
@@ -107,10 +107,11 @@ strong#jugador-activo-dados {
     text-align: center;
 }
 
+/* FIX: Se unifica el estilo del texto descriptivo */
 .descripcion-control {
     text-align: center;
     font-size: 0.85rem; 
-    color: var(--dh-texto-secundario);
+    color: var(--dh-texto-primario-oscuro); /* Se usa el color de texto principal */
     margin-bottom: 0.8rem; 
 }
 
@@ -266,9 +267,11 @@ strong#jugador-activo-dados {
     background-color: #fff;
 }
 
+/* FIX: Se cambia el color de la pestaña activa a verde para unificar con el modo digital. */
 .tab-jugador.active {
     background-color: var(--dh-fondo-contenedor);
-    color: var(--color-naranja-boton);
+    color: #27ae60; /* Verde temático */
+    font-weight: bold;
 }
 
 .tab-jugador::after {
@@ -309,7 +312,9 @@ strong#jugador-activo-dados {
     border-bottom: 2px solid var(--dh-borde-color);
 }
 
+/* FIX: Se unifica el estilo del título del parque. */
 .encabezado-parque h2 {
+    font-family: var(--dh-fuente-encabezado); /* Se usa la fuente de encabezado correcta */
     font-size: 1.6rem; 
     color: var(--color-marron-borde-texto);
 }

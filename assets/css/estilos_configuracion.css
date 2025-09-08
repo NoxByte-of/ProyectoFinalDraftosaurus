@@ -1,6 +1,6 @@
 /**
  estilos para páginas de configuración de ambos modos de juego
- version 2.2  bug del fondo recortado soluciuonado
+ version 2.3 - Añadido cursor pointer y not-allowed para botones.
  */
 
 .main-configuracion {
@@ -50,6 +50,8 @@
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
+    /* FIX: Se añade la propiedad cursor para mejorar la UX */
+    cursor: pointer;
 }
 
 .btn-menu:hover {
@@ -58,6 +60,14 @@
     color: #FFD571 !important;
     border: 2px solid #360707 !important;
 }
+
+/* FIX: Se añade un cursor específico para cuando el botón está deshabilitado */
+.btn-menu:disabled {
+    cursor: not-allowed;
+    background-color: #a0a0a0 !important;
+    border-color: #6e6e6e !important;
+}
+
 
 .panel-configuracion .form-group {
     margin-bottom: 0;
@@ -101,4 +111,3 @@
 #seccion-bienvenida p strong {
     color: #ffffff; 
 }
-

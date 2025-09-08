@@ -1,6 +1,6 @@
 /**
  * Página de registro e inicio de sesión.
- * Versión 3.0  basado en el prototipo de georgina
+ * Versión 3.2 - Ajustes finales de estilo en botones y enlaces.
  */
 
 .body-login {
@@ -116,22 +116,27 @@
     text-shadow: none;
 }
 
+/* FIX: Se cambia el color del enlace a blanco para mayor legibilidad y contraste. */
 .enlace-cambio a {
-    color: #ffdd99;
+    color: #ffffff; /* Color blanco */
     font-weight: bold;
     text-decoration: underline;
+    transition: color 0.2s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Sombra para que destaque */
 }
 
+/* FIX: Se añade un hover state dorado que combina con la paleta. */
 .enlace-cambio a:hover {
-    color: #ffd571;
+    color: #FFD571; /* Color dorado al pasar el mouse */
 }
 
+/* FIX: Se unifica el estilo del botón "Volver al Menú" con los botones principales. */
 .btn-volver {
     margin-top: 1.5rem;
     width: 100%;
     max-width: 450px;
-    background: #c0392b; 
-    border-color: #8f2d21;
+    background: #d35625; /* Naranja temático */
+    border: 2px solid #641700; /* Borde oscuro a juego */
     color: white;
     font-family: 'Bubblegum Sans', sans-serif;
     font-size: 20px;
@@ -140,11 +145,14 @@
     text-decoration: none;
     text-align: center;
     transition: all 0.3s ease;
-    text-shadow: -2px -2px 0 #5c1d01, 2px -2px 0 #5c1d01, -2px 2px 0 #5c1d01, 2px 2px 0 #5c1d01;
+    text-shadow: -2px -2px 0 #74341b, 2px -2px 0 #74341b, -2px 2px 0 #74341b, 2px 2px 0 #74341b, -2px 0 0 #74341b, 2px 0 0 #74341b, 0 -2px 0 #74341b, 0 2px 0 #74341b;
 }
 
+/* FIX: Se unifica el hover state con los botones principales. */
 .btn-volver:hover {
-    background: #a52a1a;
     transform: scale(1.02);
-    color: #fff;
+    background-color: #5c070e; /* Hover oscuro */
+    color: #FFD571; /* Texto dorado en hover */
+    border: 2px solid #360707;
 }
+

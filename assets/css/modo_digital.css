@@ -1,6 +1,6 @@
 /*
     Estilos específicos para el Modo de Juego Digital.
-    version 7.9 - Añadido estilo para el dino seleccionado con click.
+    version 8.0 - Corregida la fuente del título del tablero.
 */
 
 /* Layout Principal y Paneles  */
@@ -67,7 +67,10 @@ main#game-container {
     margin: 0;
     font-size: 1.6rem;
     border: none;
-    color: var(--color-marron-borde-texto);
+    color: var(--dh-texto-primario-oscuro);
+    text-shadow: none;
+    /* FIX: Se cambia la fuente para que coincida con otros encabezados de UI */
+    font-family: var(--dh-fuente-encabezado);
 }
 
 #board-score {
@@ -287,6 +290,13 @@ main#game-container {
     border-radius: 20px;
     padding: 1.5rem;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+#controls-column h4 {
+    color: var(--dh-texto-primario-oscuro);
+    text-shadow: none;
+    font-family: var(--dh-fuente-encabezado);
+    text-align: center;
 }
 
 #dice-area {

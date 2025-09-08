@@ -127,7 +127,6 @@
       </div>
       <div class="col-md-6 text-center bg-transparent">
         <h2>¡Aprende a Jugar!</h2><br>
-        <!-- El botón ahora abre el modal del tutorial -->
         <button id="btn-abrir-tutorial-main" class="btn">Ver Tutorial</button>
     </div>
   </div>
