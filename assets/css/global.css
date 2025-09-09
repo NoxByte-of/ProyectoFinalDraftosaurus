@@ -1,6 +1,5 @@
 /*
-  NUEVA HOJA DE ESTILOS GLOBALES
-  Contiene la paleta de colores, fuentes y estilos base del nuevo diseño.
+  colores, fuentes y estilos base 
   Versión 2.0 - menu principal de noxbyte
 */
 
@@ -94,7 +93,6 @@ body {
   background-image: url('../imagenes/draftosaurusfondo1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  /* FIX: Cambiado de 'center' a 'center top' para alinear la imagen arriba */
   background-position: center top; 
   margin: 0;
   overflow-x: hidden;

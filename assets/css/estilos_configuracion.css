@@ -50,7 +50,6 @@
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
-    /* FIX: Se añade la propiedad cursor para mejorar la UX */
     cursor: pointer;
 }
 
@@ -61,7 +60,6 @@
     border: 2px solid #360707 !important;
 }
 
-/* FIX: Se añade un cursor específico para cuando el botón está deshabilitado */
 .btn-menu:disabled {
     cursor: not-allowed;
     background-color: #a0a0a0 !important;

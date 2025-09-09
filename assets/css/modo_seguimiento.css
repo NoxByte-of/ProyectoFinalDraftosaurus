@@ -1,9 +1,9 @@
 /*
-  Archivo de Estilos del Modo Seguimiento
-  version 6.9 - Unificación de estilos de texto y color de pestaña activa.
+  Estilos del Modo Seguimiento
+  version 7.0 - letras y colores corregidos
 */
 
-/* --- Layout Principal de Dos Columnas --- */
+/*Layout Principal de Dos Columnas*/
 #main-tablero {
     background: transparent;
     box-shadow: none;
@@ -97,9 +97,8 @@ strong#jugador-activo-dados {
     align-items: stretch; 
 }
 
-/* FIX: Se unifica el estilo de los títulos de los paneles */
 .control-grupo h4 {
-    font-family: var(--dh-fuente-encabezado); /* Se usa la fuente de encabezado correcta */
+    font-family: var(--dh-fuente-encabezado);
     font-size: 1.3rem; 
     color: var(--color-marron-borde-texto);
     margin-top: 0;
@@ -107,12 +106,13 @@ strong#jugador-activo-dados {
     text-align: center;
 }
 
-/* FIX: Se unifica el estilo del texto descriptivo */
 .descripcion-control {
     text-align: center;
-    font-size: 0.85rem; 
-    color: var(--dh-texto-primario-oscuro); /* Se usa el color de texto principal */
+    font-size: 0.9rem;
+    color: var(--dh-texto-primario-oscuro);
     margin-bottom: 0.8rem; 
+    text-shadow: none; 
+    font-family: var(--dh-fuente-cuerpo); 
 }
 
 #restricciones-dados-container {
@@ -175,17 +175,18 @@ strong#jugador-activo-dados {
 
 #mano-virtual-info {
     font-family: var(--dh-fuente-cuerpo);
-    font-style: italic;
-    font-size: 0.8rem; 
+    font-style: normal; 
+    font-size: 0.9rem; 
     text-align: center;
     margin-top: 0.5rem;
     padding: 0 1rem;
     color: var(--dh-texto-primario-oscuro);
-    opacity: 0.8;
+    opacity: 1; 
+    text-shadow: none; 
 }
 
 
-/* Estilos de Dinosaurios  */
+/* Dinosaurios  */
 .dino-selector {
     width: 45px; 
     height: 45px; 
@@ -267,10 +268,9 @@ strong#jugador-activo-dados {
     background-color: #fff;
 }
 
-/* FIX: Se cambia el color de la pestaña activa a verde para unificar con el modo digital. */
 .tab-jugador.active {
     background-color: var(--dh-fondo-contenedor);
-    color: #27ae60; /* Verde temático */
+    color: #27ae60;
     font-weight: bold;
 }
 
@@ -312,11 +312,11 @@ strong#jugador-activo-dados {
     border-bottom: 2px solid var(--dh-borde-color);
 }
 
-/* FIX: Se unifica el estilo del título del parque. */
 .encabezado-parque h2 {
-    font-family: var(--dh-fuente-encabezado); /* Se usa la fuente de encabezado correcta */
+    font-family: var(--dh-fuente-encabezado);
     font-size: 1.6rem; 
     color: var(--color-marron-borde-texto);
+    text-shadow: none; 
 }
 
 .puntuacion-total-jugador {
@@ -349,7 +349,7 @@ strong#jugador-activo-dados {
     border-color: var(--color-naranja-boton);
 }
 
-/* Colores Temáticos para Recintos  */
+/* colores para Recintos  */
 .recinto[data-recinto="bosqueSemejanza"],
 .recinto[data-recinto="reySelva"],
 .recinto[data-recinto="trioFrondoso"] {
