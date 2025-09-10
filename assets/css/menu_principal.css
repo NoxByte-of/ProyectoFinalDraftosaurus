@@ -1,0 +1,130 @@
+/**
+  Estilos para el layout del menú principal en index.php.
+  v0.9 - Adaptado al menu 
+ */
+
+.body-centrado { 
+    min-height: 100vh; 
+    margin: 0; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+/* btns */
+.btn {
+  background-color: #d35625;
+  color: white;
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 20px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  padding: 10px 20px !important;
+  text-shadow:
+    -2px -2px 0 #74341b,
+     2px -2px 0 #74341b,
+    -2px  2px 0 #74341b,
+     2px  2px 0 #74341b,
+    -2px  0   0 #74341b,
+     2px  0   0 #74341b,
+     0   -2px 0 #74341b,
+     0    2px 0 #74341b;
+  border-radius: 14px;
+  border: 2px solid #642d00;
+  will-change: transform;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+  background-color: #5c070e !important;
+  color: #FFD571;
+  border: 2px solid #360707 !important;
+  transition: transform 0.3s ease;
+}
+
+h2 {
+  font-family: 'Darumadrop One', cursive;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #5c1d01,
+     2px -2px 0 #5c1d01,
+    -2px  2px 0 #5c1d01,
+     2px  2px 0 #5c1d01,
+    -2px  0   0 #5c1d01,
+     2px  0   0 #5c1d01,
+     0   -2px 0 #5c1d01,
+     0    2px 0 #5c1d01;
+  border-bottom: none; 
+  padding-bottom: 0;   
+  margin-bottom: 1.5rem; 
+}
+
+p {
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 #753900,
+     2px -2px 0 #753900,
+    -2px  2px 0 #753900,
+     2px  2px 0 #753900,
+    -2px  0   0 #753900,
+     2px  0   0 #753900,
+     0   -2px 0 #753900,
+     0    2px 0 #753900;
+}
+
+/* tabla de partidas */
+.custom-table {
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 15px;
+  overflow: hidden; 
+}
+
+.custom-table thead th {
+  background-color: #ca6622 !important;
+  color: rgb(255, 255, 255) !important;
+  font-family: 'Darumadrop One', cursive;
+  text-align: center;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-weight: 200;
+  height: 60px;
+  vertical-align: middle;
+  border-color: #683d11 !important;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 2px solid #683d11 !important;
+}
+
+.custom-table tbody td,
+.custom-table tbody th {
+  font-family: 'Bubblegum Sans', sans-serif;
+  font-size: 19px;
+  text-align: center;
+  color: #885200;
+  vertical-align: middle;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #8dce4c !important;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+  background-color: #b0ff5c !important;
+}
+
+.seccion-juego, .seccion-informacion {
+    background-color: transparent;
+    padding: 2rem;
+    border: none;
+    box-shadow: none;
+    margin: 2rem auto;
+    max-width: 1200px;
+}

@@ -1,0 +1,154 @@
+/**
+ Página de registro e inicio de sesión.
+ Versión 3.2 - Ajustes de estilo en botones y enlaces
+ */
+
+.body-login {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-login {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem; 
+    width: 100%;
+}
+
+/*Formulario*/
+.panel-login {
+    background: rgba(201, 167, 104, 0.85);
+    padding: 2.5rem;
+    border-radius: 30px;
+    border: 5px solid #856b3d;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 450px; 
+    text-align: center;
+    color: var(--dh-texto-primario-oscuro);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.panel-login h2 {
+    font-family: 'Darumadrop One', cursive;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    color: #ffffff;
+    border-bottom: none; 
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    text-shadow: -2px -2px 0 #5c1d01, 2px -2px 0 #5c1d01, -2px 2px 0 #5c1d01, 2px 2px 0 #5c1d01, -2px 0 0 #5c1d01, 2px 0 0 #5c1d01, 0 -2px 0 #5c1d01, 0 2px 0 #5c1d01;
+}
+
+.descripcion-panel {
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: -1px -1px 0 #753900, 1px -1px 0 #753900, -1px 1px 0 #753900, 1px 1px 0 #753900;
+}
+
+#formulario-registro,
+#formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; 
+    margin-top: 0.5rem;
+}
+
+.panel-login .form-control {
+    width: 100%;
+    padding: 12px 18px;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 1rem;
+    color: #5f4c3a;
+    background-color: #fff;
+    border: 2px solid #642d00;
+    border-radius: 14px; 
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.panel-login .form-control:focus {
+    border-color: #d35625;
+    box-shadow: 0 0 8px rgba(211, 86, 37, 0.6);
+    outline: none;
+}
+
+.botones-login {
+    margin-top: 1rem;
+}
+
+.btn-formulario {
+    background-color: #d35625;
+    color: white;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 20px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: 2px solid #641700;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.4s ease;
+    text-shadow: -2px -2px 0 #74341b, 2px -2px 0 #74341b, -2px 2px 0 #74341b, 2px 2px 0 #74341b, -2px 0 0 #74341b, 2px 0 0 #74341b, 0 -2px 0 #74341b, 0 2px 0 #74341b;
+    width: 100%;
+}
+
+.btn-formulario:hover {
+    transform: scale(1.02);
+    background-color: #5c070e;
+    color: #FFD571;
+    border: 2px solid #360707;
+}
+
+.enlace-cambio {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-family: 'Bubblegum Sans', sans-serif;
+}
+
+.enlace-cambio p{
+    color: #fff;
+    text-shadow: none;
+}
+
+.enlace-cambio a {
+    color: #ffffff; 
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+}
+
+.enlace-cambio a:hover {
+    color: #FFD571; 
+}
+
+.btn-volver {
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 450px;
+    background: #d35625; 
+    border: 2px solid #641700; 
+    color: white;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 20px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-shadow: -2px -2px 0 #74341b, 2px -2px 0 #74341b, -2px 2px 0 #74341b, 2px 2px 0 #74341b, -2px 0 0 #74341b, 2px 0 0 #74341b, 0 -2px 0 #74341b, 0 2px 0 #74341b;
+}
+
+.btn-volver:hover {
+    transform: scale(1.02);
+    background-color: #5c070e; 
+    color: #FFD571; 
+    border: 2px solid #360707;
+}
+

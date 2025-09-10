@@ -1,0 +1,410 @@
+/*
+    Estilos específicos para el Modo de Juego Digital.
+    version 8.0 - Corregida la fuente del título del tablero.
+*/
+
+/* Layout Principal y Paneles  */
+.digital-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main#game-container {
+    display: grid;
+    width: 100%;
+    max-width: 1600px;
+    margin: 1.5rem auto;
+    grid-template-columns: 2fr 1fr; 
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+    align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+    main#game-container { 
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Columna Izquierda (Tablero)*/
+#columna-tablero-juego {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-tablero-digital {
+    background-color: var(--dh-fondo-contenedor);
+    border: 4px solid var(--color-marron-medio);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 900px; 
+}
+
+#contenedor-imagen-tablero {
+    position: relative;
+    line-height: 0;
+    padding: 1.5rem;
+    padding-top: 0;
+}
+
+/* header del tablero*/
+#board-header-digital {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 0;
+    border-bottom: 2px solid var(--dh-borde-color);
+    margin-bottom: 1rem;
+}
+
+#board-title {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    font-size: 1.6rem;
+    border: none;
+    color: var(--dh-texto-primario-oscuro);
+    text-shadow: none;
+    /* FIX: Se cambia la fuente para que coincida con otros encabezados de UI */
+    font-family: var(--dh-fuente-encabezado);
+}
+
+#board-score {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.1rem;
+    color: var(--color-marron-borde-texto);
+}
+
+
+#imagen-tablero-digital {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+#contenedor-slots-tablero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* PESTAÑAS DE JUGADOR  */
+#tabs-jugadores-digital {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 1rem 1.5rem 0 1.5rem;
+    border-bottom: 4px solid var(--color-marron-medio);
+}
+
+.tab-jugador-digital {
+    padding: 0.7em 1.3em; 
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 0.9rem; 
+    color: var(--dh-texto-primario-oscuro);
+    background-color: var(--dh-fondo-seccion);
+    border: 4px solid var(--color-marron-medio);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -4px;
+}
+
+.tab-jugador-digital:hover {
+    background-color: #fff;
+}
+
+.tab-jugador-digital.active {
+    background-color: var(--dh-fondo-contenedor);
+    color: #27ae60; 
+    font-weight: bold; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); 
+}
+
+/* Estilos de Estado de Turno en Pestañas */
+.tab-jugador-digital::after {
+    content: '';
+    display: inline-block;
+    margin-left: 0.5em;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.tab-jugador-digital.pendiente::after {
+    content: '⌛';
+    opacity: 0.7;
+}
+
+.tab-jugador-digital.listo {
+    opacity: 0.7;
+}
+
+.tab-jugador-digital.listo::after {
+    content: '✔';
+    color: #27ae60; 
+}
+
+
+/* Estilos Recintos y Slots  */
+#columna-tablero-juego .recinto-digital {
+    position: absolute;
+    display: flex;
+    padding: 1%;
+    pointer-events: auto;
+}
+
+#columna-tablero-juego .dino-slot-digital {
+    background-color: transparent;
+    border: 2px solid transparent; 
+    border-radius: 8px;
+    flex-shrink: 0; 
+    aspect-ratio: 1 / 1;
+    transition: background-color 0.2s, border-color 0.2s;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer; 
+}
+
+/* REGLAS DE LAYOUT */
+
+/* bosque prado 6s */
+.recinto-digital[data-recinto="bosqueSemejanza"],
+.recinto-digital[data-recinto="pradoDiferencia"] {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+}
+.recinto-digital[data-recinto="bosqueSemejanza"] .dino-slot-digital,
+.recinto-digital[data-recinto="pradoDiferencia"] .dino-slot-digital {
+    width: 15.5%;
+}
+
+/* pradera del amor 8s*/
+.recinto-digital[data-recinto="praderaAmor"] {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 4%;
+}
+.recinto-digital[data-recinto="praderaAmor"] .dino-slot-digital {
+    width: 22%;
+}
+
+/* (solitaria y selva 1s) */
+.recinto-digital[data-recinto="reySelva"],
+.recinto-digital[data-recinto="islaSolitaria"] {
+     justify-content: center;
+    align-items: center;
+}
+.recinto-digital[data-recinto="reySelva"] .dino-slot-digital,
+.recinto-digital[data-recinto="islaSolitaria"] .dino-slot-digital {
+    width: 80%;
+}
+
+/* Recinto del Río (2x3) */
+.recinto-digital[data-recinto="rio"] {
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-content: space-around; 
+    gap: 5%;
+}
+.recinto-digital[data-recinto="rio"] .dino-slot-digital {
+    width: 30%; 
+    height: auto; 
+}
+
+/* Layout Trío Frondoso (en piramide) */
+.recinto-digital[data-recinto="trioFrondoso"] {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+.fila-piramide-superior {
+    width: 100%;
+    height: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fila-piramide-inferior {
+    width: 100%;
+    height: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+.recinto-digital[data-recinto="trioFrondoso"] .dino-slot-digital {
+    width: 45%;
+    height: 90%;
+}
+
+
+/* --- FIN DE REGLAS DE LAYOUT --- */
+
+
+/* Estados de los slots */
+#columna-tablero-juego .dino-slot-digital.ocupado {
+    border-color: transparent !important;
+    background-color: transparent !important;
+}
+#columna-tablero-juego .slot-valido {
+    cursor: copy !important;
+    border-color: #76ff03 !important;
+    border-style: solid;
+    background-color: rgba(118, 255, 3, 0.4) !important;
+}
+
+/* imágenes dinosaurios */
+#columna-tablero-juego .dino-slot-digital.t-rex { background-image: url('../imagenes/tiranosaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.spinosaurus { background-image: url('../imagenes/spinosaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.brachiosaurus { background-image: url('../imagenes/brachiosaurus.png'); }
+#columna-tablero-juego .dino-slot-digital.triceratops { background-image: url('../imagenes/triceratops.png'); }
+#columna-tablero-juego .dino-slot-digital.parasaurolophus { background-image: url('../imagenes/parasaurio.png'); }
+#columna-tablero-juego .dino-slot-digital.stegosaurus { background-image: url('../imagenes/estegosaurus.png'); }
+
+
+/* Columna Derecha (Controles: dado, mano de dinosaurios, turnos)  */
+#controls-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 8rem; 
+}
+
+#controls-column > section {
+    background-color: var(--dh-fondo-contenedor);
+    border: 4px solid var(--color-marron-medio);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+#controls-column h4 {
+    color: var(--dh-texto-primario-oscuro);
+    text-shadow: none;
+    font-family: var(--dh-fuente-encabezado);
+    text-align: center;
+}
+
+#dice-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#info-partida {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+}
+
+#info-partida .info-item {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 1rem; 
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eaddc7;
+}
+#info-partida .info-item:last-child {
+    border-bottom: none;
+}
+
+#info-partida .info-item span {
+    font-family: var(--dh-fuente-encabezado);
+    color: var(--color-marron-borde-texto);
+    font-weight: 700;
+}
+
+#info-partida .info-item strong {
+    font-size: 1.2em;
+    color: var(--color-naranja-boton);
+}
+
+#current-player-hand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: 60px;
+    background-color: transparent;
+    border-radius: var(--dh-radio-borde-pequeno);
+    padding: 10px;
+    border: none;
+}
+/* dino seleccionado */
+#current-player-hand .dino-selector.selected {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px 3px rgba(200, 90, 43, 0.6);
+    border-color: var(--color-naranja-boton);
+}
+
+#current-player-hand .dino-selector.colocado {
+    opacity: 0.3;
+    transform: scale(0.9);
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
+
+/* Estilos Dado  */
+#dice-container-digital {
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+#dice-digital {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.face-digital {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--color-marron-borde-texto);
+    background-color: var(--dh-fondo-seccion);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.face-digital.front  { transform: rotateY(  0deg) translateZ(40px); }
+.face-digital.back   { transform: rotateY(180deg) translateZ(40px); }
+.face-digital.right  { transform: rotateY( 90deg) translateZ(40px); }
+.face-digital.left   { transform: rotateY(-90deg) translateZ(40px); }
+.face-digital.top    { transform: rotateX( 90deg) translateZ(40px); }
+.face-digital.bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+.face-digital img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+
+body.arrastrando, body.arrastrando * {
+    cursor: grabbing !important;
+}
+

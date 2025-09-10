@@ -1,0 +1,73 @@
+/*
+  Estilos Base 
+  estilos específicos que no entran en conflicto con global.css
+  y son usados por los modos de juego.
+  version 3.0
+*/
+
+/* TIPOGRAFÍA  */
+h1, h3, h4, h5, h6 {
+    font-family: var(--dh-fuente-encabezado);
+    font-weight: 700;
+    color: var(--dh-texto-primario-oscuro);
+    line-height: 1.3;
+    text-shadow: var(--dh-sombra-texto-encabezado);
+}
+
+h1 {
+    font-family: var(--dh-fuente-principal);
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    color: var(--dh-texto-primario); 
+    text-shadow: var(--dh-sombra-texto-borde-marron);
+}
+
+/* h2 global.css */
+
+h3 {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    margin-bottom: 1rem;
+    color: var(--dh-acento-terciario); 
+}
+
+h4 {
+    font-family: var(--dh-fuente-encabezado);
+    color: var(--dh-texto-primario-oscuro);
+    font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+/* p en global.css */
+
+a {
+    text-decoration: none;
+    color: var(--dh-acento-secundario);
+    font-weight: 700;
+    transition: color 0.25s ease, text-decoration 0.25s ease;
+}
+
+a:hover, a:focus {
+    color: var(--dh-acento-primario);
+    text-decoration: none; 
+    outline: none;
+}
+
+strong {
+    font-weight: 700;
+    color: var(--dh-texto-primario-oscuro);
+}
+
+/* LAYOUT PRINCIPAL */
+header {
+    background: transparent;
+    color: var(--dh-texto-sobre-fondo-oscuro);
+    padding: 0; 
+    text-align: center;
+    position: relative;
+}
+
+.hidden {
+    display: none !important;
+}

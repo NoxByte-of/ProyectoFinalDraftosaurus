@@ -1,0 +1,24 @@
+/*
+Archivo Principal de Estilos
+
+Importa todos los estilos CSS del proyecto, ordena el código.
+@import para cargar los CSS en cascada
+*/
+
+
+@import url('global.css');
+
+@import url('base.css'); 
+@import url('components.css');
+@import url('animations.css');
+
+@import url('header.css');
+@import url('footer.css');
+@import url('menu_principal.css');
+@import url('estilos_configuracion.css');
+@import url('estilos_login.css');
+@import url('modo_seguimiento.css');
+@import url('tutorial.css');
+@import url('modo_digital.css');
+
+@import url('responsive.css');

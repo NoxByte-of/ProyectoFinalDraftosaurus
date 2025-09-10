@@ -1,0 +1,671 @@
+/*
+  Estilos del Modo Seguimiento
+  version 7.0 - letras y colores corregidos
+*/
+
+/*Layout Principal de Dos Columnas*/
+#main-tablero {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0 1.5rem; 
+    max-width: 1600px; 
+    margin: 1.5rem auto;
+}
+
+#main-tablero::before,
+#main-tablero::after {
+    display: none;
+}
+
+.seguimiento-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+/* Columna Izquierda   */
+#tablero-columna-izquierda {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-tablero-full-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+#tableros-container {
+    flex-grow: 1; 
+}
+
+/* Columna Derecha  */
+#controles-columna-derecha {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+}
+
+
+/* Paneles y Controles  */
+.panel-tablero {
+    background-color: var(--dh-fondo-contenedor);
+    border: 4px solid var(--color-marron-medio);
+    border-radius: 20px;
+    padding: 1rem 1.5rem; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    color: var(--dh-texto-primario-oscuro);
+}
+
+#info-partida {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 0.5rem; 
+    align-items: center;
+    text-align: center;
+}
+
+.info-item {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--dh-borde-color);
+}
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item span:first-child {
+    font-family: var(--dh-fuente-encabezado);
+    color: var(--color-marron-borde-texto);
+    font-weight: 700;
+    margin-right: 0.5em;
+    font-size: 1rem; 
+}
+
+strong#ronda-actual,
+strong#turno-actual,
+strong#jugador-activo-dados {
+    color: var(--color-naranja-boton);
+    font-size: 1.2em; 
+}
+
+#gestion-turno-dados {
+    display: flex; 
+    flex-direction: column;
+    gap: 1.5rem; 
+    align-items: stretch; 
+}
+
+.control-grupo h4 {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.3rem; 
+    color: var(--color-marron-borde-texto);
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+.descripcion-control {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--dh-texto-primario-oscuro);
+    margin-bottom: 0.8rem; 
+    text-shadow: none; 
+    font-family: var(--dh-fuente-cuerpo); 
+}
+
+#restricciones-dados-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; 
+    justify-content: center;
+}
+
+.btn-dado {
+    padding: 0.5em 1em; 
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 0.85rem; 
+    border: 2px solid var(--dh-borde-color);
+    background-color: var(--dh-fondo-seccion);
+    color: var(--dh-texto-primario-oscuro);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-dado:hover {
+    border-color: var(--color-naranja-boton);
+    background-color: #fff;
+}
+
+.btn-dado.active {
+    background-color: var(--color-naranja-boton);
+    color: white;
+    border-color: var(--color-marron-borde-texto);
+    text-shadow: var(--dh-sombra-texto-borde-marron);
+    box-shadow: 0 0 10px rgba(200, 90, 43, 0.5);
+}
+
+.acciones-turno-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px; 
+}
+
+#panel-de-control {
+    display: flex; 
+    flex-direction: column;
+    gap: 1.5rem; 
+    align-items: stretch;
+}
+
+#mano-virtual-dinos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.5rem; 
+    min-height: 45px; 
+    padding: 8px; 
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+#mano-virtual-info {
+    font-family: var(--dh-fuente-cuerpo);
+    font-style: normal; 
+    font-size: 0.9rem; 
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    color: var(--dh-texto-primario-oscuro);
+    opacity: 1; 
+    text-shadow: none; 
+}
+
+
+/* Dinosaurios  */
+.dino-selector {
+    width: 45px; 
+    height: 45px; 
+    display: inline-block;
+    border: 3px solid transparent;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dino-selector:hover {
+    transform: scale(1.1);
+}
+
+.dino-selector.selected {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px 5px rgba(200, 90, 43, 0.7);
+    border-color: var(--color-naranja-boton);
+}
+
+
+.dino-selector[data-dino-type="t-rex"] { background-image: url('../imagenes/tiranosaurio.png'); }
+.dino-selector[data-dino-type="spinosaurus"] { background-image: url('../imagenes/spinosaurio.png'); }
+.dino-selector[data-dino-type="brachiosaurus"] { background-image: url('../imagenes/brachiosaurus.png'); }
+.dino-selector[data-dino-type="triceratops"] { background-image: url('../imagenes/triceratops.png'); }
+.dino-selector[data-dino-type="parasaurolophus"] { background-image: url('../imagenes/parasaurio.png'); }
+.dino-selector[data-dino-type="stegosaurus"] { background-image: url('../imagenes/estegosaurus.png'); }
+
+
+#mano-virtual-dinos .dino-selector.colocado {
+    opacity: 0.3;
+    transform: scale(0.9);
+    cursor: not-allowed;
+}
+
+.mano-botones-container {
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+#acciones-jugador {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#tabs-jugadores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: -4px;
+    position: relative;
+    z-index: 1;
+    padding: 1rem 1rem 0 1rem;
+    border-bottom: 4px solid var(--color-marron-medio);
+}
+
+.tab-jugador {
+    padding: 0.7em 1.3em; 
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 0.9rem; 
+    color: var(--dh-texto-primario-oscuro);
+    background-color: var(--dh-fondo-seccion);
+    border: 4px solid var(--color-marron-medio);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: -4px;
+}
+
+.tab-jugador:hover {
+    background-color: #fff;
+}
+
+.tab-jugador.active {
+    background-color: var(--dh-fondo-contenedor);
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.tab-jugador::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.tab-jugador.pendiente::after {
+    content: '⌛';
+    opacity: 0.7;
+}
+
+.tab-jugador.listo {
+    opacity: 0.7;
+}
+
+.tab-jugador.listo::after {
+    content: '✔';
+    color: #27ae60;
+}
+
+.parque-container {
+    background-color: var(--dh-fondo-contenedor);
+    border-radius: 0 20px 20px 20px;
+    padding: 1.5rem;
+}
+
+.encabezado-parque {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--dh-borde-color);
+}
+
+.encabezado-parque h2 {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.6rem; 
+    color: var(--color-marron-borde-texto);
+    text-shadow: none; 
+}
+
+.puntuacion-total-jugador {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.1rem; 
+    color: var(--color-marron-borde-texto); 
+}
+
+.parque-jugador {
+    display: grid;
+    gap: 1rem; 
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.recinto {
+    background-color: #FBF3DE;
+    border: 2px solid #D2B48C;
+    border-radius: 8px;
+    padding: 0.8rem 1rem; 
+    transition: all 0.3s ease;
+}
+
+.recinto[data-recinto="rio"] {
+    grid-column: 1 / -1;
+}
+
+.recinto:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    border-color: var(--color-naranja-boton);
+}
+
+/* colores para Recintos  */
+.recinto[data-recinto="bosqueSemejanza"],
+.recinto[data-recinto="reySelva"],
+.recinto[data-recinto="trioFrondoso"] {
+    background-color: #dcedc8;
+    border-color: #81c784;
+}
+.recinto[data-recinto="pradoDiferencia"],
+.recinto[data-recinto="praderaAmor"],
+.recinto[data-recinto="islaSolitaria"] {
+    background-color: #ffecb3;
+    border-color: #ffd54f;
+}
+.recinto[data-recinto="rio"] {
+    background-color: #e1f5fe;
+    border-color: #81d4fa;
+}
+
+
+.recinto h3 {
+    font-family: var(--dh-fuente-encabezado);
+    color: #5D4037;
+    border-bottom: 1px solid #D2B48C;
+    padding-bottom: 0.5em; 
+    font-size: 1rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recinto-icono {
+    font-size: 1em; 
+    margin-left: 8px;
+    opacity: 0.7;
+}
+
+.recinto-puntuacion {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 6px; 
+    padding-top: 4px; 
+    border-top: 1px dashed #D2B48C;
+}
+
+.recinto-puntuacion .punto {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 0.8em; 
+    font-weight: 700;
+    color: #8c7b5a;
+    flex-basis: calc(100% / 6);
+    text-align: center;
+    line-height: 1;
+}
+
+.dino-slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px; 
+    margin-top: 0.5rem;
+}
+
+.dino-slot {
+    background-color: rgba(210, 180, 140, 0.3);
+    border: 2px dashed #D2B48C;
+    border-radius: 4px;
+    min-height: 35px; 
+    flex-grow: 1;
+    min-width: 35px; 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dino-slot:not(:empty) {
+    border-style: solid;
+    border-color: #8c7b5a;
+    background-color: transparent !important;
+}
+
+.dino-slot:empty:hover {
+    cursor: pointer;
+    border-color: var(--color-naranja-boton);
+    background-color: rgba(200, 90, 43, 0.1);
+}
+
+.dino-slot.t-rex { background-image: url('../imagenes/tiranosaurio.png') !important; }
+.dino-slot.spinosaurus { background-image: url('../imagenes/spinosaurio.png') !important; }
+.dino-slot.brachiosaurus { background-image: url('../imagenes/brachiosaurus.png') !important; }
+.dino-slot.triceratops { background-image: url('../imagenes/triceratops.png') !important; }
+.dino-slot.parasaurolophus { background-image: url('../imagenes/parasaurio.png') !important; }
+.dino-slot.stegosaurus { background-image: url('../imagenes/estegosaurus.png') !important; }
+
+.slot-valido {
+    cursor: pointer !important;
+    box-shadow: 0 0 15px 5px rgba(200, 90, 43, 0.7);
+    border-style: solid !important;
+    border-color: var(--color-naranja-boton) !important;
+    transform: scale(1.05);
+}
+
+.tablero-restringido .recinto .dino-slot:not(.slot-valido) {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.recinto-estado {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    transform: scale(0);
+}
+.recinto-estado.estado-valido {
+    background-color: #27ae60;
+    transform: scale(1);
+    box-shadow: 0 0 8px #27ae60;
+}
+.recinto-estado.estado-invalido {
+    background-color: #c0392b;
+    transform: scale(1);
+    box-shadow: 0 0 8px #c0392b;
+}
+
+.recinto-restringido {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.35s ease-in-out;
+}
+
+.modal-registro-mano .dino-registro-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.modal-registro-mano .dino-selector {
+    margin: 0 10px 0 0;
+    flex-shrink: 0;
+}
+
+.modal-registro-mano .dino-nombre {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.1rem;
+    flex-grow: 1;
+}
+
+.modal-registro-mano .dino-cantidad-controles {
+    display: flex;
+    align-items: center;
+}
+
+.modal-registro-mano .btn-cantidad {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #D2B48C;
+    background-color: #FDF6E3;
+    color: #5D4037;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-registro-mano .cantidad-display {
+    min-width: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-naranja-boton);
+}
+
+#historial-body {
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+#historial-body ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#historial-body li {
+    padding: 0.8rem 0.5rem;
+    border-bottom: 1px solid #D2B48C;
+    display: flex;
+    flex-direction: column;
+    color: #5D4037;
+}
+
+#historial-body li:last-child {
+    border-bottom: none;
+}
+
+#historial-body .historial-turno {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #a1887f;
+    margin-bottom: 4px;
+}
+
+.jugador-resultados {
+    background-color: #FBF3DE;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #D2B48C;
+    margin-bottom: 1.5rem;
+}
+
+.jugador-resultados h3 {
+    color: var(--color-marron-borde-texto);
+}
+
+.jugador-resultados ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.jugador-resultados li {
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #D2B48C;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    color: #5D4037;
+}
+
+.jugador-resultados li:last-child {
+    border-bottom: none;
+}
+
+.total-puntos {
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-marron-borde-texto);
+    text-align: right;
+    padding-top: 0.5rem;
+    border-top: 2px solid var(--color-marron-borde-texto);
+}
+
+.ganador {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: var(--dh-fuente-principal);
+    color: var(--color-naranja-boton);
+    background-color: #FBF3DE;
+    border: 2px dashed var(--color-naranja-boton);
+    border-radius: 12px;
+}
+
+.ganador p {
+    color: var(--color-naranja-boton);
+    margin-bottom: 0;
+}
+
+.btn-menu-pequeno {
+    background: var(--color-naranja-boton);
+    border: 1px solid var(--color-marron-borde-texto);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 0.9rem;
+    text-shadow: var(--dh-sombra-texto-borde-marron);
+    transition: all 0.2s ease;
+}
+.btn-menu-pequeno:hover {
+    background: var(--color-naranja-boton-hover);
+    transform: translateY(-2px);
+}
+
+.btn-menu.btn-peligro {
+    background: var(--dh-color-peligro);
+    border-color: #a52a1a;
+}
+.btn-menu.btn-peligro:hover {
+    background: var(--dh-color-peligro-hover);
+}
+
+.modal-content .btn-menu {
+    width: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .seguimiento-layout {
+        grid-template-columns: 1fr; 
+    }
+}
+
+.btn-config-header {
+    display: inline-block;
+    background: var(--color-naranja-boton);
+    border: 1px solid var(--color-marron-borde-texto);
+    color: #ffffff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 10px;
+    font-family: var(--dh-fuente-encabezado);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 1px rgba(255, 255, 255, 0.4);
+    text-shadow: var(--dh-sombra-texto-borde-marron);
+    margin-top: 0.5rem;
+}
+
+.btn-config-header:hover {
+    background: var(--color-naranja-boton-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35), inset 0px 1px 1px rgba(255, 255, 255, 0.5);
+}

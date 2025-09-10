@@ -1,0 +1,181 @@
+/*
+  Archivo de Componentes
+  Estilos para componentes UI compartidos, adaptados al nuevo diseño global.
+  version 3.0
+*/
+
+/* --- BOTONES --- */
+/* El estilo principal de .btn en global.css */
+.btn-peligro {
+    background-color: #c0392b;
+    border-color: #8f2d21;
+}
+
+.btn-peligro:hover {
+    background-color: #a52a1a !important;
+    border-color: #5c1811 !important;
+}
+
+.btn-disabled,
+.btn[aria-disabled="true"] {
+    background-color: #a0a0a0 !important;
+    color: #e0e0e0 !important;
+    cursor: not-allowed !important;
+    border-color: #6e6e6e !important;
+    transform: none !important;
+    opacity: 0.7;
+    text-shadow: -1px -1px 0 #6e6e6e, 1px -1px 0 #6e6e6e, -1px 1px 0 #6e6e6e, 1px 1px 0 #6e6e6e;
+}
+
+
+/* MODALES  */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(28, 44, 26, 0.75); 
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+div.modal-content {
+    background-color: rgba(201, 167, 104, 0.95); 
+    padding: 2rem;
+    border-radius: 30px;
+    border: 5px solid #856b3d;
+    box-shadow: 0 4px 8px rgba(75, 43, 13, 0.432);
+    width: 100%;
+    max-width: 550px;
+    max-height: 85vh;
+    position: relative;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.visible div.modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: #856b3d;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+    color: #d35625;
+    transform: rotate(90deg) scale(1.1);
+    outline: none;
+}
+
+div.modal-content h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo-container {
+    width: 150px;
+    height: auto;
+    margin: 0.5rem auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-scrollable-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    margin-right: -10px;
+    flex-grow: 1;
+}
+
+.modal-scrollable-content p {
+    margin-bottom: 1rem;
+    line-height: 1.65;
+}
+
+.modal-slogan {
+    font-family: 'Darumadrop One', cursive;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #d35625;
+    margin-top: 0.5rem;
+}
+
+.quienes-somos-logo {
+    max-width: 100%;
+    max-height: 120px;
+    height: auto;
+}
+
+/* NOTIFICACIONES  */
+#notificacion-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.notificacion {
+    min-width: 280px;
+    max-width: 350px;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    border: 2px solid rgba(0,0,0,0.3);
+}
+
+.notificacion.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notificacion.error {
+    background-color: #c0392b;
+}
+
+.notificacion.success {
+    background-color: #27ae60;
+}
+
+.notificacion.info {
+    background-color: #2980b9;
+}
