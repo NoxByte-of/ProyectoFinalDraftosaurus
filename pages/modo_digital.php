@@ -74,7 +74,7 @@
                 
                 <div id="contenedor-slots-tablero">
                     <!-- Bosque de la Semejanza  -->
-                    <div class="recinto-digital" data-recinto="bosqueSemejanza" data-zona="boscosa" style="top: 13%; left: 6%; width: 33.5%; height: 17%;">
+                    <div class="recinto-digital" data-recinto="bosqueSemejanza" data-zona="boscosa" style="top: 13%; left: 7.5%; width: 33.5%; height: 17%;">
                         <div class="dino-slot-digital" data-slot-id="bosqueSemejanza-0"></div>
                         <div class="dino-slot-digital" data-slot-id="bosqueSemejanza-1"></div>
                         <div class="dino-slot-digital" data-slot-id="bosqueSemejanza-2"></div>
@@ -110,7 +110,7 @@
                     </div>
                     
                     <!-- Pradera del Amor  -->
-                    <div class="recinto-digital" data-recinto="praderaAmor" data-zona="llanura" style="top: 70%; left: 10%; width: 29%; height: 16%;">
+                    <div class="recinto-digital" data-recinto="praderaAmor" data-zona="llanura" style="top: 70%; left: 5.8%; width: 29%; height: 19%;">
                         <div class="dino-slot-digital" data-slot-id="praderaAmor-0"></div>
                         <div class="dino-slot-digital" data-slot-id="praderaAmor-1"></div>
                         <div class="dino-slot-digital" data-slot-id="praderaAmor-2"></div>
