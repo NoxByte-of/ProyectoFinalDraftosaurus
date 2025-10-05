@@ -1,9 +1,10 @@
-
 .navbar {
 height: 110px;
-overflow: hidden;
+overflow: visible; 
 padding-top: 0;
 padding-bottom: 0;
+position: relative; 
+z-index: 100; 
 }
 
 .bg-custom {
@@ -96,10 +97,49 @@ margin-right: 20px;
 vertical-align: middle;
 }
 
+/*MENÚ DESPLEGABLE CUENTA */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #8a4c23; 
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001; 
+    border-radius: 0 0 14px 14px; 
+    overflow: hidden; 
+    right: 0; 
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 18px;
+    text-align: left; 
+    text-shadow: -1px -1px 0 #533615, 1px -1px 0 #533615, -1px 1px 0 #533615, 1px 1px 0 #533615;
+}
+
+.dropdown-content a:hover {
+    background-color: #5c070e;
+    color: #FFD571;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 @media (max-width: 991.98px) {
 .navbar {
 height: auto;
 padding: 0.25rem 0.75rem;
+overflow: hidden; 
 }
 
 .navbar-collapse {
@@ -133,6 +173,26 @@ margin-right: 10px;
 .navbar-toggler {
 padding: 0.25rem 0.5rem;
 }
+
+.dropdown-content {
+    position: static; 
+    box-shadow: none;
+    background-color: transparent;
+    border-radius: 0;
+    min-width: unset;
+    width: 100%;
+    display: none; 
+}
+.dropdown-content a {
+    text-align: center;
+}
+.dropdown:hover .dropdown-content {
+    display: block; 
+}
+.dropdown > .btn-login {
+    width: 100%;
+}
+
 }
 
 @media (max-width: 575.98px) {
@@ -140,3 +200,4 @@ padding: 0.25rem 0.5rem;
 max-width: 160px;
 }
 }
+

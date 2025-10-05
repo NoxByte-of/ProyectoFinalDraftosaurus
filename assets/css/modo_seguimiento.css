@@ -3,7 +3,7 @@
   version 7.0 - letras y colores corregidos
 */
 
-/*Layout Principal de Dos Columnas*/
+/*Layout Principal Dos Columnas*/
 #main-tablero {
     background: transparent;
     box-shadow: none;
@@ -562,7 +562,7 @@ strong#jugador-activo-dados {
 }
 
 .jugador-resultados h3 {
-    color: var(--color-marron-borde-texto);
+    color: var(--dh-texto-primario-oscuro);
 }
 
 .jugador-resultados ul {
@@ -585,13 +585,14 @@ strong#jugador-activo-dados {
 }
 
 .total-puntos {
-    font-family: var(--dh-fuente-encabezado);
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--color-marron-borde-texto);
+    font-family: var(--dh-fuente-cuerpo);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--dh-texto-primario-oscuro);
     text-align: right;
     padding-top: 0.5rem;
     border-top: 2px solid var(--color-marron-borde-texto);
+    text-shadow: none;
 }
 
 .ganador {

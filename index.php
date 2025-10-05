@@ -1,9 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draftosaurus - NoxByte</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,12 +46,24 @@
                      <li class="nav-item">
                         <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/login.php">Registrarse</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-login" href="pages/login.php">Iniciar Sesión</a>
-                    </li>
+
+                    <?php if (isset($_SESSION['nombre_usuario'])): ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link btn-login" href="#" role="button">
+                                Mi Cuenta
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="backend/Registro y Login/logout.php">Cerrar Sesión</a>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/login.php?form=register">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-login" href="pages/login.php?form=login">Iniciar Sesión</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -226,4 +242,3 @@
 
 </body>
 </html>
-

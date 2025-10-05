@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!-- este archivo es lo que ve el usuario, toda la logica esta en login.js, y en backend/login_usuario.php y registro_usuario.php-->
 
 <!DOCTYPE html>
@@ -28,29 +31,41 @@
 <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item">
-<a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="modo_seguimiento.php">Seguimiento</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="modo_juego_digital.php">Juego</a>
-</li>
-<li class="nav-item">
-                        <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
-                    </li>
-<li class="nav-item">
-                        <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
-                    </li>
-<li class="nav-item">
-<a class="nav-link" href="login.php">Registrarse</a>
-</li>
-<li class="nav-item">
-<a class="nav-link btn-login" href="login.php">Iniciar Sesión</a>
-</li>
-</ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="modo_seguimiento.php">Seguimiento</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="modo_juego_digital.php">Juego</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
+        </li>
+
+        <?php if (isset($_SESSION['nombre_usuario'])): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link btn-login" href="#" role="button">
+                    Mi Cuenta
+                </a>
+                <div class="dropdown-content">
+                    <a href="../backend/Registro y Login/logout.php">Cerrar Sesión</a>
+                </div>
+            </li>
+        <?php else: ?>
+            <li class="nav-item">
+                <a class="nav-link" href="login.php?form=register">Registrarse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-login" href="login.php?form=login">Iniciar Sesión</a>
+            </li>
+        <?php endif; ?>
+    </ul>
 </div>
 </div>
 </nav>

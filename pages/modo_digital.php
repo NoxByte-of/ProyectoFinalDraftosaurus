@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -12,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <link rel="stylesheet" href="../assets/css/style.css">
 
@@ -43,12 +46,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Registrarse</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-login" href="login.php">Iniciar Sesión</a>
-                    </li>
+                    
+                    <?php if (isset($_SESSION['nombre_usuario'])): ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link btn-login" href="#" role="button">
+                                Mi Cuenta
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="../backend/Registro y Login/logout.php">Cerrar Sesión</a>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php?form=register">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-login" href="login.php?form=login">Iniciar Sesión</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -171,6 +186,13 @@
                
             </div>
         </section>
+
+        <section id="game-actions-area" class="control-grupo">
+             <div class="acciones-turno-grid" style="margin-top: 1rem;">
+                <a href="../index.php" class="btn btn-accion">Guardar y Salir</a>
+                <a href="../index.php" class="btn btn-accion">Salir</a>
+            </div>
+        </section>
     </div>
 </main>
 
@@ -187,16 +209,20 @@
         <h2 class="font-display">¡Partida Finalizada!</h2>
         <div id="final-scores-container" class="modal-scrollable-content"></div>
         <div id="winner-container" class="ganador" style="margin-top: 1rem; flex-shrink: 0;"></div>
-        <button onclick="reiniciarPartida()" class="btn btn-info mt-4" style="flex-shrink: 0;">Jugar de Nuevo</button>
+        <div class="acciones-turno-grid" style="margin-top: 1.5rem; gap: 10px;">
+            <button onclick="reiniciarPartida()" class="btn btn-accion">Jugar de Nuevo</button>
+            <a href="../index.php" class="btn btn-accion">Guardar Partida y Salir</a>
+        </div>
     </div>
 </div>
 
 <div id="notificacion-container"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/comunes.js"></script>
 <script src="../assets/js/motor_juego.js"></script> 
 <script src="../assets/js/modo_digital.js"></script>
 
 </body>
 </html>
+

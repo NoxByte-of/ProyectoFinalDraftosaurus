@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const panelTitulo = document.getElementById('panel-titulo');
     const panelDescripcion = document.getElementById('panel-descripcion');
 
+    const parametrosUrl = new URLSearchParams(window.location.search);
+    const formularioActivo = parametrosUrl.get('form');
+
+    if (formularioActivo === 'login') {
+        formularioRegistro.style.display = 'none';
+        formularioLogin.style.display = 'flex';
+        panelTitulo.textContent = 'Iniciar Sesión';
+        panelDescripcion.textContent = '¡Qué bueno verte de nuevo!';
+    }
 
     enlaceLogin.addEventListener('click', (evento) => {
         evento.preventDefault();
@@ -28,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         panelDescripcion.textContent = '¡Únete a la aventura y guarda tu progreso!';
     });
 
-    //FORMULARIO DE REGISTRO 
     formularioRegistro.addEventListener('submit', (evento) => {
         evento.preventDefault();
 
@@ -84,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-    //FORMULARIO DE INICIO DE SESION
     formularioLogin.addEventListener('submit', (evento) => {
         evento.preventDefault();
         

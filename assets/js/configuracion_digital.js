@@ -1,7 +1,6 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    //  Lógica de Configuración de Partida 
+    //  Logica Configuración de Partida 
     const seccionConfiguracion = document.getElementById('seccion-configuracion-partida');
     if (seccionConfiguracion) {
         const btnIniciarConfiguracion = document.getElementById('btn-iniciar-configuracion');
@@ -13,12 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
         if (btnIniciarConfiguracion && seccionBienvenida) {
             btnIniciarConfiguracion.addEventListener('click', (e) => {
                 e.preventDefault();
-                seccionBienvenida.classList.add('hidden');
-                seccionConfiguracion.classList.remove('hidden');
+
+                const usuarioLogueado = document.body.dataset.usuarioLogueado === 'true';
+
+                if (usuarioLogueado) {
+                    seccionBienvenida.classList.add('hidden');
+                    seccionConfiguracion.classList.remove('hidden');
+                } else {
+                    if (window.mostrarNotificacion) {
+                        window.mostrarNotificacion('Debes estar logeado para Jugar', 'error');
+                    } else {
+                        alert('Debes estar logeado para Jugar');
+                    }
+                }
             });
         }
         
-        //  crea los campos para los nombres de los jugadores
         const actualizarCamposDeNombre = () => {
             const cantidad = parseInt(selectorJugadores.value, 10);
             contenedorCamposNombres.innerHTML = ''; 
@@ -50,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const playerCount = parseInt(selectorJugadores.value, 10);
                 const playerInputElements = contenedorCamposNombres.querySelectorAll('.nombre-jugador-input');
                 
-                //nombres.
+        
                 const playerNames = Array.from(playerInputElements).map((input, index) => {
                     return input.value.trim() || `Jugador ${index + 1}`;
                 });
@@ -66,4 +75,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-

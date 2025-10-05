@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html lang="es">
@@ -17,7 +20,7 @@
 <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
-<body>
+<body data-usuario-logueado="<?php echo isset($_SESSION['nombre_usuario']) ? 'true' : 'false'; ?>">
 <header class="header">
 <nav class="navbar bg-custom navbar-expand-lg position-relative">
 <div class="container-fluid">
@@ -26,29 +29,41 @@
 <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item">
-<a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="modo_seguimiento.php">Seguimiento</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="modo_juego_digital.php">Juego</a>
-</li>
-<li class="nav-item">
-                        <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
-                    </li>
-<li class="nav-item">
-                        <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
-                    </li>
-<li class="nav-item">
-<a class="nav-link" href="login.php">Registrarse</a>
-</li>
-<li class="nav-item">
-<a class="nav-link btn-login" href="login.php">Iniciar Sesión</a>
-</li>
-</ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="../index.php">Inicio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="modo_seguimiento.php">Seguimiento</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="modo_juego_digital.php">Juego</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="btn-abrir-tutorial">Tutorial</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="btn-quienes-somos">Sobre NoxByte</a>
+        </li>
+
+        <?php if (isset($_SESSION['nombre_usuario'])): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link btn-login" href="#" role="button">
+                    Mi Cuenta
+                </a>
+                <div class="dropdown-content">
+                    <a href="../backend/Registro y Login/logout.php">Cerrar Sesión</a>
+                </div>
+            </li>
+        <?php else: ?>
+            <li class="nav-item">
+                <a class="nav-link" href="login.php?form=register">Registrarse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn-login" href="login.php?form=login">Iniciar Sesión</a>
+            </li>
+        <?php endif; ?>
+    </ul>
 </div>
 </div>
 </nav>
@@ -101,9 +116,12 @@
       </div>
     </footer>
 
+<div id="notificacion-container"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/comunes.js"></script>
 <script src="../assets/js/configuracion_digital.js"></script>
 
 </body>
 </html>
+
