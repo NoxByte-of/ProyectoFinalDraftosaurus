@@ -1,6 +1,6 @@
 /**
  * Estilos para el tutorial interactivo
- * Versión 5.0 - rediseño basado en el code de gerogina 
+ * Versión 5.1 - Añadidos media queries para un diseño responsivo completo.
  */
 
 .tutorial__superposicion {
@@ -129,6 +129,7 @@
 .tutorial__area-contenido {
     flex-grow: 1;
     position: relative;
+    overflow-y: auto; 
 }
 
 .tutorial__pantalla {
@@ -363,3 +364,56 @@
 .tutorial__dado-cara.izquierda{ transform: rotateY(-90deg) translateZ(40px); }
 .tutorial__dado-cara.superior { transform: rotateX( 90deg) translateZ(40px); }
 .tutorial__dado-cara.inferior { transform: rotateX(-90deg) translateZ(40px); }
+
+/* RESPONSIVE TUTORIAL  */
+@media (max-width: 992px) {
+    .tutorial__contenedor {
+        padding: 1rem;
+    }
+
+    .tutorial__vista-juego {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .tutorial__tablero-contenedor {
+        width: 100%;
+        max-width: 500px;
+        min-height: 300px; 
+    }
+    
+    .tutorial__barra-lateral {
+        width: 100%;
+        padding-top: 1rem;
+        flex-direction: column;
+    }
+    
+    .tutorial__panel-lateral {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .tutorial__dinosaurio {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tutorial__encabezado,
+    .tutorial__pantalla h3 {
+        font-size: 1.8rem;
+    }
+
+    .tutorial__pantalla p,
+    .tutorial__tooltip p {
+        font-size: 18px;
+    }
+    
+    .tutorial__tooltip {
+        max-width: calc(100% - 2rem);
+    }
+}

@@ -1,7 +1,7 @@
 /*
   Archivo de Componentes
   Estilos para componentes UI compartidos, adaptados al nuevo diseño global.
-  version 3.0
+  version 3.2 - Solucionado el recorte de texto en el modal y centrado el párrafo final.
 */
 
 /* --- BOTONES --- */
@@ -51,7 +51,7 @@
 
 div.modal-content {
     background-color: rgba(201, 167, 104, 0.95); 
-    padding: 2rem;
+    padding: 2.5rem; 
     border-radius: 30px;
     border: 5px solid #856b3d;
     box-shadow: 0 4px 8px rgba(75, 43, 13, 0.432);
@@ -112,14 +112,16 @@ div.modal-content h2 {
 .modal-scrollable-content {
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: 10px;
-    margin-right: -10px;
+    padding: 0 15px; 
+    margin: 0 -15px; 
     flex-grow: 1;
 }
 
 .modal-scrollable-content p {
-    margin-bottom: 1rem;
-    line-height: 1.65;
+    margin-bottom: 1.2rem; 
+    line-height: 1.7;   
+    font-size: 20px;    
+    padding-left: 5px; 
 }
 
 .modal-slogan {
@@ -179,3 +181,4 @@ div.modal-content h2 {
 .notificacion.info {
     background-color: #2980b9;
 }
+

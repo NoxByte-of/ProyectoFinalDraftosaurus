@@ -1,4 +1,5 @@
 <?php
+// Iniciar la sesión al principio de todo
 session_start();
 ?>
 <!DOCTYPE html>
@@ -89,39 +90,34 @@ session_start();
       <div class="col-12">
         <div class="table-responsive">
           <div class="mx-auto" style="max-width: 900px;">
-            <h2>Partidas recientes</h2><br>
+            <h2>Partidas Guardadas</h2><br>
             <table class="table table-striped table-bordered custom-table">
               <thead>
                 <tr>
-                  <th></th>
-                  <th>Jugador</th>
-                  <th>Puntaje</th>
+                  <th>Partidas</th>
+                  <th>Guardados</th>
                   <th>Fecha</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th>1</th>
-                  <td>Jugador1</td>
-                  <td>3500</td>
+                  <td>Partida 1</td>
+                  <td>Reanudar</td>
                   <td>2025-06-01</td>
                 </tr>
                 <tr>
-                  <th>2</th>
-                  <td>Jugador2</td>
-                  <td>2800</td>
+                  <td>Partida 2</td>
+                  <td>Reanudar</td>
                   <td>2025-05-30</td>
                 </tr>
                 <tr>
-                  <th>3</th>
-                  <td>Jugador3</td>
-                  <td>3200</td>
+                  <td>Partida 3</td>
+                  <td>Reanudar</td>
                   <td>2025-05-28</td>
                 </tr>
                 <tr>
-                  <th>4</th>
-                  <td>Jugador4</td>
-                  <td>4000</td>
+                  <td>Partida 4</td>
+                  <td>Reanudar</td>
                   <td>2025-05-25</td>
                 </tr>
               </tbody>

@@ -1,6 +1,6 @@
 /*
     Estilos específicos para el Modo de Juego Digital.
-    version 8.0 - Corregida la fuente del título del tablero.
+    version 8.1 - Ajustes responsive para puntuación y botones.
 */
 
 /* Layout Principal y Paneles  */
@@ -69,7 +69,6 @@ main#game-container {
     border: none;
     color: var(--dh-texto-primario-oscuro);
     text-shadow: none;
-    /* FIX: Se cambia la fuente para que coincida con otros encabezados de UI */
     font-family: var(--dh-fuente-encabezado);
 }
 
@@ -252,8 +251,6 @@ main#game-container {
 }
 
 
-/* --- FIN DE REGLAS DE LAYOUT --- */
-
 
 /* Estados de los slots */
 #columna-tablero-juego .dino-slot-digital.ocupado {
@@ -408,3 +405,29 @@ body.arrastrando, body.arrastrando * {
     cursor: grabbing !important;
 }
 
+/* RESPONSIVE MODO DIGITAL */
+@media (max-width: 767px) {
+    #board-header-digital {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    #board-score {
+        font-size: 1rem; 
+    }
+    
+    #controls-column {
+        padding-top: 1.5rem; 
+    }
+    
+    #game-actions-area .btn-accion {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 1rem;
+        height: 100%; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

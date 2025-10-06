@@ -1,10 +1,10 @@
 .navbar {
 height: 110px;
-overflow: visible; 
+overflow: visible; /* Cambiado de 'hidden' a 'visible' para permitir que el menú se vea */
 padding-top: 0;
 padding-bottom: 0;
-position: relative; 
-z-index: 100; 
+position: relative; /* Necesario para el contexto de apilamiento del z-index */
+z-index: 100; /* Un z-index base para el nav */
 }
 
 .bg-custom {
@@ -97,7 +97,7 @@ margin-right: 20px;
 vertical-align: middle;
 }
 
-/*MENÚ DESPLEGABLE CUENTA */
+/* --- ESTILOS PARA EL MENÚ DESPLEGABLE DE CUENTA --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -106,13 +106,13 @@ vertical-align: middle;
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #8a4c23; 
+    background-color: #8a4c23; /* Mismo color que el nav */
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1001; 
-    border-radius: 0 0 14px 14px; 
-    overflow: hidden; 
-    right: 0; 
+    z-index: 1001; /* Z-index alto para que se superponga */
+    border-radius: 0 0 14px 14px; /* Bordes redondeados abajo */
+    overflow: hidden; /* Para que los hijos respeten el border-radius */
+    right: 0; /* Alinea el menú a la derecha del botón */
 }
 
 .dropdown-content a {
@@ -122,7 +122,7 @@ vertical-align: middle;
     display: block;
     font-family: 'Bubblegum Sans', sans-serif;
     font-size: 18px;
-    text-align: left; 
+    text-align: left; /* Alinea el texto a la izquierda */
     text-shadow: -1px -1px 0 #533615, 1px -1px 0 #533615, -1px 1px 0 #533615, 1px 1px 0 #533615;
 }
 
@@ -134,60 +134,66 @@ vertical-align: middle;
 .dropdown:hover .dropdown-content {
     display: block;
 }
+/* --- FIN DE ESTILOS PARA EL MENÚ DESPLEGABLE --- */
+
 
 @media (max-width: 991.98px) {
 .navbar {
-height: auto;
-padding: 0.25rem 0.75rem;
-overflow: hidden; 
+    height: auto;
+    padding: 0.25rem 0.75rem;
+    overflow: visible; /* FIX: Cambiado a 'visible' para que el menú hamburguesa funcione */
 }
 
 .navbar-collapse {
-position: absolute;
-top: 100%;
-left: 0;
-width: 100%;
-background-color: #4d1a0d;
-padding: 1.5rem 0;
-z-index: 999;
-box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #8a4c23c0; /* Mismo color que el nav */
+    padding: 1.5rem 0;
+    z-index: 999;
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .navbar-nav {
-flex-direction: column;
-align-items: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nav-link,
 .btn-login {
-width: 100%;
-border-radius: 8px;
-margin: 0;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0;
 }
 
 .logo-img {
-max-width: 140px;
-margin-right: 10px;
+    max-width: 140px;
+    margin-right: 10px;
 }
 
 .navbar-toggler {
-padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid #74341b;
 }
 
+/* Ajustes para el dropdown en móvil */
 .dropdown-content {
-    position: static; 
+    position: static; /* Cambia a estático para que fluya con el nav */
     box-shadow: none;
     background-color: transparent;
     border-radius: 0;
     min-width: unset;
     width: 100%;
-    display: none; 
+    display: none; /* Oculto por defecto en móvil también */
 }
 .dropdown-content a {
     text-align: center;
 }
 .dropdown:hover .dropdown-content {
-    display: block; 
+    display: block; /* Solo se muestra al hacer hover */
 }
 .dropdown > .btn-login {
     width: 100%;
@@ -197,7 +203,6 @@ padding: 0.25rem 0.5rem;
 
 @media (max-width: 575.98px) {
 .logo-img {
-max-width: 160px;
+    max-width: 160px;
 }
 }
-

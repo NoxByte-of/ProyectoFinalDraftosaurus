@@ -1,13 +1,12 @@
 /**
  * Lógica del tutorial interactivo
- * Versión 5.7 - muchos bugs :(... solucionados :D
+ * Versión 6.0 - Mejorado el posicionamiento del tooltip para evitar solapamiento con la mano en móvil.
  */
 document.addEventListener('DOMContentLoaded', () => {
     
     const botonAbrirTutorial = document.getElementById('btn-abrir-tutorial');
     const modalSuperposicion = document.getElementById('tutorial-modal');
 
-    // BUG FIX BOTONES DUPLICAOS
     const btnAbrirTutorialMain = document.getElementById('btn-abrir-tutorial-main');
 
     if (!modalSuperposicion) {
@@ -44,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let pasoActual = 0;
     let dinosaurioArrastrado = null;
+    let dinoSeleccionado = null; 
+    let elementoDinoSeleccionado = null; 
 
     const DEFINICION_RECINTOS = {
         bosqueSemejanza: { id: 'pen-1', texto: 'El "Bosque de la Semejanza". Aquí, todos los dinos deben ser de la misma especie.', dinoValido: 'parasaurolophus', style: 'top: 8%; left: 6%; width: 33.5%; height: 17%;', slots: 1 },
@@ -61,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ...Object.values(DEFINICION_RECINTOS).map(recinto => ({
             tipo: 'interactivo',
             elementoDestacado: `#${recinto.id}`,
-            texto: `${recinto.texto} Arrastra el ${recinto.dinoValido.replace('-', ' ')} aquí.`,
-            accion: () => prepararZonaDeArrastre(recinto.id, [recinto.dinoValido]),
+            texto: `${recinto.texto} Arrastra o haz clic en el ${recinto.dinoValido.replace('-', ' ')} y luego en el recinto.`,
+            accion: () => prepararZonaDeArrastreYClick(recinto.id, [recinto.dinoValido]),
         })),
         { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Ahora explicaremos el dado. Al inicio de cada turno, un jugador lo lanza, este jugador es llamado "Jugador Activo". La cara que toque en el dado crea una restricción para los demás jugadores, pero no afecta al jugador activo.', accion: () => lanzarDado(0) },
         { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta cara es "Zona Boscosa". Obliga a colocar en uno de los 3 recintos del bosque en el tablero.', accion: () => lanzarDado(0) },
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.style.display = 'none';
         cajaResaltadoRecinto.style.display = 'none';
         cajaResaltadoMano.style.display = 'none';
-        desactivarTodasLasZonasDeArrastre();
+        desactivarTodasLasZonasInteractivas();
 
         if (paso.pantalla) {
             paso.pantalla.classList.remove('oculta');
@@ -135,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (paso.elementoDestacado) {
             const elemento = document.querySelector(paso.elementoDestacado);
             if (elemento) {
-                // BUG FIX
                 const cajaCorrecta = paso.elementoDestacado === '#player-hand-area' ? cajaResaltadoMano : cajaResaltadoRecinto;
                 posicionarAyuda(elemento, paso.texto, cajaCorrecta);
                 if (!paso.pantalla || paso.pantalla === pantallaJuego) {
@@ -173,53 +173,102 @@ document.addEventListener('DOMContentLoaded', () => {
                 dinosaurioArrastrado = null;
             });
 
+            elemento.addEventListener('click', () => manejarClickEnDino(elemento));
+
             manoDinosaurios.appendChild(elemento);
         });
     }
+    
+    function manejarClickEnDino(elemento) {
+        const paso = PASOS_TUTORIAL[pasoActual];
+        if (paso.tipo !== 'interactivo') return;
 
-    function prepararZonaDeArrastre(idRecinto, tiposAceptados) {
-        const recinto = document.getElementById(idRecinto);
-        if (recinto) {
-            recinto.classList.add('tutorial__recinto--objetivo-valido');
-            recinto.dataset.tiposAceptados = JSON.stringify(tiposAceptados);
-            recinto.addEventListener('dragover', onDragOver);
-            recinto.addEventListener('drop', onDrop);
+        const tiposAceptados = JSON.parse(document.getElementById(paso.elementoDestacado.substring(1)).dataset.tiposAceptados);
+        if (!tiposAceptados.includes(elemento.dataset.tipo)) {
+            if (window.mostrarNotificacion) window.mostrarNotificacion("¡Ese no es el dinosaurio correcto para este paso!", "error");
+            return;
+        }
+
+        if (elemento.classList.contains('seleccionado')) {
+            elemento.classList.remove('seleccionado');
+            dinoSeleccionado = null;
+            elementoDinoSeleccionado = null;
+            limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
+        } else {
+            if (elementoDinoSeleccionado) {
+                elementoDinoSeleccionado.classList.remove('seleccionado');
+            }
+            elemento.classList.add('seleccionado');
+            dinoSeleccionado = elemento.dataset.tipo;
+            elementoDinoSeleccionado = elemento;
+            document.getElementById(paso.elementoDestacado.substring(1)).classList.add('tutorial__recinto--objetivo-valido');
         }
     }
 
-    function desactivarTodasLasZonasDeArrastre() {
+
+    function prepararZonaDeArrastreYClick(idRecinto, tiposAceptados) {
+        const recinto = document.getElementById(idRecinto);
+        if (recinto) {
+            recinto.dataset.tiposAceptados = JSON.stringify(tiposAceptados);
+            recinto.addEventListener('dragover', onDragOver);
+            recinto.addEventListener('drop', onDrop);
+            recinto.addEventListener('click', onRecintoClick);
+        }
+    }
+
+    function desactivarTodasLasZonasInteractivas() {
         document.querySelectorAll('.tutorial__recinto').forEach(recinto => {
             recinto.classList.remove('tutorial__recinto--objetivo-valido');
             recinto.removeEventListener('dragover', onDragOver);
             recinto.removeEventListener('drop', onDrop);
+            recinto.removeEventListener('click', onRecintoClick);
         });
+        limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
     }
 
     function onDragOver(e) {
         e.preventDefault();
     }
-
+    
     function onDrop(e) {
         e.preventDefault();
         const recinto = e.currentTarget;
         const tiposAceptados = JSON.parse(recinto.dataset.tiposAceptados);
 
         if (dinosaurioArrastrado && tiposAceptados.includes(dinosaurioArrastrado.dataset.tipo)) {
-            const slotVacio = recinto.querySelector('.tutorial__dino-slot:not(.ocupado)');
-            if (slotVacio) {
-                slotVacio.className = `tutorial__dino-slot ocupado ${dinosaurioArrastrado.dataset.tipo}`;
-                dinosaurioArrastrado.style.visibility = 'hidden';
-                dinosaurioArrastrado.draggable = false;
-                avanzarPaso();
-            }
+            colocarDinoEnRecinto(recinto, dinosaurioArrastrado);
         } else {
-             if (window.mostrarNotificacion) {
-                window.mostrarNotificacion("¡Ese dinosaurio no puede ir ahí!", "error");
-            } else {
-                alert("¡Ese dinosaurio no puede ir ahí!");
-            }
+             if (window.mostrarNotificacion) window.mostrarNotificacion("¡Ese dinosaurio no puede ir ahí!", "error");
         }
     }
+
+    function onRecintoClick(e) {
+        const recinto = e.currentTarget;
+        if (recinto.classList.contains('tutorial__recinto--objetivo-valido') && dinoSeleccionado && elementoDinoSeleccionado) {
+            colocarDinoEnRecinto(recinto, elementoDinoSeleccionado);
+        }
+    }
+    
+    function colocarDinoEnRecinto(recinto, elementoDino) {
+        const slotVacio = recinto.querySelector('.tutorial__dino-slot:not(.ocupado)');
+        if (slotVacio) {
+            slotVacio.className = `tutorial__dino-slot ocupado ${elementoDino.dataset.tipo}`;
+            elementoDino.style.visibility = 'hidden';
+            elementoDino.draggable = false;
+            elementoDino.classList.remove('seleccionado');
+            
+            dinoSeleccionado = null;
+            elementoDinoSeleccionado = null;
+            dinosaurioArrastrado = null;
+            
+            avanzarPaso();
+        }
+    }
+
+    function limpiarClaseRecintos(clase) {
+        document.querySelectorAll('.tutorial__recinto').forEach(r => r.classList.remove(clase));
+    }
+
 
     function posicionarAyuda(elemento, texto, cajaResaltado) {
         const rect = elemento.getBoundingClientRect();
@@ -234,28 +283,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (texto) {
             tooltipContenido.textContent = texto;
             tooltip.style.display = 'block';
+            
             const tooltipRect = tooltip.getBoundingClientRect();
             const contenedorRect = modalSuperposicion.getBoundingClientRect();
+            const manoRect = panelMano.getBoundingClientRect();
 
             let top, left;
-            
-            // BUG FIX
-            if (elemento.id === 'player-hand-area' || elemento.id === 'dice-area-tutorial') {
-                top = rect.top + (rect.height / 2) - (tooltipRect.height / 2);
-                left = rect.left - tooltipRect.width - (margen * 2);
-                if (left < contenedorRect.left) {
-                    left = rect.right + margen;
-                }
-            } else {
+
+            top = rect.bottom + margen;
+
+            if (top + tooltipRect.height > manoRect.top && rect.bottom < manoRect.bottom) {
+                 top = rect.top - tooltipRect.height - margen;
+            }
+
+            if (top < contenedorRect.top + margen) {
                 top = rect.bottom + margen;
-                if (top + tooltipRect.height > contenedorRect.bottom) {
-                    top = rect.top - tooltipRect.height - margen;
-                }
-                left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                if (left < contenedorRect.left) left = contenedorRect.left + margen;
-                if (left + tooltipRect.width > contenedorRect.right) {
-                    left = contenedorRect.right - tooltipRect.width - margen;
-                }
+            }
+
+            left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+
+            if (left < contenedorRect.left + margen) {
+                left = contenedorRect.left + margen;
+            } else if (left + tooltipRect.width > contenedorRect.right - margen) {
+                left = contenedorRect.right - tooltipRect.width - margen;
             }
 
             tooltip.style.top = `${top}px`;
@@ -287,3 +337,4 @@ document.addEventListener('DOMContentLoaded', () => {
     botonIniciarTutorial.addEventListener('click', avanzarPaso);
     botonSiguienteTooltip.addEventListener('click', avanzarPaso);
 });
+
