@@ -1,23 +1,25 @@
 /**
  Logica para el Modo Digital
- version 6.8 - Añadida funcionalidad de click-para-colocar para que funcione bien el responsive
+ version 7.1 - Corregida la lógica de cambio de vista de jugador al finalizar el turno.
  */
 
 //  INICIALIZACION Y CONFIGURACIÓN DEL JUEGO 
 document.addEventListener('DOMContentLoaded', () => {
+
     const configPartidaJSON = sessionStorage.getItem('draftosaurusGameConfig');
 
     if (configPartidaJSON) {
         const configPartida = JSON.parse(configPartidaJSON);
-        configuracionInicial = { ...configPartida };
+        configuracionInicial = { ...configPartida }; 
         setTimeout(() => iniciarPartida(configPartida.playerCount, configPartida.playerNames), 100);
-        sessionStorage.removeItem('draftosaurusGameConfig');
+        sessionStorage.removeItem('draftosaurusGameConfig'); 
     } else {
+        
         window.location.href = 'modo_juego_digital.php';
     }
 });
 
-// CONSTANTES GLOBALES 
+// CONSTANTES Y ESTADO GLOBAL
 const RESTRICCIONES_DADO = {
     'boscosa': { texto: 'Zona Boscosa' },
     'llanura': { texto: 'Zona Llanura' },
@@ -28,18 +30,20 @@ const RESTRICCIONES_DADO = {
 };
 const MAPA_CARAS_DADO = { 'boscosa': 0, 'banos': 1, 'llanura': 2, 'cafeteria': 3, 'vacio': 4, 'sin-t-rex': 5 };
 
-//  ESTADOS
 let estadoJuego = {};
 let configuracionInicial = {};
-let dinosaurioSiendoArrastrado = null; 
-let idDinoArrastrado = null; 
-let dinoSeleccionadoInfo = null; 
+let dinosaurioSiendoArrastrado = null;
+let idDinoArrastrado = null;
+let dinoSeleccionadoInfo = null;
+let partidaFinalizada = false;
 
 //  FUNCIONES PRINCIPALES DEL JUEGO 
 function iniciarPartida(numeroDeJugadores, nombresJugadores = []) {
+    partidaFinalizada = false;
     let bolsaDeDinos = crearBolsaDeDinos(numeroDeJugadores);
     barajarArray(bolsaDeDinos);
 
+    // Inicializa el estado del juego
     estadoJuego = {
         numeroDeJugadores,
         bolsaDeDinos,
@@ -59,18 +63,31 @@ function iniciarPartida(numeroDeJugadores, nombresJugadores = []) {
         jugadoresQueHanJugadoEsteTurno: [],
     };
 
-    repartirDinos();
-    
+    repartirDinos(); 
+
+    // contenedor del juego y listeners
     document.getElementById('game-container').classList.remove('hidden');
     document.getElementById('roll-dice-btn').addEventListener('click', manejarLanzamientoDado);
     document.getElementById('tabs-jugadores-digital').addEventListener('click', cambiarVistaJugador);
+    document.getElementById('btn-ver-puntuaciones').addEventListener('click', () => {
+        document.getElementById('end-game-modal').classList.add('visible');
+    });
+
 
     configurarListenersDeJuego();
     renderizarTodo();
+
+    // paneles visibles al inicio
+    document.getElementById('info-partida').classList.remove('hidden');
+    document.getElementById('dice-area').classList.remove('hidden');
+    document.getElementById('player-hand-area').classList.remove('hidden');
+    document.getElementById('end-game-actions-container').classList.add('hidden');
 }
 
 function finalizarTurno() {
+    if (partidaFinalizada) return;
     const manos = estadoJuego.jugadores.map(j => j.mano);
+    // Rotar manos 
     for (let i = 0; i < estadoJuego.numeroDeJugadores; i++) {
         const indiceAnterior = (i - 1 + estadoJuego.numeroDeJugadores) % estadoJuego.numeroDeJugadores;
         estadoJuego.jugadores[i].mano = manos[indiceAnterior];
@@ -81,6 +98,7 @@ function finalizarTurno() {
         return;
     }
     
+    // siguiente turno
     estadoJuego.turnoActual++;
     estadoJuego.indiceJugadorDado = (estadoJuego.indiceJugadorDado + 1) % estadoJuego.numeroDeJugadores;
     estadoJuego.indiceJugadorVista = estadoJuego.indiceJugadorDado; 
@@ -91,6 +109,7 @@ function finalizarTurno() {
 }
 
 function finalizarRonda() {
+    if (partidaFinalizada) return;
     if (estadoJuego.rondaActual === 2) {
         finalizarPartida();
         return;
@@ -98,6 +117,7 @@ function finalizarRonda() {
     
     window.mostrarNotificacion(`Fin de la Ronda ${estadoJuego.rondaActual}. ¡Nuevos dinosaurios!`, 'success');
     
+    // siguiente ronda
     estadoJuego.rondaActual++;
     estadoJuego.turnoActual = 1;
     estadoJuego.indiceJugadorDado = 0;
@@ -110,13 +130,20 @@ function finalizarRonda() {
 }
 
 function finalizarPartida() {
+    partidaFinalizada = true;
+
     estadoJuego.jugadores.forEach(jugador => {
         const resultados = window.MotorJuego.calcularPuntuacionTotal(jugador, estadoJuego.jugadores);
         jugador.puntuacionDetallada = resultados.puntajes;
         jugador.puntuacionTotal = resultados.total;
     });
 
-    estadoJuego.jugadores.sort((a, b) => b.puntuacionTotal - a.puntuacionTotal);
+    estadoJuego.jugadores.sort((a, b) => {
+        if (b.puntuacionTotal !== a.puntuacionTotal) {
+            return b.puntuacionTotal - a.puntuacionTotal;
+        }
+        return window.MotorJuego.contarTRex(a) - window.MotorJuego.contarTRex(b);
+    });
 
     const contenedorResultados = document.getElementById('final-scores-container');
     const contenedorGanador = document.getElementById('winner-container');
@@ -124,16 +151,17 @@ function finalizarPartida() {
     
     contenedorResultados.innerHTML = '';
     const puntuacionMaxima = estadoJuego.jugadores[0].puntuacionTotal;
-    const ganadores = estadoJuego.jugadores.filter(j => j.puntuacionTotal === puntuacionMaxima);
+    const posiblesGanadores = estadoJuego.jugadores.filter(j => j.puntuacionTotal === puntuacionMaxima);
+    const ganador = posiblesGanadores[0]; 
     
-    contenedorGanador.innerHTML = `<p>🏆 ¡Victoria para ${ganadores.map(g => g.nombre).join(' y ')}! 🏆</p>`;
+    contenedorGanador.innerHTML = `<p>🏆 ¡Victoria para ${ganador.nombre}! 🏆</p>`;
 
     estadoJuego.jugadores.forEach((jugador) => {
         const p = jugador.puntuacionDetallada;
         const resultadoDiv = document.createElement('div');
         resultadoDiv.className = 'jugador-resultados'; 
         resultadoDiv.innerHTML = `
-            <h3>${jugador.nombre} ${ganadores.includes(jugador) ? '⭐' : ''}</h3>
+            <h3>${jugador.nombre} ${jugador.id === ganador.id ? '⭐' : ''}</h3>
             <ul>
                 <li><span>Bosque Semejanza:</span> <span>${p.bosqueSemejanza || 0}</span></li>
                 <li><span>Prado Diferencia:</span> <span>${p.pradoDiferencia || 0}</span></li>
@@ -151,6 +179,13 @@ function finalizarPartida() {
 
     modal.classList.add('visible');
     modal.querySelector('#btn-close-end-game-modal').onclick = () => modal.classList.remove('visible');
+
+    document.getElementById('info-partida').classList.add('hidden');
+    document.getElementById('dice-area').classList.add('hidden');
+    document.getElementById('player-hand-area').classList.add('hidden');
+    document.getElementById('end-game-actions-container').classList.remove('hidden');
+
+    renderizarTodo(); 
 }
 
 function reiniciarPartida() {
@@ -171,6 +206,7 @@ function configurarListenersDeJuego() {
     const contenedorSlots = document.getElementById('contenedor-slots-tablero');
 
     contenedorSlots.addEventListener('dragover', e => {
+        if (partidaFinalizada) return;
         if (e.target.classList.contains('slot-valido')) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
@@ -178,6 +214,7 @@ function configurarListenersDeJuego() {
     });
 
     contenedorSlots.addEventListener('drop', e => {
+        if (partidaFinalizada) return;
         e.preventDefault();
         if (e.target.classList.contains('slot-valido')) {
             const dinoId = e.dataTransfer.getData('text/plain');
@@ -189,6 +226,7 @@ function configurarListenersDeJuego() {
     });
 
     contenedorSlots.addEventListener('click', e => {
+        if (partidaFinalizada) return;
         if (dinoSeleccionadoInfo && e.target.classList.contains('slot-valido')) {
             colocarDinosaurio(e.target, dinoSeleccionadoInfo);
         }
@@ -196,6 +234,7 @@ function configurarListenersDeJuego() {
 }
 
 function manejarArrastre(e) {
+    if (partidaFinalizada) return;
     const dinoElemento = e.currentTarget;
     const jugadorActual = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
 
@@ -235,6 +274,7 @@ function manejarFinArrastre(e) {
 }
 
 function colocarDinosaurio(slot, dinoInfo) {
+    if (partidaFinalizada) return;
     const jugador = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
     const indiceDinoEnMano = jugador.mano.findIndex(d => d.id === dinoInfo.id);
     
@@ -273,6 +313,7 @@ function colocarDinosaurio(slot, dinoInfo) {
 }
 
 function manejarLanzamientoDado() {
+    if (partidaFinalizada) return;
     if (estadoJuego.jugadores[estadoJuego.indiceJugadorVista].id !== estadoJuego.indiceJugadorDado) {
         window.mostrarNotificacion(`No es tu turno de lanzar. Esperando a ${estadoJuego.jugadores[estadoJuego.indiceJugadorDado].nombre}.`, 'error');
         return;
@@ -325,6 +366,7 @@ function resaltarSlotsValidos(tipoDino) {
                 }
             }
             
+            //colocación secuencial para nosque y prado
             if (esValido && (claveRecinto === 'bosqueSemejanza' || claveRecinto === 'pradoDiferencia')) {
                 const primerSlotVacioIndex = Array.from(slotsDelRecinto).findIndex(s => !s.classList.contains('ocupado'));
                 if (index !== primerSlotVacioIndex) {
@@ -332,6 +374,7 @@ function resaltarSlotsValidos(tipoDino) {
                 }
             }
 
+            // restricción del dado si corresponde
             if (esValido && jugador.id !== estadoJuego.indiceJugadorDado && estadoJuego.restriccionDado) {
                 const restriccion = estadoJuego.restriccionDado;
                 const zonas = {
@@ -370,6 +413,12 @@ function limpiarResaltadoSlots() {
 
 //  RENDERIZADO Y UI 
 function renderizarTodo() {
+    if (partidaFinalizada) {
+        renderizarPestanas();
+        renderizarTablero();
+        renderizarMano(); 
+        return;
+    }
     renderizarPestanas();
     renderizarInfoPartida();
     renderizarMano();
@@ -385,12 +434,12 @@ function renderizarPestanas() {
         pestana.textContent = jugador.nombre;
         pestana.dataset.jugadorIndex = index;
 
+        // Muestra si el jugador ya jugó en el turno
         if (estadoJuego.jugadoresQueHanJugadoEsteTurno.includes(jugador.id)) {
             pestana.classList.add('listo');
         } else {
             pestana.classList.add('pendiente');
         }
-
         if (index === estadoJuego.indiceJugadorVista) {
             pestana.classList.add('active');
         }
@@ -412,12 +461,16 @@ function renderizarMano() {
 
     const jugador = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
     if (!jugador) return;
+    
+    if (partidaFinalizada) {
+        contenedorMano.innerHTML = '<p class="mensaje-mano">Partida finalizada</p>';
+        return;
+    }
 
     if (estadoJuego.jugadoresQueHanJugadoEsteTurno.includes(jugador.id)) {
-         contenedorMano.innerHTML = '<p style="color: #5D4037; text-align: center; width: 100%;">Esperando a los demás jugadores...</p>';
+         contenedorMano.innerHTML = '<p class="mensaje-mano">Agarrando dinos de la bolsa...</p>';
          return;
     }
-    
     
     jugador.mano.forEach(dino => {
         contenedorMano.appendChild(crearElementoDino(dino));
@@ -432,7 +485,6 @@ function renderizarTablero() {
     jugador.puntuacionTotal = resultados.total;
     document.getElementById('board-title').textContent = `Parque de ${jugador.nombre}`;
     document.querySelector('#board-score span').textContent = jugador.puntuacionTotal;
-
 
     document.querySelectorAll('.dino-slot-digital').forEach(slot => {
         slot.className = 'dino-slot-digital';
@@ -467,6 +519,7 @@ function cambiarVistaJugador(e) {
     }
 }
 
+//  FUNCIONES UTILES
 function crearBolsaDeDinos(numJugadores) {
     const dinosPorEspecie = { 5: 10, 4: 8, 3: 6, 2: 8 }[numJugadores] || 10;
     let idCounter = 0;
@@ -501,8 +554,9 @@ function crearElementoDino(dino) {
     dinoEl.addEventListener('dragstart', manejarArrastre);
     dinoEl.addEventListener('dragend', manejarFinArrastre);
 
-    // Lógica para seleccionar con click.
+    // Lógica para seleccionar con click
     dinoEl.addEventListener('click', () => {
+        if (partidaFinalizada) return;
         const jugadorActual = estadoJuego.jugadores[estadoJuego.indiceJugadorVista];
         if (estadoJuego.jugadoresQueHanJugadoEsteTurno.includes(jugadorActual.id) || dinoEl.classList.contains('colocado')) {
             return;
@@ -511,12 +565,13 @@ function crearElementoDino(dino) {
             window.mostrarNotificacion(`¡${estadoJuego.jugadores[estadoJuego.indiceJugadorDado].nombre} debe lanzar el dado!`, 'error');
             return;
         }
-        // deselecciona si se hace clic en el mismo dino
+       
         if (dinoEl.classList.contains('selected')) {
             dinoEl.classList.remove('selected');
             dinoSeleccionadoInfo = null;
             limpiarResaltadoSlots();
         } else {
+            
             if (dinoSeleccionadoInfo && dinoSeleccionadoInfo.elemento) {
                 dinoSeleccionadoInfo.elemento.classList.remove('selected');
             }
@@ -540,6 +595,7 @@ function lanzarDadoDigital(indiceCara) {
         { x: -90, y: 0 },     // 4: vacio (superior)
         { x: 90, y: 0 }       // 5: sin-t-rex (inferior)
     ];
+
     const giroAleatorioY = 360 * (Math.floor(Math.random() * 2) + 2);
     const giroAleatorioX = 360 * (Math.floor(Math.random() * 2) + 2);
     const rotacionObjetivo = rotaciones[indiceCara];

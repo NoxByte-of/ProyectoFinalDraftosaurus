@@ -1,6 +1,6 @@
 /*
     Estilos específicos para el Modo de Juego Digital.
-    version 8.1 - Ajustes responsive para puntuación y botones.
+    version 8.4 - Ajuste de estilo para el mensaje de espera.
 */
 
 /* Layout Principal y Paneles  */
@@ -18,12 +18,13 @@ main#game-container {
     grid-template-columns: 2fr 1fr; 
     gap: 1.5rem;
     padding: 0 1.5rem;
-    align-items: flex-start;
+    align-items: center; 
 }
 
 @media (max-width: 1024px) {
     main#game-container { 
         grid-template-columns: 1fr; 
+        align-items: flex-start; 
     }
 }
 
@@ -278,7 +279,7 @@ main#game-container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-top: 8rem; 
+    justify-content: center; 
 }
 
 #controls-column > section {
@@ -339,12 +340,23 @@ main#game-container {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    align-items: center;
     min-height: 60px;
     background-color: transparent;
     border-radius: var(--dh-radio-borde-pequeno);
     padding: 10px;
     border: none;
 }
+
+#current-player-hand .mensaje-mano {
+    color: var(--dh-texto-primario-oscuro);
+    font-family: var(--dh-fuente-cuerpo);
+    text-shadow: none;
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
 /* dino seleccionado */
 #current-player-hand .dino-selector.selected {
     transform: scale(1.1);
@@ -405,6 +417,10 @@ body.arrastrando, body.arrastrando * {
     cursor: grabbing !important;
 }
 
+#end-game-actions-container {
+    text-align: center;
+}
+
 /* RESPONSIVE MODO DIGITAL */
 @media (max-width: 767px) {
     #board-header-digital {
@@ -419,9 +435,11 @@ body.arrastrando, body.arrastrando * {
     
     #controls-column {
         padding-top: 1.5rem; 
+        justify-content: flex-start; 
     }
     
-    #game-actions-area .btn-accion {
+    #game-actions-area .btn-accion, 
+    #end-game-actions-container .btn-accion {
         padding-top: 12px;
         padding-bottom: 12px;
         font-size: 1rem;
@@ -431,3 +449,4 @@ body.arrastrando, body.arrastrando * {
         justify-content: center;
     }
 }
+

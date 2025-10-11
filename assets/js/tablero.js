@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             e.preventDefault();
                             return;
                         }
-                        // Limpia la selección por clic si se inicia un arrastre
+                        
                         if (elementoDinoSeleccionado) {
                             elementoDinoSeleccionado.classList.remove('selected');
                         }
@@ -309,23 +309,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function mostrarResultadosFinales() {
+            
             estadoJuego.jugadores.forEach((_, index) => calcularPuntuacionTotal(index));
+            
+            
             estadoJuego.jugadores.sort((a, b) => {
+                
                 if (b.puntuacionTotal !== a.puntuacionTotal) {
                     return b.puntuacionTotal - a.puntuacionTotal;
                 }
-                const conteoDinosA = Object.values(a.tablero).flat().length;
-                const conteoDinosB = Object.values(b.tablero).flat().length;
-                return conteoDinosB - conteoDinosA;
+                
+                const tRexA = window.MotorJuego.contarTRex(a);
+                const tRexB = window.MotorJuego.contarTRex(b);
+                return tRexA - tRexB;
             });
-
+        
             const contenedorResultados = document.getElementById('resultados-finales-container');
             if (!contenedorResultados) return;
             contenedorResultados.innerHTML = '';
-
-            const puntuacionMaxima = estadoJuego.jugadores[0].puntuacionTotal;
-            const ganadores = estadoJuego.jugadores.filter(j => j.puntuacionTotal === puntuacionMaxima);
-
+        
+            
+            const ganadorPrincipal = estadoJuego.jugadores[0];
+            const puntuacionMaxima = ganadorPrincipal.puntuacionTotal;
+            const tRexGanador = window.MotorJuego.contarTRex(ganadorPrincipal);
+        
+            const ganadores = estadoJuego.jugadores.filter(j => 
+                j.puntuacionTotal === puntuacionMaxima && window.MotorJuego.contarTRex(j) === tRexGanador
+            );
+        
+           
             estadoJuego.jugadores.forEach(jugador => {
                 const p = jugador.puntuacionDetallada;
                 const div = document.createElement('div');
@@ -347,16 +359,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 contenedorResultados.appendChild(div);
             });
-
+        
             let textoGanador;
             if (ganadores.length > 1) {
-                textoGanador = `🎉 ¡Victoria compartida entre ${ganadores.map(g => g.nombre).join(' y ')}! 🎉`;
+                textoGanador = `🎉 ¡Empate! Victoria compartida entre ${ganadores.map(g => g.nombre).join(' y ')}! 🎉`;
             } else {
                 textoGanador = `🎉 ¡${ganadores[0].nombre} es el ganador! 🎉`;
             }
             const elGanador = document.getElementById('ganador-container');
             if (elGanador) elGanador.innerHTML = `<p>${textoGanador}</p>`;
-
+        
             modalResultadosOverlay.classList.add('visible');
         }
 
@@ -521,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (elementoDinoSeleccionado) {
                 elementoDinoSeleccionado.classList.remove('selected');
                 elementoDinoSeleccionado.classList.add('colocado');
-            } else { // Si la colocación vino de un drag & drop
+            } else { 
                 const dinoEnManoVisual = dinosManoVirtual.querySelector(`.dino-selector[data-dino-type="${dinosaurioSeleccionado}"]:not(.colocado)`);
                 if (dinoEnManoVisual) dinoEnManoVisual.classList.add('colocado');
             }
@@ -777,12 +789,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (e.target.classList.contains('slot-valido')) {
                         const tipoDino = e.dataTransfer.getData('text/plain');
                         dinosaurioSeleccionado = tipoDino;
-                        elementoDinoSeleccionado = null; // Limpia por si venía de un click
+                        elementoDinoSeleccionado = null; 
                         intentarColocarDinosaurio(e.target);
                     }
                     limpiarVisualizacionSlots();
                 });
-                // Event listener para colocar con click
+                //listener para colocar con click
                 contenedorTableros.addEventListener('click', (e) => {
                     if (dinosaurioSeleccionado && e.target.classList.contains('slot-valido')) {
                         intentarColocarDinosaurio(e.target);
@@ -849,4 +861,3 @@ document.addEventListener('DOMContentLoaded', function() {
         inicializarJuego();
     }
 });
-

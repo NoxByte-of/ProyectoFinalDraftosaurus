@@ -8,6 +8,12 @@ window.MotorJuego = (function() {
 
     const TIPOS_DINO = ["t-rex", "spinosaurus", "brachiosaurus", "triceratops", "parasaurolophus", "stegosaurus"];
 
+    const contarTRex = (jugador) => {
+        const tablero = jugador.tablero || jugador.parque;
+        if (!tablero) return 0;
+        return Object.values(tablero).flat().filter(d => (d.type || d.especie) === 't-rex').length;
+    };
+
 
     /**
     Pradera del Amor
@@ -118,6 +124,7 @@ window.MotorJuego = (function() {
     
     return {
         calcularPuntuacionTotal,
+        contarTRex, 
         TIPOS_DINO
     };
 

@@ -156,6 +156,7 @@ session_start();
     </div>
 
     <div id="controls-column">
+
         <section id="info-partida">
             <div class="info-item"><span>Ronda:</span><strong id="round-number">1</strong> / 2</div>
             <div class="info-item"><span>Turno:</span><strong id="turn-number">1</strong> / 6</div>
@@ -185,6 +186,11 @@ session_start();
             <div id="current-player-hand">
                
             </div>
+        </section>
+
+        
+        <section id="end-game-actions-container" class="control-grupo hidden">
+             <button id="btn-ver-puntuaciones" class="btn btn-accion">Ver Tabla de Puntuaciones</button>
         </section>
 
         <section id="game-actions-area" class="control-grupo">
