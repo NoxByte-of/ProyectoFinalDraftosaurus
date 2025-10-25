@@ -1,6 +1,4 @@
-/**
-  configuración del modo seguimiento
- */
+
 document.addEventListener('DOMContentLoaded', function() {
 
     const contenedorConfiguracion = document.getElementById('seccion-configuracion-partida');
@@ -36,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 1; i <= cantidad; i++) {
                 const input = document.createElement('input');
                 input.type = 'text';
-                input.placeholder = `Nombre del Jugador ${i}`;
+                const placeholderText = traducirJS('config_placeholder_nombre_jugador').replace('{numero}', i);
+                input.placeholder = placeholderText;
                 input.className = 'nombre-jugador-input form-control'; 
                 contenedorCamposNombres.appendChild(input);
             }
@@ -52,14 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const playerInputElements = contenedorCamposNombres.querySelectorAll('.nombre-jugador-input');
                 
                 const nombres = Array.from(playerInputElements).map((input, index) => {
-                    return input.value.trim() || `Jugador ${index + 1}`;
+                    const nombrePorDefecto = traducirJS('config_placeholder_nombre_defecto').replace('{numero}', index + 1);
+                    return input.value.trim() || nombrePorDefecto;
                 });
 
-                // localStorage para usarlos en el tablero.php
                 localStorage.setItem('jugadoresDraftosaurus', JSON.stringify(nombres));
                 window.location.href = 'tablero.php';
             });
         }
     }
 });
-

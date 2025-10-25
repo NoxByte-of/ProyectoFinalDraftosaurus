@@ -1,11 +1,4 @@
-/*
-  Estilos Base 
-  estilos específicos que no entran en conflicto con global.css
-  y son usados por los modos de juego.
-  version 3.0
-*/
 
-/* TIPOGRAFÍA  */
 h1, h3, h4, h5, h6 {
     font-family: var(--dh-fuente-encabezado);
     font-weight: 700;
@@ -56,10 +49,9 @@ a:hover, a:focus {
 
 strong {
     font-weight: 700;
-    color: var(--dh-texto-primario-oscuro);
 }
 
-/* LAYOUT PRINCIPAL */
+
 header {
     background: transparent;
     color: var(--dh-texto-sobre-fondo-oscuro);

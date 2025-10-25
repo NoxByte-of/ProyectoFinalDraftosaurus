@@ -1,18 +1,17 @@
 <?php
+
 session_start();
 
-$_SESSION = array();
+require_once '../config/Database.php';
+require_once '../controllers/AuthController.php';
 
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
+try {
+    $db = Database::obtenerInstancia()->obtenerConexion();
+    $controladorAuth = new AuthController($db);
+    $controladorAuth->logout();
+
+} catch (Exception $e) {
+    header("Location: ../../index.php");
+    exit;
 }
-
-session_destroy();
-
-header("Location: ../../index.php");
-exit;
 ?>

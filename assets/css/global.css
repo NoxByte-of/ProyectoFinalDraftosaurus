@@ -1,14 +1,9 @@
-/*
-  colores, fuentes y estilos base 
-  Versión 2.0 - menu principal de noxbyte
-*/
 
 @import url('https://fonts.googleapis.com/css2?family=Piedra&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 
-/*VARIABLES Y COLORES*/
 :root {
     /* Paleta Principal */
     --color-naranja-boton: #c85a2b; 
@@ -87,7 +82,6 @@
     box-sizing: border-box;
 }
 
-/*BASE DEL BODY  */
 body {
   background-color: transparent;
   background-image: url('../imagenes/draftosaurusfondo1.jpg');
@@ -101,7 +95,6 @@ body {
   min-height: 100vh;
 }
 
-/*BOTONES*/
 .btn {
   background-color: #d35625;
   color: white !important; 
@@ -130,7 +123,6 @@ body {
   border: 2px solid #360707 !important;
 }
 
-/*ESTILOS TEXTO*/
 h2 {
   font-family: 'Darumadrop One', cursive;
   color: #ffffff;
@@ -160,7 +152,6 @@ p {
      0    2px 0 #753900;
 }
 
-/* ESTILOS TABLA */
 .custom-table thead th {
   background-color: #ca6622 !important;
   color: rgb(255, 255, 255) !important;
@@ -195,7 +186,6 @@ p {
   background-color: #b0ff5c !important;
 }
 
-/*SECCIONES DEL MAIN */
 .seccion-juego, .seccion-informacion {
     background-color: rgba(201, 167, 104, 0.8);
     padding: 2rem;

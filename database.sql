@@ -1,4 +1,3 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -15,6 +14,7 @@ CREATE TABLE `usuario` (
   `rol` ENUM('jugador', 'administrador') NOT NULL DEFAULT 'jugador',
   `fecha_registro` datetime NOT NULL DEFAULT current_timestamp(),
   `idioma_preferido` varchar(50) DEFAULT 'es',
+  `fecha_ultimo_cambio_nombre` DATE DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `email_unico` (`email`),
   UNIQUE KEY `nombre_usuario_unico` (`nombre_usuario`)
@@ -101,6 +101,26 @@ CREATE TABLE `mano_turno` (
   KEY `id_dino` (`id_dino`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `partida_guardada` (
+  `id_partida_guardada` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `estado_juego` longtext NOT NULL,
+  `fecha_guardado` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_partida_guardada`),
+  KEY `id_usuario` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `partida_finalizada` (
+  `id_partida_finalizada` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `nombre_partida` varchar(255) NOT NULL,
+  `estado_juego` longtext NOT NULL,
+  `fecha_guardado` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_partida_finalizada`),
+  KEY `id_usuario` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 ALTER TABLE `colocacion`
   ADD CONSTRAINT `colocacion_ibfk_1` FOREIGN KEY (`id_turno`) REFERENCES `turno` (`id_turno`) ON DELETE CASCADE,
   ADD CONSTRAINT `colocacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
@@ -121,5 +141,11 @@ ALTER TABLE `mano_turno`
   ADD CONSTRAINT `mano_turno_ibfk_1` FOREIGN KEY (`id_turno`) REFERENCES `turno` (`id_turno`) ON DELETE CASCADE,
   ADD CONSTRAINT `mano_turno_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
   ADD CONSTRAINT `mano_turno_ibfk_3` FOREIGN KEY (`id_dino`) REFERENCES `dinosaurio` (`id_dino`);
-COMMIT;
 
+ALTER TABLE `partida_guardada`
+  ADD CONSTRAINT `partida_guardada_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
+
+ALTER TABLE `partida_finalizada`
+  ADD CONSTRAINT `partida_finalizada_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
+
+COMMIT;

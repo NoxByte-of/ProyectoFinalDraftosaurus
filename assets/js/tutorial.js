@@ -1,84 +1,164 @@
-/**
- * Lógica del tutorial interactivo
- * Versión 6.0 - Mejorado el posicionamiento del tooltip para evitar solapamiento con la mano en móvil.
- */
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const botonAbrirTutorial = document.getElementById('btn-abrir-tutorial');
-    const modalSuperposicion = document.getElementById('tutorial-modal');
 
-    const btnAbrirTutorialMain = document.getElementById('btn-abrir-tutorial-main');
+class Tutorial {
+    constructor() {
+        this.dom = {
+            modalSuperposicion: document.getElementById('tutorial-modal'),
+            botonCerrar: document.getElementById('tutorial-close-btn'),
+            botonCerrarFin: document.getElementById('tutorial-close-btn-end'),
+            botonIniciar: document.getElementById('tutorial-start-btn'),
+            botonSiguienteTooltip: document.getElementById('tooltip-next-btn'),
+            pantallaBienvenida: document.getElementById('welcome-screen-tutorial'),
+            pantallaJuego: document.querySelector('.tutorial__vista-juego'),
+            pantallaFin: document.getElementById('end-screen-tutorial'),
+            cajaResaltadoRecinto: document.getElementById('highlight-overlay-tutorial'),
+            cajaResaltadoMano: document.getElementById('highlight-overlay-hand-tutorial'),
+            tooltip: document.getElementById('tutorial-tooltip'),
+            tooltipContenido: document.getElementById('tooltip-content'),
+            manoDinosaurios: document.getElementById('player-hand-tutorial'),
+            panelMano: document.getElementById('player-hand-area'),
+            dado: document.getElementById('dice-tutorial'),
+            contenedorSlots: document.getElementById('tutorial-slots-container'),
+            tableroContenedor: document.querySelector('.tutorial__tablero-contenedor')
+        };
+        
+        this.notificador = new Notificador('notificacion-container-tutorial');
 
-    if (!modalSuperposicion) {
-        console.error("No se encontró el modal del tutorial en el DOM.");
-        return;
+        this.pasoActual = 0;
+        this.dinosaurioArrastrado = null;
+        this.dinoSeleccionado = null;
+        this.elementoDinoSeleccionado = null;
+        this.pasosDefinidos = false; 
+
+        this.DEFINICION_RECINTOS = {
+            bosqueSemejanza: { id: 'pen-1', clave_texto: 'tutorial_paso_recinto_bosque', dinoValido: 'parasaurolophus', style: 'top: 6.5%; left: 10%; width: 34%; height: 18%;', slots: 1 },
+            reySelva: { id: 'pen-4', clave_texto: 'tutorial_paso_recinto_rey', dinoValido: 'triceratops', style: 'top: 6.5%; left: 60%; width: 14%; height: 12%;', slots: 1 },
+            trioFrondoso: { id: 'pen-3', clave_texto: 'tutorial_paso_recinto_trio', dinoValido: 't-rex', style: 'top: 38%; left: 15%; width: 21%; height: 18%;', slots: 1 },
+            pradoDiferencia: { id: 'pen-0', clave_texto: 'tutorial_paso_recinto_prado', dinoValido: 'brachiosaurus', style: 'top: 42%; left: 53%; width: 34%; height: 18%;', slots: 1 },
+            praderaAmor: { id: 'pen-2', clave_texto: 'tutorial_paso_recinto_amor', dinoValido: 'spinosaurus', style: 'top: 73%; left: 10.5%; width: 31%; height: 19%;', slots: 1 },
+            islaSolitaria: { id: 'pen-5', clave_texto: 'tutorial_paso_recinto_isla', dinoValido: 'stegosaurus', style: 'top: 68%; left: 69.5%; width: 14%; height: 14%;', slots: 1 }
+        };
+
+        this.PASOS_TUTORIAL = [];
     }
 
-    const botonesAbrir = [botonAbrirTutorial, btnAbrirTutorialMain].filter(btn => btn !== null);
+    _definirPasos() {
+        if (this.pasosDefinidos) return;
 
-    if (botonesAbrir.length === 0) {
-        console.error("No se encontraron botones para abrir el tutorial.");
-        return;
+        this.PASOS_TUTORIAL = [
+            { tipo: 'informativo', pantalla: this.dom.pantallaBienvenida },
+            { tipo: 'informativo', pantalla: this.dom.pantallaJuego, elementoDestacado: '#player-hand-area', texto: traducirJS('tutorial_paso_inicio_mano_texto'), accion: () => this._poblarMano(['brachiosaurus', 'parasaurolophus', 'spinosaurus', 't-rex', 'triceratops', 'stegosaurus']) },
+            { tipo: 'informativo', elementoDestacado: '#player-hand-area', texto: traducirJS('tutorial_paso_mano_lista') },
+            ...Object.values(this.DEFINICION_RECINTOS).map(recinto => ({
+                tipo: 'interactivo',
+                elementoDestacado: `#${recinto.id}`,
+                texto: traducirJS(recinto.clave_texto),
+                accion: () => this._prepararZonaDeArrastreYClick(recinto.id, [recinto.dinoValido]),
+            })),
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_intro'), accion: () => this._lanzarDado(0) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_boscosa'), accion: () => this._lanzarDado(0) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_banos'), accion: () => this._lanzarDado(1) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_llanura'), accion: () => this._lanzarDado(2) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_cafeteria'), accion: () => this._lanzarDado(3) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_vacio'), accion: () => this._lanzarDado(4) },
+            { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: traducirJS('tutorial_paso_dado_sin_trex'), accion: () => this._lanzarDado(5) },
+            { tipo: 'informativo', pantalla: this.dom.pantallaFin }
+        ];
+
+        this.pasosDefinidos = true;
     }
 
-    const botonCerrarTutorial = document.getElementById('tutorial-close-btn');
-    const botonCerrarTutorialFin = document.getElementById('tutorial-close-btn-end');
-    const botonIniciarTutorial = document.getElementById('tutorial-start-btn');
-    const botonSiguienteTooltip = document.getElementById('tooltip-next-btn');
-    
-    const pantallaBienvenida = document.getElementById('welcome-screen-tutorial');
-    const pantallaJuego = document.querySelector('.tutorial__vista-juego');
-    const pantallaFin = document.getElementById('end-screen-tutorial');
-    
-    const cajaResaltadoRecinto = document.getElementById('highlight-overlay-tutorial');
-    const cajaResaltadoMano = document.getElementById('highlight-overlay-hand-tutorial');
-    
-    const tooltip = document.getElementById('tutorial-tooltip');
-    const tooltipContenido = document.getElementById('tooltip-content');
-    
-    const manoDinosaurios = document.getElementById('player-hand-tutorial');
-    const panelMano = document.getElementById('player-hand-area');
-    const dado = document.getElementById('dice-tutorial');
-    const contenedorSlots = document.getElementById('tutorial-slots-container');
+    inicializar(selectorTriggers) {
+        if (!this.dom.modalSuperposicion) return;
 
-    let pasoActual = 0;
-    let dinosaurioArrastrado = null;
-    let dinoSeleccionado = null; 
-    let elementoDinoSeleccionado = null; 
+        document.querySelectorAll(selectorTriggers).forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.iniciar();
+            });
+        });
 
-    const DEFINICION_RECINTOS = {
-        bosqueSemejanza: { id: 'pen-1', texto: 'El "Bosque de la Semejanza". Aquí, todos los dinos deben ser de la misma especie.', dinoValido: 'parasaurolophus', style: 'top: 8%; left: 6%; width: 33.5%; height: 17%;', slots: 1 },
-        reySelva: { id: 'pen-4', texto: 'El "Rey de la Selva" te da 7 puntos si tienes más dinos de la especie que coloques que tus rivales.', dinoValido: 'triceratops', style: 'top: 8%; left: 62%; width: 12%; height: 12%;', slots: 1 },
-        trioFrondoso: { id: 'pen-3', texto: 'El "Trío Frondoso". Ganas 7 puntos si colocas exactamente 3 dinos.', dinoValido: 't-rex', style: 'top: 40%; left: 14%; width: 23%; height: 15%;', slots: 1 },
-        pradoDiferencia: { id: 'pen-0', texto: 'Este es el "Prado de la Diferencia". Aquí solo puedes colocar especies distintas.', dinoValido: 'brachiosaurus', style: 'top: 44%; left: 55%; width: 33.5%; height: 17%;', slots: 1 },
-        praderaAmor: { id: 'pen-2', texto: 'La "Pradera del Amor", obtienes 5 puntos por parejas de dinosaurios de la misma especie.', dinoValido: 'spinosaurus', style: 'top: 70%; left: 15%; width: 29%; height: 16%;', slots: 1 },
-        islaSolitaria: { id: 'pen-5', texto: 'La "Isla Solitaria" da puntos si el dino es el único de su especie en todo tu parque.', dinoValido: 'stegosaurus', style: 'top: 69%; left: 72%; width: 12%; height: 12%;', slots: 1 }
-    };
-    
-    const PASOS_TUTORIAL = [
-        { tipo: 'informativo', pantalla: pantallaBienvenida },
-        { tipo: 'informativo', pantalla: pantallaJuego, elementoDestacado: '#player-hand-area', texto: '¡Empecemos! En cada ronda debes tomar 6 dinosaurios de la bolsa. ¡Esto se hace automaticamente!', accion: () => poblarMano(['brachiosaurus', 'parasaurolophus', 'spinosaurus', 't-rex', 'triceratops', 'stegosaurus']) },
-        { tipo: 'informativo', elementoDestacado: '#player-hand-area', texto: '¡Genial! Estos 6 dinosaurios están en tu mano ahora. Tu objetivo es elegir uno y colocarlo en un recinto del parque.' },
-        ...Object.values(DEFINICION_RECINTOS).map(recinto => ({
-            tipo: 'interactivo',
-            elementoDestacado: `#${recinto.id}`,
-            texto: `${recinto.texto} Arrastra o haz clic en el ${recinto.dinoValido.replace('-', ' ')} y luego en el recinto.`,
-            accion: () => prepararZonaDeArrastreYClick(recinto.id, [recinto.dinoValido]),
-        })),
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Ahora explicaremos el dado. Al inicio de cada turno, un jugador lo lanza, este jugador es llamado "Jugador Activo". La cara que toque en el dado crea una restricción para los demás jugadores, pero no afecta al jugador activo.', accion: () => lanzarDado(0) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta cara es "Zona Boscosa". Obliga a colocar en uno de los 3 recintos del bosque en el tablero.', accion: () => lanzarDado(0) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta es la "Zona de Baños". Obliga a colocar en uno de los 3 recintos del lado derecho del tablero.', accion: () => lanzarDado(1) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta cara es "Zona de llanura". Obliga a colocar en los 3 recintos ubicados en la Zona de llanura.', accion: () => lanzarDado(2) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta es la "Zona Cafetería". Obliga a colocar en los 3 recintos de la parte izquierda del tablero.', accion: () => lanzarDado(3) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Esta cara es "Recinto Vacío" y te obliga a colocar tu dinosaurio en un recinto que esté completamente vacío en tu parque.', accion: () => lanzarDado(4) },
-        { tipo: 'informativo', elementoDestacado: '#dice-area-tutorial', texto: 'Y por último, esta cara prohíbe colocar tu dinosaurio en un recinto que ya hayas colocado un T-Rex.', accion: () => lanzarDado(5) },
-        { tipo: 'informativo', pantalla: pantallaFin }
-    ];
-    
-    function generarTableroTutorial() {
-        contenedorSlots.innerHTML = '';
-        for (const key in DEFINICION_RECINTOS) {
-            const recintoData = DEFINICION_RECINTOS[key];
+        this.dom.botonCerrar.addEventListener('click', () => this.cerrar());
+        this.dom.botonCerrarFin.addEventListener('click', () => this.cerrar());
+        this.dom.botonIniciar.addEventListener('click', () => this._avanzarPaso());
+        this.dom.botonSiguienteTooltip.addEventListener('click', () => this._avanzarPaso());
+    }
+
+    iniciar() {
+        this._definirPasos();
+
+        if (this.dom.tableroContenedor) {
+            this.dom.tableroContenedor.style.maxWidth = '950px';
+        }
+
+        this.dom.modalSuperposicion.classList.add('visible');
+        this.pasoActual = 0;
+        this._generarTableroTutorial();
+        this.dom.manoDinosaurios.innerHTML = '';
+        this._ejecutarPaso(this.pasoActual);
+    }
+
+    cerrar() {
+        this.dom.modalSuperposicion.classList.remove('visible');
+        this.dom.tooltip.style.display = 'none';
+        this.dom.cajaResaltadoRecinto.style.display = 'none';
+        this.dom.cajaResaltadoMano.style.display = 'none';
+    }
+
+    _avanzarPaso() {
+        this.pasoActual++;
+        if (this.pasoActual < this.PASOS_TUTORIAL.length) {
+            this._ejecutarPaso(this.pasoActual);
+        } else {
+            this._mostrarPantalla(this.dom.pantallaFin);
+        }
+    }
+
+    _ejecutarPaso(indice) {
+        const paso = this.PASOS_TUTORIAL[indice];
+
+        this.dom.pantallaBienvenida.classList.add('oculta');
+        this.dom.pantallaJuego.classList.add('oculta');
+        this.dom.pantallaFin.classList.add('oculta');
+        this.dom.tooltip.style.display = 'none';
+        this.dom.cajaResaltadoRecinto.style.display = 'none';
+        this.dom.cajaResaltadoMano.style.display = 'none';
+        this._desactivarTodasLasZonasInteractivas();
+        
+        this.dom.panelMano.classList.remove('elemento-resaltado-tutorial');
+
+        if (paso.pantalla) {
+            paso.pantalla.classList.remove('oculta');
+        } else {
+            this.dom.pantallaJuego.classList.remove('oculta');
+        }
+
+        if (paso.elementoDestacado) {
+            const elemento = document.querySelector(paso.elementoDestacado);
+            if (elemento) {
+                if (paso.elementoDestacado === '#player-hand-area') {
+                    this.dom.panelMano.classList.add('elemento-resaltado-tutorial');
+                }
+                const esMano = paso.elementoDestacado === '#player-hand-area';
+                const cajaResaltado = esMano ? this.dom.cajaResaltadoMano : this.dom.cajaResaltadoRecinto;
+                this._posicionarAyuda(elemento, paso.texto, cajaResaltado);
+
+                if (esMano || paso.tipo === 'interactivo') {
+                    this.dom.cajaResaltadoMano.style.display = 'block';
+                }
+            }
+        }
+
+        if (paso.accion) {
+            paso.accion();
+        }
+
+        this.dom.botonSiguienteTooltip.style.display = paso.tipo === 'informativo' ? 'block' : 'none';
+    }
+
+    _generarTableroTutorial() {
+        this.dom.contenedorSlots.innerHTML = '';
+        for (const key in this.DEFINICION_RECINTOS) {
+            const recintoData = this.DEFINICION_RECINTOS[key];
             const recintoEl = document.createElement('div');
             recintoEl.id = recintoData.id;
             recintoEl.className = 'tutorial__recinto';
@@ -88,75 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
             slotEl.className = 'tutorial__dino-slot';
             recintoEl.appendChild(slotEl);
             
-            contenedorSlots.appendChild(recintoEl);
+            this.dom.contenedorSlots.appendChild(recintoEl);
         }
     }
 
-    function iniciarTutorial() {
-        modalSuperposicion.classList.add('visible');
-        pasoActual = 0;
-        generarTableroTutorial();
-        manoDinosaurios.innerHTML = '';
-        ejecutarPaso(pasoActual);
-    }
-
-    function cerrarTutorial() {
-        modalSuperposicion.classList.remove('visible');
-    }
-
-    function avanzarPaso() {
-        pasoActual++;
-        if (pasoActual < PASOS_TUTORIAL.length) {
-            ejecutarPaso(pasoActual);
-        } else {
-            mostrarPantalla(pantallaFin);
-        }
-    }
-
-    function ejecutarPaso(indice) {
-        const paso = PASOS_TUTORIAL[indice];
-
-        panelMano.classList.remove('elemento-resaltado-tutorial');
-
-        pantallaBienvenida.classList.add('oculta');
-        pantallaJuego.classList.add('oculta');
-        pantallaFin.classList.add('oculta');
-        
-        tooltip.style.display = 'none';
-        cajaResaltadoRecinto.style.display = 'none';
-        cajaResaltadoMano.style.display = 'none';
-        desactivarTodasLasZonasInteractivas();
-
-        if (paso.pantalla) {
-            paso.pantalla.classList.remove('oculta');
-        } else {
-            pantallaJuego.classList.remove('oculta');
-        }
-
-        if (paso.elementoDestacado) {
-            const elemento = document.querySelector(paso.elementoDestacado);
-            if (elemento) {
-                const cajaCorrecta = paso.elementoDestacado === '#player-hand-area' ? cajaResaltadoMano : cajaResaltadoRecinto;
-                posicionarAyuda(elemento, paso.texto, cajaCorrecta);
-                if (!paso.pantalla || paso.pantalla === pantallaJuego) {
-                     panelMano.classList.add('elemento-resaltado-tutorial');
-                }
-            }
-        }
-
-        if (paso.accion) {
-            paso.accion();
-        }
-
-        botonSiguienteTooltip.style.display = paso.tipo === 'informativo' ? 'block' : 'none';
-    }
-
-    function mostrarPantalla(pantalla) {
-        pantalla.classList.remove('oculta');
-    }
-
-    function poblarMano(dinos) {
-        manoDinosaurios.innerHTML = '';
+    _poblarMano(dinos) {
+        this.dom.manoDinosaurios.innerHTML = '';
         dinos.forEach(tipo => {
             const elemento = document.createElement('div');
             elemento.className = `tutorial__dinosaurio ${tipo}`;
@@ -164,116 +181,122 @@ document.addEventListener('DOMContentLoaded', () => {
             elemento.dataset.tipo = tipo;
 
             elemento.addEventListener('dragstart', e => {
-                dinosaurioArrastrado = elemento;
+                this.dinosaurioArrastrado = elemento;
                 setTimeout(() => elemento.style.opacity = '0.5', 0);
                 e.dataTransfer.effectAllowed = 'move';
             });
             elemento.addEventListener('dragend', () => {
-                if(dinosaurioArrastrado) dinosaurioArrastrado.style.opacity = '1';
-                dinosaurioArrastrado = null;
+                if (this.dinosaurioArrastrado) this.dinosaurioArrastrado.style.opacity = '1';
+                this.dinosaurioArrastrado = null;
             });
 
-            elemento.addEventListener('click', () => manejarClickEnDino(elemento));
-
-            manoDinosaurios.appendChild(elemento);
+            elemento.addEventListener('click', () => this._manejarClickEnDino(elemento));
+            this.dom.manoDinosaurios.appendChild(elemento);
         });
     }
-    
-    function manejarClickEnDino(elemento) {
-        const paso = PASOS_TUTORIAL[pasoActual];
+
+    _manejarClickEnDino(elemento) {
+        const paso = this.PASOS_TUTORIAL[this.pasoActual];
         if (paso.tipo !== 'interactivo') return;
 
         const tiposAceptados = JSON.parse(document.getElementById(paso.elementoDestacado.substring(1)).dataset.tiposAceptados);
         if (!tiposAceptados.includes(elemento.dataset.tipo)) {
-            if (window.mostrarNotificacion) window.mostrarNotificacion("¡Ese no es el dinosaurio correcto para este paso!", "error");
+            this.notificador.mostrar(traducirJS("notif_tutorial_dino_incorrecto"), "error");
             return;
         }
 
         if (elemento.classList.contains('seleccionado')) {
             elemento.classList.remove('seleccionado');
-            dinoSeleccionado = null;
-            elementoDinoSeleccionado = null;
-            limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
+            this.dinoSeleccionado = null;
+            this.elementoDinoSeleccionado = null;
+            this._limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
         } else {
-            if (elementoDinoSeleccionado) {
-                elementoDinoSeleccionado.classList.remove('seleccionado');
+            if (this.elementoDinoSeleccionado) {
+                this.elementoDinoSeleccionado.classList.remove('seleccionado');
             }
             elemento.classList.add('seleccionado');
-            dinoSeleccionado = elemento.dataset.tipo;
-            elementoDinoSeleccionado = elemento;
+            this.dinoSeleccionado = elemento.dataset.tipo;
+            this.elementoDinoSeleccionado = elemento;
             document.getElementById(paso.elementoDestacado.substring(1)).classList.add('tutorial__recinto--objetivo-valido');
         }
     }
 
-
-    function prepararZonaDeArrastreYClick(idRecinto, tiposAceptados) {
+    _prepararZonaDeArrastreYClick(idRecinto, tiposAceptados) {
         const recinto = document.getElementById(idRecinto);
         if (recinto) {
             recinto.dataset.tiposAceptados = JSON.stringify(tiposAceptados);
-            recinto.addEventListener('dragover', onDragOver);
-            recinto.addEventListener('drop', onDrop);
-            recinto.addEventListener('click', onRecintoClick);
+            recinto.addEventListener('dragover', this._onDragOver.bind(this));
+            recinto.addEventListener('drop', this._onDrop.bind(this));
+            recinto.addEventListener('click', this._onRecintoClick.bind(this));
         }
     }
 
-    function desactivarTodasLasZonasInteractivas() {
+    _desactivarTodasLasZonasInteractivas() {
         document.querySelectorAll('.tutorial__recinto').forEach(recinto => {
             recinto.classList.remove('tutorial__recinto--objetivo-valido');
-            recinto.removeEventListener('dragover', onDragOver);
-            recinto.removeEventListener('drop', onDrop);
-            recinto.removeEventListener('click', onRecintoClick);
+            recinto.removeEventListener('dragover', this._onDragOver);
+            recinto.removeEventListener('drop', this._onDrop);
+            recinto.removeEventListener('click', this._onRecintoClick);
         });
-        limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
+        this._limpiarClaseRecintos('tutorial__recinto--objetivo-valido');
     }
 
-    function onDragOver(e) {
-        e.preventDefault();
-    }
-    
-    function onDrop(e) {
+    _onDragOver(e) { e.preventDefault(); }
+
+    _onDrop(e) {
         e.preventDefault();
         const recinto = e.currentTarget;
         const tiposAceptados = JSON.parse(recinto.dataset.tiposAceptados);
 
-        if (dinosaurioArrastrado && tiposAceptados.includes(dinosaurioArrastrado.dataset.tipo)) {
-            colocarDinoEnRecinto(recinto, dinosaurioArrastrado);
+        if (this.dinosaurioArrastrado && tiposAceptados.includes(this.dinosaurioArrastrado.dataset.tipo)) {
+            this._colocarDinoEnRecinto(recinto, this.dinosaurioArrastrado);
         } else {
-             if (window.mostrarNotificacion) window.mostrarNotificacion("¡Ese dinosaurio no puede ir ahí!", "error");
+            this.notificador.mostrar(traducirJS("notif_tutorial_lugar_incorrecto"), "error");
         }
     }
 
-    function onRecintoClick(e) {
+    _onRecintoClick(e) {
         const recinto = e.currentTarget;
-        if (recinto.classList.contains('tutorial__recinto--objetivo-valido') && dinoSeleccionado && elementoDinoSeleccionado) {
-            colocarDinoEnRecinto(recinto, elementoDinoSeleccionado);
+        if (recinto.classList.contains('tutorial__recinto--objetivo-valido') && this.dinoSeleccionado && this.elementoDinoSeleccionado) {
+            this._colocarDinoEnRecinto(recinto, this.elementoDinoSeleccionado);
         }
     }
-    
-    function colocarDinoEnRecinto(recinto, elementoDino) {
+
+    _colocarDinoEnRecinto(recinto, elementoDino) {
         const slotVacio = recinto.querySelector('.tutorial__dino-slot:not(.ocupado)');
         if (slotVacio) {
             slotVacio.className = `tutorial__dino-slot ocupado ${elementoDino.dataset.tipo}`;
             elementoDino.style.visibility = 'hidden';
             elementoDino.draggable = false;
             elementoDino.classList.remove('seleccionado');
-            
-            dinoSeleccionado = null;
-            elementoDinoSeleccionado = null;
-            dinosaurioArrastrado = null;
-            
-            avanzarPaso();
+            this.dinoSeleccionado = null;
+            this.elementoDinoSeleccionado = null;
+            this.dinosaurioArrastrado = null;
+            this.notificador.mostrar(traducirJS("notif_tutorial_bien_hecho"), "success");
+            setTimeout(() => this._avanzarPaso(), 1200);
         }
     }
+    
+    _lanzarDado(indiceCara) {
+        const rotaciones = [
+            { x: 0, y: 0 }, { x: 0, y: 180 }, { x: 0, y: -90 }, 
+            { x: 0, y: 90 }, { x: -90, y: 0 }, { x: 90, y: 0 }
+        ];
+        
+        const girosCompletos = Math.floor(Math.random() * 3) + 2;
+        const giroAleatorioX = 360 * girosCompletos;
+        const giroAleatorioY = 360 * girosCompletos;
+        const giroAleatorioZ = 360 * girosCompletos;
 
-    function limpiarClaseRecintos(clase) {
-        document.querySelectorAll('.tutorial__recinto').forEach(r => r.classList.remove(clase));
+        const rotacionFinal = rotaciones[indiceCara];
+        this.dom.dado.style.transform = `rotateX(${giroAleatorioX + rotacionFinal.x}deg) rotateY(${giroAleatorioY + rotacionFinal.y}deg) rotateZ(${giroAleatorioZ}deg)`;
     }
-
-
-    function posicionarAyuda(elemento, texto, cajaResaltado) {
+    
+    _mostrarPantalla(pantalla) { pantalla.classList.remove('oculta'); }
+    _limpiarClaseRecintos(clase) { document.querySelectorAll('.tutorial__recinto').forEach(r => r.classList.remove(clase)); }
+    _posicionarAyuda(elemento, texto, cajaResaltado) {
         const rect = elemento.getBoundingClientRect();
         const margen = 10;
-
         cajaResaltado.style.width = `${rect.width + margen * 2}px`;
         cajaResaltado.style.height = `${rect.height + margen * 2}px`;
         cajaResaltado.style.top = `${rect.top - margen}px`;
@@ -281,60 +304,21 @@ document.addEventListener('DOMContentLoaded', () => {
         cajaResaltado.style.display = 'block';
 
         if (texto) {
-            tooltipContenido.textContent = texto;
+            this.dom.tooltipContenido.textContent = texto;
+            const tooltip = this.dom.tooltip;
             tooltip.style.display = 'block';
-            
             const tooltipRect = tooltip.getBoundingClientRect();
-            const contenedorRect = modalSuperposicion.getBoundingClientRect();
-            const manoRect = panelMano.getBoundingClientRect();
-
-            let top, left;
-
-            top = rect.bottom + margen;
-
-            if (top + tooltipRect.height > manoRect.top && rect.bottom < manoRect.bottom) {
-                 top = rect.top - tooltipRect.height - margen;
+            let top = rect.bottom + margen;
+            if (top + tooltipRect.height > window.innerHeight - margen) {
+                top = rect.top - tooltipRect.height - margen;
             }
-
-            if (top < contenedorRect.top + margen) {
-                top = rect.bottom + margen;
+            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            if (left < margen) left = margen;
+            if (left + tooltipRect.width > window.innerWidth - margen) {
+                left = window.innerWidth - tooltipRect.width - margen;
             }
-
-            left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-
-            if (left < contenedorRect.left + margen) {
-                left = contenedorRect.left + margen;
-            } else if (left + tooltipRect.width > contenedorRect.right - margen) {
-                left = contenedorRect.right - tooltipRect.width - margen;
-            }
-
             tooltip.style.top = `${top}px`;
             tooltip.style.left = `${left}px`;
         }
     }
-
-    function lanzarDado(indiceCara) {
-        
-        const rotaciones = [
-            { x: 0, y: 0 },       // 0: boscosa 
-            { x: 0, y: 180 },     // 1: baños
-            { x: 0, y: -90 },     // 2: llanura 
-            { x: 0, y: 90 },      // 3: cafeteria 
-            { x: -90, y: 0 },     // 4: recinto vacio 
-            { x: 90, y: 0 }       // 5: sin-t-rex 
-        ];
-        
-        const giroAleatorioY = 360 * (Math.floor(Math.random() * 2) + 3);
-        const giroAleatorioX = 360 * (Math.floor(Math.random() * 2) + 3);
-        
-        const rotacionFinal = rotaciones[indiceCara];
-        dado.style.transform = `rotateX(${giroAleatorioX + rotacionFinal.x}deg) rotateY(${giroAleatorioY + rotacionFinal.y}deg)`;
-    }
-    
-    botonesAbrir.forEach(btn => btn.addEventListener('click', iniciarTutorial));
-    botonCerrarTutorial.addEventListener('click', cerrarTutorial);
-    botonCerrarTutorialFin.addEventListener('click', cerrarTutorial);
-    botonIniciarTutorial.addEventListener('click', avanzarPaso);
-    botonSiguienteTooltip.addEventListener('click', avanzarPaso);
-});
-
+}

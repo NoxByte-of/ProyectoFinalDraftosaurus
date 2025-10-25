@@ -1,7 +1,4 @@
-/**
- * logica de registro e inicio de sesión
- * comunica con el backend para registrar usuarios e iniciar sesion.
- */
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const formularioRegistro = document.getElementById('formulario-registro');
@@ -14,27 +11,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const parametrosUrl = new URLSearchParams(window.location.search);
     const formularioActivo = parametrosUrl.get('form');
 
+    const cambiarFormulario = (esLogin) => {
+        if (esLogin) {
+            formularioRegistro.style.display = 'none';
+            formularioLogin.style.display = 'flex';
+            panelTitulo.textContent = traducirJS('login_iniciar_sesion_titulo');
+            panelDescripcion.textContent = traducirJS('login_iniciar_sesion_subtitulo');
+        } else {
+            formularioLogin.style.display = 'none';
+            formularioRegistro.style.display = 'flex';
+            panelTitulo.textContent = traducirJS('login_crear_cuenta_titulo');
+            panelDescripcion.textContent = traducirJS('login_crear_cuenta_subtitulo');
+        }
+    };
+
     if (formularioActivo === 'login') {
-        formularioRegistro.style.display = 'none';
-        formularioLogin.style.display = 'flex';
-        panelTitulo.textContent = 'Iniciar Sesión';
-        panelDescripcion.textContent = '¡Qué bueno verte de nuevo!';
+        cambiarFormulario(true);
     }
 
     enlaceLogin.addEventListener('click', (evento) => {
         evento.preventDefault();
-        formularioRegistro.style.display = 'none';
-        formularioLogin.style.display = 'flex';
-        panelTitulo.textContent = 'Iniciar Sesión';
-        panelDescripcion.textContent = '¡Qué bueno verte de nuevo!';
+        cambiarFormulario(true);
     });
 
     enlaceRegistro.addEventListener('click', (evento) => {
         evento.preventDefault();
-        formularioLogin.style.display = 'none';
-        formularioRegistro.style.display = 'flex';
-        panelTitulo.textContent = 'Crear una Cuenta';
-        panelDescripcion.textContent = '¡Únete a la aventura y guarda tu progreso!';
+        cambiarFormulario(false);
     });
 
     formularioRegistro.addEventListener('submit', (evento) => {
@@ -47,22 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmarContrasena = document.getElementById('confirmar-contrasena').value;
 
         if (!nombreUsuario || !email || !edad || !contrasena || !confirmarContrasena) {
-            mostrarNotificacion('Todos los campos son obligatorios.', 'error');
+            window.notificador.mostrar(traducirJS('notif_todos_campos_obligatorios'), 'error');
             return;
         }
 
         if (parseInt(edad, 10) < 0) {
-            mostrarNotificacion('La edad no puede ser un número negativo.', 'error');
+            window.notificador.mostrar(traducirJS('notif_edad_negativa'), 'error');
             return;
         }
 
         if (contrasena.length < 8) {
-            mostrarNotificacion('La contraseña debe tener al menos 8 caracteres.', 'error');
+            window.notificador.mostrar(traducirJS('notif_contrasena_corta'), 'error');
             return;
         }
 
         if (contrasena !== confirmarContrasena) {
-            mostrarNotificacion('Las contraseñas no coinciden.', 'error');
+            window.notificador.mostrar(traducirJS('notif_contrasenas_no_coinciden'), 'error');
             return;
         }
 
@@ -79,16 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json()) 
         .then(data => {
             if (data.exito) {
-                mostrarNotificacion(data.mensaje, 'success');
+                window.notificador.mostrar(data.mensaje, 'success');
                 formularioRegistro.reset(); 
                 enlaceLogin.click(); 
             } else {
-                mostrarNotificacion(data.mensaje, 'error');
+                window.notificador.mostrar(data.mensaje, 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            mostrarNotificacion('Ocurrió un error de conexión. Inténtalo de nuevo.', 'error');
+            window.notificador.mostrar(traducirJS('notif_error_conexion'), 'error');
         });
     });
 
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contrasena = document.getElementById('contrasena-login').value;
 
         if (!nombreUsuario || !contrasena) {
-            mostrarNotificacion('Por favor, ingresa tu usuario y contraseña.', 'error');
+            window.notificador.mostrar(traducirJS('notif_ingresa_usuario_contrasena'), 'error');
             return;
         }
 
@@ -114,17 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.exito) {
-                mostrarNotificacion(data.mensaje, 'success');
+                window.notificador.mostrar(data.mensaje, 'success');
                 setTimeout(() => {
                     window.location.href = '../index.php';
                 }, 1500); 
             } else {
-                mostrarNotificacion(data.mensaje, 'error');
+                window.notificador.mostrar(data.mensaje, 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            mostrarNotificacion('Ocurrió un error de conexión. Inténtalo de nuevo.', 'error');
+            window.notificador.mostrar(traducirJS('notif_error_conexion'), 'error');
         });
     });
 });

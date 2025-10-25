@@ -1,7 +1,4 @@
-/**
- * Estilos para el tutorial interactivo
- * Versión 5.1 - Añadidos media queries para un diseño responsivo completo.
- */
+
 
 .tutorial__superposicion {
     position: fixed;
@@ -38,6 +35,20 @@
     transform: scale(0.9);
     opacity: 0;
     transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease-out;
+    overflow: hidden; 
+}
+
+#notificacion-container-tutorial {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10001; 
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .tutorial__superposicion.visible .tutorial__contenedor {
@@ -79,6 +90,7 @@
     border: none;
     cursor: pointer;
     transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
 }
 
 .tutorial__boton-cerrar:hover {
@@ -142,12 +154,13 @@
     text-align: center;
     padding: 1rem;
     opacity: 1;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out, visibility 0s 0s, display 0s 0s;
 }
 
-.tutorial__pantalla.oculta, .tutorial__vista-juego.oculta {
+.tutorial__pantalla.oculta {
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
     display: none !important;
 }
 
@@ -156,12 +169,21 @@
     grid-template-columns: 2fr 1fr;
     gap: 1.5rem;
     height: 100%;
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out, visibility 0s 0s, display 0s 0s;
+}
+
+.tutorial__vista-juego.oculta {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    display: none !important;
 }
 
 .tutorial__tablero-contenedor {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     margin: auto;
     aspect-ratio: 1.33 / 1;
 }
@@ -188,6 +210,7 @@
     pointer-events: auto;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 
 .tutorial__dino-slot {
@@ -204,12 +227,21 @@
     max-width: 50px;
 }
 
+.tutorial__dino-slot.ocupado {
+    border: none;
+}
+.tutorial__dino-slot.t-rex { background-image: url('../imagenes/tiranosaurio.png'); }
+.tutorial__dino-slot.spinosaurus { background-image: url('../imagenes/spinosaurio.png'); }
+.tutorial__dino-slot.brachiosaurus { background-image: url('../imagenes/brachiosaurus.png'); }
+.tutorial__dino-slot.triceratops { background-image: url('../imagenes/triceratops.png'); }
+.tutorial__dino-slot.parasaurolophus { background-image: url('../imagenes/parasaurio.png'); }
+.tutorial__dino-slot.stegosaurus { background-image: url('../imagenes/estegosaurus.png'); }
+
 .tutorial__barra-lateral {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    justify-content: flex-start;
-    padding-top: 2rem;
+    justify-content: center; 
 }
 
 .tutorial__panel-lateral {
@@ -238,7 +270,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: center;
-    min-height: 60px;
+    min-height: 125px; 
 }
 
 .tutorial__dinosaurio {
@@ -246,7 +278,7 @@
     height: 55px;
     cursor: grab;
     user-select: none;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s, visibility 0.2s;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -255,6 +287,10 @@
 .tutorial__dinosaurio:active {
     cursor: grabbing;
     transform: scale(1.1);
+}
+.tutorial__dinosaurio.seleccionado {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px 3px rgba(232, 138, 55, 0.7);
 }
 
 .tutorial__dinosaurio.t-rex { background-image: url('../imagenes/tiranosaurio.png'); }
@@ -267,8 +303,9 @@
 .tutorial__caja-resaltado {
     position: fixed;
     z-index: 9998;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
-    border: 3px solid var(--color-marron-medio);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.40), 
+                0 0 15px 5px rgba(255, 190, 11, 0.8);
+    border: 3px solid #ffca28;
     border-radius: 12px;
     pointer-events: none;
     transition: all 0.4s ease-in-out;
@@ -281,7 +318,7 @@
 
 .tutorial__tooltip {
     position: fixed;
-    z-index: 9999;
+    z-index: 10000;
     width: 100%;
     max-width: 380px;
     background-color: var(--dh-fondo-contenedor);
@@ -304,20 +341,11 @@
     padding-right: 2.5rem;
 }
 
-@keyframes brillo-interactivo {
-    0% { box-shadow: 0 0 5px rgba(123, 100, 80, 0.5), inset 0 0 5px rgba(123, 100, 80, 0.2); }
-    50% { box-shadow: 0 0 20px rgba(200, 90, 43, 1), inset 0 0 10px rgba(200, 90, 43, 0.5); }
-    100% { box-shadow: 0 0 5px rgba(123, 100, 80, 0.5), inset 0 0 5px rgba(123, 100, 80, 0.2); }
-}
-
-.elemento-interactivo {
-    animation: brillo-interactivo 2s infinite ease-in-out;
-}
-
 .tutorial__recinto--objetivo-valido .tutorial__dino-slot {
     background-color: rgba(76, 175, 80, 0.2);
     border-color: #4CAF50;
     border-style: solid;
+    cursor: pointer;
 }
 
 .tutorial__contenedor-dado {
@@ -345,9 +373,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--dh-texto-primario-oscuro);
 }
 
 .tutorial__dado-cara img {
@@ -365,10 +390,10 @@
 .tutorial__dado-cara.superior { transform: rotateX( 90deg) translateZ(40px); }
 .tutorial__dado-cara.inferior { transform: rotateX(-90deg) translateZ(40px); }
 
-/* RESPONSIVE TUTORIAL  */
 @media (max-width: 992px) {
     .tutorial__contenedor {
         padding: 1rem;
+        height: 95vh;
     }
 
     .tutorial__vista-juego {
@@ -417,3 +442,4 @@
         max-width: calc(100% - 2rem);
     }
 }
+

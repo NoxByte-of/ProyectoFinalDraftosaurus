@@ -1,11 +1,4 @@
-/*
-  Archivo de Componentes
-  Estilos para componentes UI compartidos, adaptados al nuevo diseño global.
-  version 3.2 - Solucionado el recorte de texto en el modal y centrado el párrafo final.
-*/
 
-/* --- BOTONES --- */
-/* El estilo principal de .btn en global.css */
 .btn-peligro {
     background-color: #c0392b;
     border-color: #8f2d21;
@@ -14,6 +7,18 @@
 .btn-peligro:hover {
     background-color: #a52a1a !important;
     border-color: #5c1811 !important;
+}
+
+.btn-eliminar {
+    background-color: #c0392b; 
+    border-color: #8f2d21;
+    font-size: 16px !important; 
+    padding: 8px 16px !important;
+}
+
+.btn-eliminar:hover {
+    background-color: #e74c3c !important;
+    border-color: #a52a1a !important;
 }
 
 .btn-disabled,
@@ -124,6 +129,10 @@ div.modal-content h2 {
     padding-left: 5px; 
 }
 
+.modal-thanks {
+    text-align: center;
+}
+
 .modal-slogan {
     font-family: 'Darumadrop One', cursive;
     font-size: 1.5rem;
@@ -142,11 +151,12 @@ div.modal-content h2 {
 #notificacion-container {
     position: fixed;
     top: 20px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 10px;
 }
 
@@ -160,14 +170,14 @@ div.modal-content h2 {
     font-family: 'Bubblegum Sans', sans-serif;
     font-size: 1rem;
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(-20px);
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     border: 2px solid rgba(0,0,0,0.3);
 }
 
 .notificacion.visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 .notificacion.error {
@@ -180,5 +190,34 @@ div.modal-content h2 {
 
 .notificacion.info {
     background-color: #2980b9;
+}
+
+.table-row-fade-out {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: center; 
+    gap: 1.5rem; 
+    margin-top: 1.5rem;
+    padding-top: 0; 
+    border-top: none;
+}
+
+.modal-acciones .btn {
+    min-width: 120px; 
+    flex-basis: 120px;
+    font-size: 18px !important; 
+    padding: 10px 20px !important; 
+}
+
+.modal-content .descripcion-panel {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.25rem; 
+    line-height: 1.6; 
 }
 

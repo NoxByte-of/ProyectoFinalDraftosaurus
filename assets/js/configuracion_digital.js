@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    //  Logica Configuración de Partida 
     const seccionConfiguracion = document.getElementById('seccion-configuracion-partida');
     if (seccionConfiguracion) {
         const btnIniciarConfiguracion = document.getElementById('btn-iniciar-configuracion');
@@ -19,11 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     seccionBienvenida.classList.add('hidden');
                     seccionConfiguracion.classList.remove('hidden');
                 } else {
-                    if (window.mostrarNotificacion) {
-                        window.mostrarNotificacion('Debes estar logeado para Jugar', 'error');
-                    } else {
-                        alert('Debes estar logeado para Jugar');
-                    }
+                    window.notificador.mostrar(traducirJS('notif_debes_estar_logueado'), 'error');
                 }
             });
         }
@@ -43,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let i = 1; i <= cantidad; i++) {
                 const input = document.createElement('input');
                 input.type = 'text';
-                input.placeholder = `Nombre del Jugador ${i}`;
+                const placeholderText = traducirJS('config_placeholder_nombre_jugador').replace('{numero}', i);
+                input.placeholder = placeholderText;
                 input.className = 'nombre-jugador-input form-control'; 
                 contenedorCamposNombres.appendChild(input);
             }
@@ -61,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
         
                 const playerNames = Array.from(playerInputElements).map((input, index) => {
-                    return input.value.trim() || `Jugador ${index + 1}`;
+                    const nombrePorDefecto = traducirJS('config_placeholder_nombre_defecto').replace('{numero}', index + 1);
+                    return input.value.trim() || nombrePorDefecto;
                 });
 
                 const gameConfig = {

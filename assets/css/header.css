@@ -1,103 +1,134 @@
 .navbar {
-height: 110px;
-overflow: visible; /* Cambiado de 'hidden' a 'visible' para permitir que el menú se vea */
-padding-top: 0;
-padding-bottom: 0;
-position: relative; /* Necesario para el contexto de apilamiento del z-index */
-z-index: 100; /* Un z-index base para el nav */
+    height: 110px;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    z-index: 100;
 }
 
 .bg-custom {
-background-color: #8a4c23c0;
-background-repeat: repeat;
-background-size: 1280px 720px;
+    background-color: #8a4c23c0;
+}
+
+.navbar > .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-left-items {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-img {
+    max-width: 200px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.language-selector-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.language-dropdown .btn-language {
+    background-color: #d35625;
+    color: white;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 14px;
+    border: 2px solid #74341b;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: -1px -1px 0 #74341b, 1px -1px 0 #74341b, -1px 1px 0 #74341b, 1px 1px 0 #74341b;
+}
+
+.language-dropdown .btn-language:hover {
+    background-color: #5c070e;
+}
+
+.language-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #8a4c23;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+    border-radius: 0 0 14px 14px;
+    overflow: hidden;
+}
+
+.language-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 16px;
+    text-align: left;
+}
+
+.language-dropdown-content a:hover {
+    background-color: #5c070e;
+    color: #FFD571;
+}
+
+.language-dropdown:hover .language-dropdown-content {
+    display: block;
 }
 
 .navbar-nav {
-display: flex;
-align-items: center;
-gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .nav-link {
-text-shadow:
--2px -2px 0 #533615,
-2px -2px 0 #533615,
--2px  2px 0 #533615,
-2px  2px 0 #533615,
--2px  0   0 #533615,
-2px  0   0 #533615,
-0   -2px 0 #533615,
-0    2px 0 #533615;
+    text-shadow: -2px -2px 0 #533615, 2px -2px 0 #533615, -2px 2px 0 #533615, 2px 2px 0 #533615, -2px 0 0 #533615, 2px 0 0 #533615, 0 -2px 0 #533615, 0 2px 0 #533615;
 }
 
 .nav-link,
 .btn-login {
-color: #ffffff;
-font-family: 'Bubblegum Sans', sans-serif;
-font-size: 20px;
-padding: 0.5rem 1rem;
-transition: color 0.3s ease;
-text-align: center;
-position: relative;
+    color: #ffffff;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 20px;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    text-align: center;
+    position: relative;
 }
 
 .nav-link:hover {
-color: #FFD571;
-}
-
-.nav-link::after {
-content: '';
-position: absolute;
-width: 0%;
-height: 2px;
-bottom: 0;
-left: 0;
-background-color: #ffffff;
-transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-width: 100%;
+    color: #FFD571;
 }
 
 .btn-login {
-background-color: #d35625;
-border-radius: 14px;
-transition: background-color 0.3s ease, color 0.3s ease !important;
-text-shadow:
--2px -2px 0 #74341b,
-2px -2px 0 #74341b,
--2px  2px 0 #74341b,
-2px  2px 0 #74341b,
--2px  0   0 #74341b,
-2px  0   0 #74341b,
-0   -2px 0 #74341b,
-0    2px 0 #74341b;
-border: 2px solid #74341b;
-will-change: transform;
+    background-color: #d35625;
+    border-radius: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+    text-shadow: -2px -2px 0 #74341b, 2px -2px 0 #74341b, -2px 2px 0 #74341b, 2px 2px 0 #74341b, -2px 0 0 #74341b, 2px 0 0 #74341b, 0 -2px 0 #74341b, 0 2px 0 #74341b;
+    border: 2px solid #74341b;
+    will-change: transform;
 }
 
 .btn-login:hover {
-background-color: #5c070e !important;
-border: 2px solid #360707 !important;
-color: #FFD571;
-transform: scale(1.02);
-transition: transform 0.4s ease;
+    background-color: #5c070e !important;
+    border: 2px solid #360707 !important;
+    color: #FFD571;
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
 }
 
-.btn-login::after {
-display: none;
-}
-
-.logo-img {
-max-width: 200px;
-height: auto;
-margin-right: 20px;
-vertical-align: middle;
-}
-
-/* --- ESTILOS PARA EL MENÚ DESPLEGABLE DE CUENTA --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -106,13 +137,13 @@ vertical-align: middle;
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #8a4c23; /* Mismo color que el nav */
+    background-color: #8a4c23;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1001; /* Z-index alto para que se superponga */
-    border-radius: 0 0 14px 14px; /* Bordes redondeados abajo */
-    overflow: hidden; /* Para que los hijos respeten el border-radius */
-    right: 0; /* Alinea el menú a la derecha del botón */
+    z-index: 1001;
+    border-radius: 0 0 14px 14px;
+    overflow: hidden;
+    right: 0;
 }
 
 .dropdown-content a {
@@ -122,7 +153,7 @@ vertical-align: middle;
     display: block;
     font-family: 'Bubblegum Sans', sans-serif;
     font-size: 18px;
-    text-align: left; /* Alinea el texto a la izquierda */
+    text-align: left;
     text-shadow: -1px -1px 0 #533615, 1px -1px 0 #533615, -1px 1px 0 #533615, 1px 1px 0 #533615;
 }
 
@@ -134,75 +165,71 @@ vertical-align: middle;
 .dropdown:hover .dropdown-content {
     display: block;
 }
-/* --- FIN DE ESTILOS PARA EL MENÚ DESPLEGABLE --- */
-
 
 @media (max-width: 991.98px) {
-.navbar {
-    height: auto;
-    padding: 0.25rem 0.75rem;
-    overflow: visible; /* FIX: Cambiado a 'visible' para que el menú hamburguesa funcione */
-}
+    .navbar {
+        height: auto;
+        padding: 0.25rem 0.75rem;
+    }
+    
+    .navbar > .container-fluid {
+        flex-wrap: nowrap;
+    }
 
-.navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #8a4c23c0; /* Mismo color que el nav */
-    padding: 1.5rem 0;
-    z-index: 999;
-    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
+    .navbar-left-items {
+        flex-grow: 1; 
+    }
+    
+    .language-selector-container {
+       display: none;
+    }
 
-.navbar-nav {
-    flex-direction: column;
-    align-items: center;
-}
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #8a4c23c0;
+        padding: 1.5rem 0;
+        z-index: 999;
+        box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 
-.nav-link,
-.btn-login {
-    width: 100%;
-    border-radius: 8px;
-    margin: 0;
-}
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-link, .btn-login {
+        width: 100%;
+        border-radius: 8px;
+        margin: 0;
+    }
+    .logo-img {
+        max-width: 140px;
+    }
+    .navbar-toggler {
+        padding: 0.25rem 0.5rem;
+        border: 2px solid #74341b;
+    }
 
-.logo-img {
-    max-width: 140px;
-    margin-right: 10px;
-}
-
-.navbar-toggler {
-    padding: 0.25rem 0.5rem;
-    border: 2px solid #74341b;
-}
-
-/* Ajustes para el dropdown en móvil */
-.dropdown-content {
-    position: static; /* Cambia a estático para que fluya con el nav */
-    box-shadow: none;
-    background-color: transparent;
-    border-radius: 0;
-    min-width: unset;
-    width: 100%;
-    display: none; /* Oculto por defecto en móvil también */
-}
-.dropdown-content a {
-    text-align: center;
-}
-.dropdown:hover .dropdown-content {
-    display: block; /* Solo se muestra al hacer hover */
-}
-.dropdown > .btn-login {
-    width: 100%;
-}
-
-}
-
-@media (max-width: 575.98px) {
-.logo-img {
-    max-width: 160px;
-}
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        border-radius: 0;
+        min-width: unset;
+        width: 100%;
+        display: none;
+    }
+    .dropdown-content a {
+        text-align: center;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown > .btn-login {
+        width: 100%;
+    }
 }

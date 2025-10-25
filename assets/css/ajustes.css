@@ -1,0 +1,100 @@
+
+.main-ajustes {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
+.panel-ajustes {
+    background: rgba(201, 167, 104, 0.85);
+    padding: 2.5rem;
+    border-radius: 30px;
+    border: 5px solid #856b3d;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    color: var(--dh-texto-primario);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.panel-ajustes h2 {
+    margin-bottom: 0.5rem;
+}
+
+.panel-ajustes p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.menu-ajustes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.btn-ajuste {
+    background-color: #d35625;
+    color: white !important;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 20px;
+    padding: 15px 20px;
+    border-radius: 14px;
+    border: 2px solid #74341b;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.4s ease;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    text-shadow: -2px -2px 0 #74341b, 2px -2px 0 #74341b, -2px 2px 0 #74341b, 2px 2px 0 #74341b, -2px 0 0 #74341b, 2px 0 0 #74341b, 0 -2px 0 #74341b, 0 2px 0 #74341b !important;
+}
+
+.btn-ajuste:hover {
+    transform: scale(1.02);
+    background-color: #5c070e !important;
+    color: #FFD571 !important;
+    border: 2px solid #360707 !important;
+}
+
+.btn-ajuste-peligro {
+    background-color: #c0392b;
+    border-color: #8f2d21;
+}
+
+.btn-ajuste-peligro:hover {
+    background-color: #a52a1a !important;
+    border-color: #5c1811 !important;
+}
+
+/* formularios modales */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-content .form-control {
+    width: 100%;
+    padding: 12px 18px;
+    font-family: 'Bubblegum Sans', sans-serif;
+    font-size: 1rem;
+    color: #5f4c3a;
+    background-color: #fff;
+    border: 2px solid #642d00;
+    border-radius: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-content .form-control:focus {
+    border-color: #d35625;
+    box-shadow: 0 0 8px rgba(211, 86, 37, 0.6);
+    outline: none;
+}
