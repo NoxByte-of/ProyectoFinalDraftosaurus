@@ -9,6 +9,7 @@ class Usuario {
     public $email;
     public $contrasena;
     public $edad;
+    public $idioma_preferido;
 
     public function __construct($db) {
         $this->conexion = $db;
@@ -23,23 +24,23 @@ class Usuario {
     }
 
     public function obtenerTodos() {
-        $query = "SELECT 
-                    id_usuario, 
-                    nombre_usuario, 
-                    email, 
-                    edad, 
+        $query = "SELECT
+                    id_usuario,
+                    nombre_usuario,
+                    email,
+                    edad,
                     rol,
-                    fecha_registro, 
-                    idioma_preferido, 
-                    fecha_ultimo_cambio_nombre 
-                  FROM " . $this->nombre_tabla . " 
+                    fecha_registro,
+                    idioma_preferido,
+                    fecha_ultimo_cambio_nombre
+                  FROM " . $this->nombre_tabla . "
                   ORDER BY FIELD(rol, 'administrador', 'jugador'), fecha_registro DESC";
-        
+
         $stmt = $this->conexion->prepare($query);
         $stmt->execute();
         return $stmt;
     }
- 
+
     public function actualizarCampoPorAdmin($id_usuario, $campo, $valor) {
         $campos_permitidos = ['nombre_usuario', 'edad'];
         if (!in_array($campo, $campos_permitidos)) {
@@ -62,12 +63,12 @@ class Usuario {
         }
 
         $query = "UPDATE " . $this->nombre_tabla . " SET " . $campo . " = :valor WHERE id_usuario = :id_usuario";
-        
+
         try {
             $stmt = $this->conexion->prepare($query);
             $stmt->bindParam(':valor', $valor);
             $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-            
+
             if ($stmt->execute()) {
                 return ['exito' => true, 'mensaje' => 'Dato actualizado correctamente.'];
             } else {
@@ -91,7 +92,7 @@ class Usuario {
         $this->nombre_usuario = htmlspecialchars(strip_tags($this->nombre_usuario));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->edad = htmlspecialchars(strip_tags($this->edad));
-        
+
         $this->contrasena = password_hash($this->contrasena, PASSWORD_DEFAULT);
 
         $stmt->bindParam(':nombre_usuario', $this->nombre_usuario);
@@ -124,7 +125,7 @@ class Usuario {
         return false;
     }
 
-    
+
     public function nombreUsuarioExiste($nombre_usuario, $id_usuario_actual) {
         $query = "SELECT id_usuario FROM " . $this->nombre_tabla . "
                   WHERE nombre_usuario = :nombre_usuario AND id_usuario != :id_usuario_actual
@@ -140,15 +141,16 @@ class Usuario {
     }
 
     public function buscarPorNombreUsuario() {
-        $query = "SELECT id_usuario, nombre_usuario, contrasena, rol FROM " . $this->nombre_tabla . "
+        $query = "SELECT id_usuario, nombre_usuario, contrasena, rol, idioma_preferido
+                  FROM " . $this->nombre_tabla . "
                   WHERE nombre_usuario = :nombre_usuario
                   LIMIT 1";
-        
+
         $stmt = $this->conexion->prepare($query);
         $this->nombre_usuario = htmlspecialchars(strip_tags($this->nombre_usuario));
         $stmt->bindParam(':nombre_usuario', $this->nombre_usuario);
         $stmt->execute();
-        
+
         if ($stmt->rowCount() == 1) {
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
@@ -156,7 +158,10 @@ class Usuario {
     }
 
     public function buscarPorId($id_usuario) {
-        $query = "SELECT * FROM " . $this->nombre_tabla . " WHERE id_usuario = :id_usuario LIMIT 1";
+         $query = "SELECT id_usuario, nombre_usuario, email, contrasena, edad, rol, fecha_registro, idioma_preferido, fecha_ultimo_cambio_nombre
+                   FROM " . $this->nombre_tabla . "
+                   WHERE id_usuario = :id_usuario
+                   LIMIT 1";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(':id_usuario', $id_usuario);
         $stmt->execute();
@@ -168,7 +173,7 @@ class Usuario {
 
     public function actualizarNombre($id_usuario, $nuevo_nombre_usuario) {
         $usuario = $this->buscarPorId($id_usuario);
-        
+
         if ($usuario['fecha_ultimo_cambio_nombre'] !== null) {
             try {
                 $fecha_ultimo_cambio = new DateTime($usuario['fecha_ultimo_cambio_nombre']);
@@ -188,23 +193,23 @@ class Usuario {
                 return ['exito' => false, 'mensaje' => 'Error al procesar la fecha del último cambio.'];
             }
         }
-        
+
         if ($this->nombreUsuarioExiste($nuevo_nombre_usuario, $id_usuario)) {
              return ['exito' => false, 'mensaje' => 'Ese nombre de usuario ya está en uso. Por favor, elige otro.'];
         }
 
-        $query = "UPDATE " . $this->nombre_tabla . " 
-                  SET nombre_usuario = :nuevo_nombre_usuario, fecha_ultimo_cambio_nombre = CURDATE() 
+        $query = "UPDATE " . $this->nombre_tabla . "
+                  SET nombre_usuario = :nuevo_nombre_usuario, fecha_ultimo_cambio_nombre = CURDATE()
                   WHERE id_usuario = :id_usuario";
-        
+
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(':nuevo_nombre_usuario', $nuevo_nombre_usuario);
         $stmt->bindParam(':id_usuario', $id_usuario);
-        
+
         if ($stmt->execute()) {
             return ['exito' => true, 'mensaje' => '¡Nombre de usuario actualizado con éxito!'];
         }
-        
+
         return ['exito' => false, 'mensaje' => 'Error al actualizar el nombre de usuario.'];
     }
 
@@ -219,7 +224,7 @@ class Usuario {
         $nueva_contrasena_hash = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
 
         $query = "UPDATE " . $this->nombre_tabla . " SET contrasena = :nueva_contrasena WHERE id_usuario = :id_usuario";
-        
+
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(':nueva_contrasena', $nueva_contrasena_hash);
         $stmt->bindParam(':id_usuario', $id_usuario);
@@ -233,15 +238,43 @@ class Usuario {
 
     public function eliminarPorId($id_usuario) {
         $query = "DELETE FROM " . $this->nombre_tabla . " WHERE id_usuario = :id_usuario";
-        
+
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-        
+
         if ($stmt->execute()) {
             return $stmt->rowCount() > 0;
         }
 
         return false;
     }
+
+    public function actualizarIdiomaPreferido($id_usuario, $nuevo_idioma) {
+        $idiomas_validos = ['es', 'en'];
+        if (!in_array($nuevo_idioma, $idiomas_validos)) {
+            return ['exito' => false, 'mensaje' => 'Idioma no válido.'];
+        }
+
+        $query = "UPDATE " . $this->nombre_tabla . "
+                  SET idioma_preferido = :idioma_preferido
+                  WHERE id_usuario = :id_usuario";
+
+        try {
+            $stmt = $this->conexion->prepare($query);
+            $stmt->bindParam(':idioma_preferido', $nuevo_idioma);
+            $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return ['exito' => true, 'mensaje' => 'Idioma preferido actualizado con éxito.'];
+            } else {
+                error_log("Error al ejecutar la actualización de idioma para el usuario ID: " . $id_usuario);
+                return ['exito' => false, 'mensaje' => 'Error al actualizar el idioma en la base de datos.'];
+            }
+        } catch (PDOException $e) {
+            error_log("PDOException al actualizar idioma: " . $e->getMessage());
+            return ['exito' => false, 'mensaje' => 'Error de base de datos al actualizar el idioma.'];
+        }
+    }
 }
 ?>
+

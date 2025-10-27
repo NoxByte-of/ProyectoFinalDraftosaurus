@@ -121,7 +121,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
                                         <th><?php echo $traductor->traducir('historial_tabla_nombre'); ?></th>
                                         <th><?php echo $traductor->traducir('historial_tabla_fecha'); ?></th>
                                         <th><?php echo $traductor->traducir('historial_tabla_visualizar'); ?></th>
-                                        <th><?php echo $traductor->traducir('historial_tabla_eliminar'); ?></th> 
+                                        <th><?php echo $traductor->traducir('historial_tabla_eliminar'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-historial-partidas">
@@ -145,18 +145,9 @@ if (!isset($_SESSION['nombre_usuario'])) {
       </div>
     </footer>
 
-<div id="confirmacion-modal-overlay" class="modal-overlay">
-    <div class="modal-content card-parchment">
-        <h2 class="font-display" id="confirmacion-modal-titulo"><?php echo $traductor->traducir('historial_modal_eliminar_titulo'); ?></h2>
-        <p id="confirmacion-modal-texto" class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;"></p>
-        <div class="modal-acciones">
-            <button id="btn-cancelar-eliminacion" class="btn"><?php echo $traductor->traducir('ajustes_boton_cancelar'); ?></button>
-            <button id="btn-confirmar-eliminacion" class="btn btn-eliminar"><?php echo $traductor->traducir('ajustes_boton_eliminar'); ?></button>
-        </div>
-    </div>
-</div>
 
-<div id="notificacion-container"></div>
+
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -166,6 +157,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/historial.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

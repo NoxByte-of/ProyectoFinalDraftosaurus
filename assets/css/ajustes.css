@@ -1,4 +1,3 @@
-
 .main-ajustes {
     flex-grow: 1;
     display: flex;
@@ -73,7 +72,6 @@
     border-color: #5c1811 !important;
 }
 
-/* formularios modales */
 .modal-content form {
     display: flex;
     flex-direction: column;
@@ -97,4 +95,81 @@
     border-color: #d35625;
     box-shadow: 0 0 8px rgba(211, 86, 37, 0.6);
     outline: none;
+}
+
+.modal-idioma-opciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 1rem;
+    padding: 0 10px;
+}
+
+.modal-idioma-opcion {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: white;
+    position: relative;
+    padding-left: 35px;
+    font-family: 'Bubblegum Sans', sans-serif;
+    text-shadow: -1px -1px 0 #753900, 1px -1px 0 #753900, -1px 1px 0 #753900, 1px 1px 0 #753900;
+}
+
+.modal-idioma-opcion input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.modal-idioma-opcion .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 3px solid #74341b;
+    transition: background-color 0.2s, border-color 0.2s;
+    transform: translateY(-50%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.modal-idioma-opcion:hover input ~ .checkmark {
+    background-color: #f0e6d5;
+}
+
+.modal-idioma-opcion input:checked ~ .checkmark {
+    background-color: #d35625;
+    border-color: #5c1d01;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.modal-idioma-opcion input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.modal-idioma-opcion .checkmark:after {
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+}
+
+.modal-idioma-opcion span {
+    margin-left: 5px; 
 }

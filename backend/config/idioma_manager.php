@@ -24,7 +24,17 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], $idiomas_disponibles)) {
     $idioma_navegador = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     if (in_array($idioma_navegador, $idiomas_disponibles)) {
         $idioma_seleccionado = $idioma_navegador;
+        $_SESSION['idioma'] = $idioma_seleccionado;
+        setcookie('idioma', $idioma_seleccionado, time() + (365 * 24 * 60 * 60), "/");
     }
 }
 
+if (!isset($_SESSION['idioma'])) {
+    $_SESSION['idioma'] = $idioma_seleccionado;
+}
+if (!isset($_COOKIE['idioma'])) {
+     setcookie('idioma', $idioma_seleccionado, time() + (365 * 24 * 60 * 60), "/");
+}
+
 ?>
+

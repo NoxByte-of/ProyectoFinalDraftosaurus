@@ -1,18 +1,18 @@
 <?php
 require_once __DIR__ . '/../models/Usuario.php';
-require_once __DIR__ . '/../config/Traductor.php'; 
-require_once __DIR__ . '/../config/idioma_manager.php'; 
+require_once __DIR__ . '/../config/Traductor.php';
+require_once __DIR__ . '/../config/idioma_manager.php';
 
 class AuthController {
     private $conexion;
     private $usuario;
-    private $traductor; 
+    private $traductor;
 
     public function __construct($db) {
-        global $idioma_seleccionado; 
+        global $idioma_seleccionado;
         $this->conexion = $db;
         $this->usuario = new Usuario($this->conexion);
-        $this->traductor = new Traductor($idioma_seleccionado); 
+        $this->traductor = new Traductor($idioma_seleccionado);
     }
 
     public function registrar() {
@@ -94,17 +94,27 @@ class AuthController {
 
             $mensajeTraducido = $this->traductor->traducir('auth_login_exitoso');
             $respuesta['mensaje'] = str_replace('{nombreUsuario}', htmlspecialchars($datosUsuario['nombre_usuario']), $mensajeTraducido);
-        
+
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
 
             $_SESSION['id_usuario'] = $datosUsuario['id_usuario'];
             $_SESSION['nombre_usuario'] = $datosUsuario['nombre_usuario'];
-            $_SESSION['rol'] = $datosUsuario['rol']; 
+            $_SESSION['rol'] = $datosUsuario['rol'];
+            $_SESSION['idioma'] = $datosUsuario['idioma_preferido'] ?? 'es';
+
+        } else {
+             $respuesta['mensaje'] = $this->traductor->traducir('auth_error_login');
         }
 
         echo json_encode($respuesta);
     }
 
     public function logout() {
+        if (session_status() == PHP_SESSION_NONE) {
+             session_start();
+        }
         $_SESSION = array();
 
         if (ini_get("session.use_cookies")) {
@@ -122,3 +132,4 @@ class AuthController {
     }
 }
 ?>
+

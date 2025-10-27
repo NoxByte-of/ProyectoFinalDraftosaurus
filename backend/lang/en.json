@@ -231,7 +231,7 @@
     "tablero_dado_cafeteria": "Cafeteria Zone",
     "tablero_dado_banos": "Restroom Zone",
     "tablero_dado_vacio": "Empty Pen",
-    "tablero_dado_sin_t_rex": "No T-Rex",  
+    "tablero_dado_sin_t_rex": "No T-Rex",
     "tablero_dado_ninguna": "None",
     "tablero_acciones_turno": "Turn Actions",
     "tablero_btn_lanzar_dado": "Roll Die",
@@ -334,5 +334,13 @@
     "partida_error_datos_incompletos_finalizada": "Incomplete data to save the finished game.",
     "partida_error_nombre_vacio_finalizada": "The game name cannot be empty.",
     "partida_error_guardar_historial_db": "Database error when saving to history.",
-    "modal_confirmar_eliminacion_partida_texto": "Are you sure you want to delete this saved game? This action cannot be undone."
+    "modal_confirmar_eliminacion_partida_texto": "Are you sure you want to delete this saved game? This action cannot be undone.",
+    "ajustes_btn_seleccionar_idioma": "Select Preferred Language",
+    "ajustes_modal_idioma_titulo": "Select Language",
+    "ajustes_modal_idioma_subtitulo": "Choose the language you prefer for the application.",
+    "ajustes_boton_guardar": "Save",
+    "ajustes_idioma_actualizado_exito": "Preferred language updated. The page will reload.",
+    "ajustes_error_actualizar_idioma": "Error updating preferred language.",
+    "ajustes_error_seleccionar_idioma": "Please select a language."
 }
+

@@ -135,7 +135,7 @@ $traductor = new Traductor($idioma_seleccionado);
                     <div class="control-grupo">
                         <h4><?php echo $traductor->traducir('tablero_restriccion_dado'); ?></h4>
                         <p class="descripcion-control"><?php echo $traductor->traducir('tablero_restriccion_subtitulo'); ?></p>
-                        <div id="restricciones-dados-container">              
+                        <div id="restricciones-dados-container">
                             <button class="btn-dado" data-restriccion="boscosa"><?php echo $traductor->traducir('tablero_dado_boscosa'); ?></button>
                             <button class="btn-dado" data-restriccion="llanura"><?php echo $traductor->traducir('tablero_dado_llanura'); ?></button>
                             <button class="btn-dado" data-restriccion="cafeteria"><?php echo $traductor->traducir('tablero_dado_cafeteria'); ?></button>
@@ -161,7 +161,7 @@ $traductor = new Traductor($idioma_seleccionado);
             <div class="panel-tablero">
                 <div id="panel-de-control">
                     <div id="mano-virtual-container" class="control-grupo">
-                        <h4 id="titulo-mano-virtual"><?php ?></h4>
+                        <h4 id="titulo-mano-virtual"><?php echo $traductor->traducir('tablero_tu_mano_titulo', ['ronda' => 1]); ?></h4>
                         <div id="mano-virtual-dinos"></div>
                         <p id="mano-virtual-info" class="hidden">
                             <?php echo $traductor->traducir('tablero_tu_mano_subtitulo'); ?>
@@ -192,18 +192,7 @@ $traductor = new Traductor($idioma_seleccionado);
       </div>
     </footer>
 
-<div id="notificacion-container"></div>
 
-<div id="confirmacion-modal-overlay" class="modal-overlay">
-    <div class="modal-content card-parchment">
-        <h2 class="font-display"><?php echo $traductor->traducir('modal_confirm_titulo'); ?></h2>
-        <p id="confirmacion-modal-texto" class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;"></p>
-        <div class="modal-acciones">
-            <button id="btn-cancelar-eliminacion" class="btn"><?php echo $traductor->traducir('modal_confirm_cancelar'); ?></button>
-            <button id="btn-confirmar-eliminacion" class="btn btn-eliminar"><?php echo $traductor->traducir('modal_confirm_aceptar'); ?></button>
-        </div>
-    </div>
-</div>
 
 <template id="plantilla-parque-jugador">
     <div class="parque-container">
@@ -320,6 +309,10 @@ $traductor = new Traductor($idioma_seleccionado);
     </div>
 </div>
 
+
+
+<?php require_once '../includes/modales_comunes.php'; ?>
+
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
 </script>
@@ -330,8 +323,8 @@ $traductor = new Traductor($idioma_seleccionado);
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/motor_juego.js"></script>
-
 <script src="../assets/js/tablero.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

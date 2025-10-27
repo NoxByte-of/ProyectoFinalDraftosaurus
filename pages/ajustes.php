@@ -1,13 +1,21 @@
 <?php
 require_once '../backend/config/idioma_manager.php';
 require_once '../backend/config/Traductor.php';
+require_once '../backend/config/Database.php';
+require_once '../backend/models/Usuario.php';
 
 $traductor = new Traductor($idioma_seleccionado);
 
-if (!isset($_SESSION['nombre_usuario'])) {
+if (!isset($_SESSION['id_usuario'])) {
     header('Location: login.php?form=login');
     exit();
 }
+
+$db = Database::obtenerInstancia()->obtenerConexion();
+$usuario_modelo = new Usuario($db);
+$datos_usuario = $usuario_modelo->buscarPorId($_SESSION['id_usuario']);
+$idioma_preferido_actual = $datos_usuario ? $datos_usuario['idioma_preferido'] : $idioma_seleccionado;
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +23,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?php echo $traductor->traducir('ajustes_titulo'); ?> - Draftosaurus - NoxByte</title>
+<title><?php echo $traductor->traducir('page_title_ajustes'); ?></title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +34,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <link rel="stylesheet" href="../assets/css/style.css">
+
 
 </head>
 <body data-usuario-logueado="true">
@@ -114,6 +123,7 @@ if (!isset($_SESSION['nombre_usuario'])) {
         <div class="menu-ajustes">
             <button class="btn-ajuste" id="btn-abrir-modal-nombre"><?php echo $traductor->traducir('ajustes_btn_cambiar_nombre'); ?></button>
             <button class="btn-ajuste" id="btn-abrir-modal-contrasena"><?php echo $traductor->traducir('ajustes_btn_cambiar_contrasena'); ?></button>
+            <button class="btn-ajuste" id="btn-abrir-modal-idioma"><?php echo $traductor->traducir('ajustes_btn_seleccionar_idioma'); ?></button>
             <button onclick="window.location.href='../backend/Registro y Login/logout.php'" class="btn-ajuste btn-ajuste-peligro"><?php echo $traductor->traducir('ajustes_btn_cerrar_sesion'); ?></button>
             <button class="btn-ajuste btn-ajuste-peligro" id="btn-eliminar-cuenta"><?php echo $traductor->traducir('ajustes_btn_eliminar_cuenta'); ?></button>
         </div>
@@ -159,20 +169,45 @@ if (!isset($_SESSION['nombre_usuario'])) {
     </div>
 </div>
 
-<div id="confirmacion-eliminar-cuenta-modal" class="modal-overlay">
+<div id="modal-cambiar-idioma" class="modal-overlay">
     <div class="modal-content">
-        <h2><?php echo $traductor->traducir('ajustes_modal_eliminar_titulo'); ?></h2>
+        <button class="modal-close-btn" data-modal-id="modal-cambiar-idioma">&times;</button>
+        <h2><?php echo $traductor->traducir('ajustes_modal_idioma_titulo'); ?></h2>
+        <p class="descripcion-panel"><?php echo $traductor->traducir('ajustes_modal_idioma_subtitulo'); ?></p>
+        <form id="form-cambiar-idioma" novalidate>
+            <div class="modal-idioma-opciones">
+                <label class="modal-idioma-opcion">
+                    <input type="radio" name="idioma_preferido" value="es" <?php echo ($idioma_preferido_actual === 'es') ? 'checked' : ''; ?>>
+                    <span class="checkmark"></span>
+                    <span><?php echo $traductor->traducir('lang_es'); ?></span>
+                </label>
+                <label class="modal-idioma-opcion">
+                    <input type="radio" name="idioma_preferido" value="en" <?php echo ($idioma_preferido_actual === 'en') ? 'checked' : ''; ?>>
+                    <span class="checkmark"></span>
+                    <span><?php echo $traductor->traducir('lang_en'); ?></span>
+                </label>
+            </div>
+            <div class="modal-acciones">
+                <button type="submit" class="btn"><?php echo $traductor->traducir('ajustes_boton_guardar'); ?></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="confirmacion-eliminar-cuenta-modal" class="modal-overlay">
+    <div class="modal-content card-parchment">
+        <h2 class="font-display"><?php echo $traductor->traducir('ajustes_modal_eliminar_titulo'); ?></h2>
         <p class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;">
             <?php echo $traductor->traducir('ajustes_modal_eliminar_texto'); ?>
         </p>
         <div class="modal-acciones">
             <button id="btn-cancelar-eliminacion-cuenta" class="btn"><?php echo $traductor->traducir('ajustes_boton_cancelar'); ?></button>
-            <button id="btn-confirmar-eliminacion-cuenta" class="btn btn-peligro"><?php echo $traductor->traducir('ajustes_boton_eliminar'); ?></button>
+            <button id="btn-confirmar-eliminacion-cuenta" class="btn btn-eliminar"><?php echo $traductor->traducir('ajustes_boton_eliminar'); ?></button>
         </div>
     </div>
 </div>
 
-<div id="notificacion-container"></div>
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -182,6 +217,8 @@ if (!isset($_SESSION['nombre_usuario'])) {
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/ajustes.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>
+

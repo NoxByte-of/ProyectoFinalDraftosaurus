@@ -231,7 +231,7 @@
     "tablero_dado_cafeteria": "Zona de Cafetería",
     "tablero_dado_banos": "Zona de Baños",
     "tablero_dado_vacio": "Recinto Vacío",
-    "tablero_dado_sin_t_rex": "Sin T-Rex",  
+    "tablero_dado_sin_t_rex": "Sin T-Rex",
     "tablero_dado_ninguna": "Ninguna",
     "tablero_acciones_turno": "Acciones del Turno",
     "tablero_btn_lanzar_dado": "Lanzar Dado",
@@ -334,5 +334,13 @@
     "partida_error_datos_incompletos_finalizada": "Datos incompletos para guardar la partida finalizada.",
     "partida_error_nombre_vacio_finalizada": "El nombre de la partida no puede estar vacío.",
     "partida_error_guardar_historial_db": "Error en la base de datos al guardar en el historial.",
-    "modal_confirmar_eliminacion_partida_texto": "¿Estás seguro de que deseas eliminar esta partida guardada? Esta acción no se puede deshacer."
+    "modal_confirmar_eliminacion_partida_texto": "¿Estás seguro de que deseas eliminar esta partida guardada? Esta acción no se puede deshacer.",
+    "ajustes_btn_seleccionar_idioma": "Seleccionar Idioma Preferido",
+    "ajustes_modal_idioma_titulo": "Seleccionar Idioma",
+    "ajustes_modal_idioma_subtitulo": "Elige el idioma en que prefieres ver la aplicación.",
+    "ajustes_boton_guardar": "Guardar",
+    "ajustes_idioma_actualizado_exito": "Idioma preferido actualizado. La página se recargará.",
+    "ajustes_error_actualizar_idioma": "Error al actualizar el idioma preferido.",
+    "ajustes_error_seleccionar_idioma": "Por favor, selecciona un idioma."
 }
+

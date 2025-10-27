@@ -102,7 +102,7 @@ $traductor = new Traductor($idioma_seleccionado);
 </header>
 
 <main class="main-configuracion flex-grow-1">
-    
+
     <div id="seccion-bienvenida">
         <div class="panel-configuracion">
             <h2><?php echo $traductor->traducir('config_seguimiento_bienvenida_titulo'); ?></h2>
@@ -133,7 +133,7 @@ $traductor = new Traductor($idioma_seleccionado);
             <label><?php echo $traductor->traducir('config_label_nombres'); ?></label>
             <div id="campos-nombres"></div>
         </div>
-        
+
         <div class="botones-configuracion">
             <button id="btn-crear-partida" class="btn-menu" disabled><?php echo $traductor->traducir('config_btn_crear_partida'); ?></button>
         </div>
@@ -147,6 +147,10 @@ $traductor = new Traductor($idioma_seleccionado);
       </div>
     </footer>
 
+
+
+<?php require_once '../includes/modales_comunes.php'; ?>
+
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
 </script>
@@ -155,8 +159,8 @@ $traductor = new Traductor($idioma_seleccionado);
 <script src="../assets/js/comunes.js"></script>
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
-
 <script src="../assets/js/configuracion.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

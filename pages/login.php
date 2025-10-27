@@ -10,7 +10,7 @@ $traductor = new Traductor($idioma_seleccionado);
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro / Inicio de Sesión - Draftosaurus</title>
+<title><?php echo $traductor->traducir('page_title_login'); ?> - Draftosaurus</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@ $traductor = new Traductor($idioma_seleccionado);
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <link rel="stylesheet" href="../assets/css/style.css">
+
 
 </head>
 <body class="body-login">
@@ -105,7 +106,7 @@ $traductor = new Traductor($idioma_seleccionado);
     <div class="panel-login">
         <h2 id="panel-titulo"><?php echo $traductor->traducir('login_crear_cuenta_titulo'); ?></h2>
         <p id="panel-descripcion" class="descripcion-panel"><?php echo $traductor->traducir('login_crear_cuenta_subtitulo'); ?></p>
-        
+
         <form id="formulario-registro" novalidate>
             <input type="text" id="nombre-usuario-registro" class="form-control" required placeholder="<?php echo $traductor->traducir('login_placeholder_usuario'); ?>">
             <input type="email" id="email" class="form-control" required placeholder="<?php echo $traductor->traducir('login_placeholder_email'); ?>">
@@ -140,7 +141,8 @@ $traductor = new Traductor($idioma_seleccionado);
 </main>
 
 
-<div id="notificacion-container"></div>
+
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -150,6 +152,7 @@ $traductor = new Traductor($idioma_seleccionado);
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/login.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

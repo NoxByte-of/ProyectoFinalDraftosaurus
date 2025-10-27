@@ -21,6 +21,7 @@ $traductor = new Traductor($idioma_seleccionado);
 
 <link rel="stylesheet" href="../assets/css/style.css">
 
+
 </head>
 <body class="digital-body">
 
@@ -102,20 +103,20 @@ $traductor = new Traductor($idioma_seleccionado);
 </header>
 
 <main id="game-container" class="hidden">
-    
+
     <div id="columna-tablero-juego">
-       
+
         <div class="panel-tablero-digital">
             <div id="tabs-jugadores-digital"></div>
             <div id="contenedor-imagen-tablero">
-                
+
                 <div id="board-header-digital">
                     <h2 id="board-title"><?php echo $traductor->traducir('digital_parque_de'); ?></h2>
                     <div id="board-score" class="puntuacion-total-jugador"><?php echo $traductor->traducir('digital_puntuacion'); ?> <span>0</span></div>
                 </div>
 
                 <img src="../assets/imagenes/tablerodraftosaurus.png" alt="Tablero de Draftosaurus" id="imagen-tablero-digital">
-                
+
                 <div id="contenedor-slots-tablero">
                     <div class="recinto-digital" data-recinto="bosqueSemejanza" data-zona="boscosa" style="top: 13%; left: 7.0%; width: 33.5%; height: 17%;">
                         <div class="dino-slot-digital" data-slot-id="bosqueSemejanza-0"></div>
@@ -192,7 +193,7 @@ $traductor = new Traductor($idioma_seleccionado);
             <h4><?php echo $traductor->traducir('digital_tu_mano'); ?></h4>
             <div id="current-player-hand"></div>
         </section>
-        
+
         <section id="end-game-actions-container" class="control-grupo hidden">
              <button id="btn-ver-puntuaciones" class="btn btn-accion"><?php echo $traductor->traducir('digital_btn_ver_puntuaciones'); ?></button>
         </section>
@@ -213,36 +214,11 @@ $traductor = new Traductor($idioma_seleccionado);
       </div>
     </footer>
 
-<div id="end-game-modal" class="modal-overlay">
-    <div class="modal-content card-parchment">
-        <button id="btn-close-end-game-modal" class="modal-close-btn" aria-label="Cerrar ventana modal">&times;</button>
-        <h2 class="font-display"><?php echo $traductor->traducir('digital_modal_fin_titulo'); ?></h2>
-        <div id="final-scores-container" class="modal-scrollable-content"></div>
-        <div id="winner-container" class="ganador" style="margin-top: 1rem; flex-shrink: 0;"></div>
-        <div class="acciones-turno-grid" style="margin-top: 1.5rem; gap: 10px;">
-            <button class="btn btn-accion" onclick="window.location.href='modo_juego_digital.php'"><?php echo $traductor->traducir('digital_btn_jugar_nuevo'); ?></button>
-            <a href="../index.php" class="btn btn-accion"><?php echo $traductor->traducir('digital_btn_volver_menu'); ?></a>
-        </div>
-    </div>
-</div>
 
-<div id="guardar-partida-modal-overlay" class="modal-overlay">
-    <div class="modal-content card-parchment">
-        <button id="btn-cancelar-guardado-final" class="modal-close-btn" aria-label="Cancelar">&times;</button>
-        <h2 class="font-display"><?php echo $traductor->traducir('digital_modal_guardar_titulo'); ?></h2>
-        <p class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;">
-            <?php echo $traductor->traducir('digital_modal_guardar_texto'); ?>
-        </p>
-        <div class="form-group" style="margin-top: 1rem;">
-            <input type="text" id="nombre-partida-finalizada" class="form-control" placeholder="<?php echo $traductor->traducir('digital_modal_guardar_placeholder'); ?>" maxlength="50">
-        </div>
-        <div class="modal-acciones">
-            <button id="btn-confirmar-guardado-final" class="btn btn-accion" disabled><?php echo $traductor->traducir('digital_btn_guardar_final'); ?></button>
-        </div>
-    </div>
-</div>
 
-<div id="notificacion-container"></div>
+
+
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -251,8 +227,9 @@ $traductor = new Traductor($idioma_seleccionado);
 <script src="../assets/js/comunes.js"></script>
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
-<script src="../assets/js/motor_juego.js"></script> 
+<script src="../assets/js/motor_juego.js"></script>
 <script src="../assets/js/modo_digital.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

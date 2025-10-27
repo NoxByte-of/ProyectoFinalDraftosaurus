@@ -21,6 +21,7 @@ $traductor = new Traductor($idioma_seleccionado);
 
 <link rel="stylesheet" href="../assets/css/style.css">
 
+
 </head>
 <body data-usuario-logueado="<?php echo isset($_SESSION['nombre_usuario']) ? 'true' : 'false'; ?>">
 <header class="header">
@@ -146,7 +147,9 @@ $traductor = new Traductor($idioma_seleccionado);
       </div>
     </footer>
 
-<div id="notificacion-container"></div>
+
+
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -156,6 +159,7 @@ $traductor = new Traductor($idioma_seleccionado);
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/configuracion_digital.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>

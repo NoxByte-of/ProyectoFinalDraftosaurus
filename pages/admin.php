@@ -25,7 +25,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/admin.css">
+
 
 </head>
 <body>
@@ -134,18 +134,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
     </div>
 </div>
 
-<div id="confirmacion-modal-overlay" class="modal-overlay">
-    <div class="modal-content card-parchment">
-        <h2 class="font-display"><?php echo $traductor->traducir('admin_modal_confirmar_eliminacion'); ?></h2>
-        <p id="confirmacion-modal-texto" class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;"></p>
-        <div class="modal-acciones">
-            <button id="btn-cancelar-eliminacion" class="btn"><?php echo $traductor->traducir('ajustes_boton_cancelar'); ?></button>
-            <button id="btn-confirmar-eliminacion" class="btn btn-eliminar"><?php echo $traductor->traducir('ajustes_boton_aceptar'); ?></button>
-        </div>
-    </div>
-</div>
 
-<div id="notificacion-container"></div>
+
+<?php require_once '../includes/modales_comunes.php'; ?>
 
 <script>
     window.translations = <?php echo json_encode($traductor->obtenerTodosLosTextos()); ?>;
@@ -155,6 +146,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrador') {
 <script src="../assets/js/idioma.js"></script>
 <script src="../assets/js/traductor.js"></script>
 <script src="../assets/js/admin.js"></script>
+<script src="../assets/js/tutorial.js"></script>
 
 </body>
 </html>
