@@ -99,7 +99,7 @@ $idioma_preferido_actual = $datos_usuario ? $datos_usuario['idioma_preferido'] :
                             <div class="dropdown-content">
                                 <a href="historial.php"><?php echo $traductor->traducir('nav_ver_historial'); ?></a>
                                 <a href="ajustes.php"><?php echo $traductor->traducir('nav_ajustes'); ?></a>
-                                <a href="../backend/Registro y Login/logout.php"><?php echo $traductor->traducir('nav_cerrar_sesion'); ?></a>
+                                <a href="../backend/Registro_y_Login/logout.php"><?php echo $traductor->traducir('nav_cerrar_sesion'); ?></a>
                             </div>
                         </li>
                     <?php else: ?>
@@ -124,7 +124,7 @@ $idioma_preferido_actual = $datos_usuario ? $datos_usuario['idioma_preferido'] :
             <button class="btn-ajuste" id="btn-abrir-modal-nombre"><?php echo $traductor->traducir('ajustes_btn_cambiar_nombre'); ?></button>
             <button class="btn-ajuste" id="btn-abrir-modal-contrasena"><?php echo $traductor->traducir('ajustes_btn_cambiar_contrasena'); ?></button>
             <button class="btn-ajuste" id="btn-abrir-modal-idioma"><?php echo $traductor->traducir('ajustes_btn_seleccionar_idioma'); ?></button>
-            <button onclick="window.location.href='../backend/Registro y Login/logout.php'" class="btn-ajuste btn-ajuste-peligro"><?php echo $traductor->traducir('ajustes_btn_cerrar_sesion'); ?></button>
+            <button onclick="window.location.href='../backend/Registro_y_Login/logout.php'" class="btn-ajuste btn-ajuste-peligro"><?php echo $traductor->traducir('ajustes_btn_cerrar_sesion'); ?></button>
             <button class="btn-ajuste btn-ajuste-peligro" id="btn-eliminar-cuenta"><?php echo $traductor->traducir('ajustes_btn_eliminar_cuenta'); ?></button>
         </div>
     </div>

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const formularioRegistro = document.getElementById('formulario-registro');
@@ -74,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         datos.append('edad', edad);
         datos.append('contrasena', contrasena);
 
-        fetch('../backend/Registro y Login/registro_usuario.php', {
+        fetch('../backend/Registro_y_Login/registro_usuario.php', {
             method: 'POST',
             body: datos
         })
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         datos.append('nombre_usuario', nombreUsuario);
         datos.append('contrasena', contrasena);
 
-        fetch('../backend/Registro y Login/login_usuario.php', {
+        fetch('../backend/Registro_y_Login/login_usuario.php', {
             method: 'POST',
             body: datos
         })
@@ -130,3 +129,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+

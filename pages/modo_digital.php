@@ -85,7 +85,7 @@ $traductor = new Traductor($idioma_seleccionado);
                             <div class="dropdown-content">
                                 <a href="historial.php"><?php echo $traductor->traducir('nav_ver_historial'); ?></a>
                                 <a href="ajustes.php"><?php echo $traductor->traducir('nav_ajustes'); ?></a>
-                                <a href="../backend/Registro y Login/logout.php"><?php echo $traductor->traducir('nav_cerrar_sesion'); ?></a>
+                                <a href="../backend/Registro_y_Login/logout.php"><?php echo $traductor->traducir('nav_cerrar_sesion'); ?></a>
                             </div>
                         </li>
                     <?php else: ?>
@@ -259,3 +259,4 @@ $traductor = new Traductor($idioma_seleccionado);
 
 </body>
 </html>
+
