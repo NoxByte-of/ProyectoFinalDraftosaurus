@@ -11,5 +11,5 @@ try {
     header('Content-Type: application/json');
     echo json_encode(['exito' => false, 'mensaje' => 'Ha ocurrido un error inesperado: ' . $e->getMessage()]);
 }
-?>
+
 

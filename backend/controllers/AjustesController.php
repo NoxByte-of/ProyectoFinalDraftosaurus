@@ -211,5 +211,5 @@ class AjustesController {
         echo json_encode($respuesta);
     }
 }
-?>
+
 

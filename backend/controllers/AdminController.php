@@ -111,5 +111,5 @@ class AdminController {
         echo json_encode($respuesta);
     }
 }
-?>
+
 

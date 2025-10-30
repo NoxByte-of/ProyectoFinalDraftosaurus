@@ -282,4 +282,4 @@ class PartidaController {
         echo json_encode($respuesta);
     }
 }
-?>
+

@@ -23,4 +23,4 @@ try {
     http_response_code(500);
     echo json_encode(['exito' => false, 'mensaje' => 'Ha ocurrido un error inesperado: ' . $e->getMessage()]);
 }
-?>
+

@@ -29,5 +29,5 @@ class Traductor {
         return $this->textos;
     }
 }
-?>
+
 

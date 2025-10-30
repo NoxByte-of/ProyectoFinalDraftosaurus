@@ -131,5 +131,5 @@ class AuthController {
         exit;
     }
 }
-?>
+
 
