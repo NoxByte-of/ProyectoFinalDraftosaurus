@@ -18,5 +18,5 @@ try {
     error_log("Error en cambiar_idioma.php: " . $e->getMessage());
     echo json_encode(['exito' => false, 'mensaje' => 'Ha ocurrido un error inesperado al intentar cambiar el idioma.']);
 }
-?>
+
 

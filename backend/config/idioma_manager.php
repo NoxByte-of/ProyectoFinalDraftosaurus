@@ -36,5 +36,5 @@ if (!isset($_COOKIE['idioma'])) {
      setcookie('idioma', $idioma_seleccionado, time() + (365 * 24 * 60 * 60), "/");
 }
 
-?>
+
 
