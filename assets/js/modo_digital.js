@@ -57,6 +57,7 @@ class JuegoDigitalUI {
         this.elementosDOM.contenedorSlots?.addEventListener('drop', e => this._manejadorDrop(e));
         this.elementosDOM.contenedorSlots?.addEventListener('click', e => this._manejadorClicSlot(e));
 
+        // Eventos del modal de fin de juego (ahora debería funcionar)
         this.elementosDOM.modalFinJuego?.btnCerrar?.addEventListener('click', () => this.ocultarModalFinJuego());
         document.getElementById('btn-ver-puntuaciones')?.addEventListener('click', () => this.mostrarModalFinJuego());
         this.elementosDOM.modalFinJuego?.overlay?.addEventListener('click', e => {
@@ -115,6 +116,7 @@ class JuegoDigitalUI {
         this.renderizarTablero(estado);
         this.renderizarMano(estado);
 
+        // Lógica para mostrar/ocultar paneles
         const { paneles, btnGuardarSalir } = this.elementosDOM;
         const estaFinalizada = estado.partidaFinalizada;
         const modoVisualizacion = this.juego.enModoVisualizacion;
@@ -122,15 +124,13 @@ class JuegoDigitalUI {
         paneles.infoPartida?.classList.toggle('hidden', estaFinalizada);
         paneles.areaDado?.classList.toggle('hidden', estaFinalizada);
         paneles.areaMano?.classList.toggle('hidden', estaFinalizada);
-        paneles.accionesJuego?.classList.toggle('hidden', estaFinalizada || modoVisualizacion);
+        
+        // Corrección de la lógica de visibilidad de botones
+        paneles.accionesJuego?.classList.toggle('hidden', modoVisualizacion);
         paneles.accionesFinJuego?.classList.toggle('hidden', !estaFinalizada);
 
-        if (btnGuardarSalir && !estaFinalizada) {
-            btnGuardarSalir.textContent = traducirJS('digital_btn_guardar_salir');
-        } else if (btnGuardarSalir && estaFinalizada && !modoVisualizacion) {
-             btnGuardarSalir.textContent = traducirJS('digital_modal_guardar_titulo');
-        } else if (btnGuardarSalir) {
-             btnGuardarSalir.classList.add('hidden');
+        if (btnGuardarSalir) {
+            btnGuardarSalir.textContent = traducirJS(estaFinalizada ? 'digital_modal_guardar_titulo' : 'digital_btn_guardar_salir');
         }
     }
 
@@ -160,9 +160,12 @@ class JuegoDigitalUI {
         if (this.elementosDOM.btnLanzarDado) this.elementosDOM.btnLanzarDado.disabled = estado.restriccionDado !== null;
 
         if(this.elementosDOM.textoResultadoDado) {
+            // --- INICIO DE LA CORRECCIÓN ---
+            // Se usa replace(/-/g, '_') para reemplazar TODOS los guiones
             const claveTraduccionDado = estado.restriccionDado
-                ? 'tablero_dado_' + estado.restriccionDado
+                ? 'tablero_dado_' + estado.restriccionDado.replace(/-/g, '_') 
                 : 'digital_dado_resultado_ninguna';
+            // --- FIN DE LA CORRECCIÓN ---
             this.elementosDOM.textoResultadoDado.textContent = traducirJS(claveTraduccionDado);
         }
     }
@@ -512,11 +515,7 @@ class JuegoDigital {
         const caras = ['boscosa', 'llanura', 'cafeteria', 'banos', 'vacio', 'sin-t-rex'];
         let resultado = caras[Math.floor(Math.random() * caras.length)];
 
-        if (resultado === 'sin-t-rex') {
-            this.estado.restriccionDado = 'sin_t_rex';
-        } else {
-            this.estado.restriccionDado = resultado;
-        }
+        this.estado.restriccionDado = resultado;
 
         const indiceCaraDado = { 'boscosa': 0, 'banos': 1, 'llanura': 2, 'cafeteria': 3, 'vacio': 4, 'sin-t-rex': 5 }[resultado];
 
@@ -524,7 +523,10 @@ class JuegoDigital {
 
         setTimeout(() => {
             this.ui.renderizarInfoPartida(this.estado);
-             const claveTraduccionDado = this.estado.restriccionDado ? 'tablero_dado_' + this.estado.restriccionDado : null;
+             // --- INICIO DE LA CORRECCIÓN ---
+             // Se usa replace(/-/g, '_') para reemplazar TODOS los guiones
+             const claveTraduccionDado = this.estado.restriccionDado ? 'tablero_dado_' + this.estado.restriccionDado.replace(/-/g, '_') : null;
+             // --- FIN DE LA CORRECCIÓN ---
              const textoRestriccion = claveTraduccionDado ? traducirJS(claveTraduccionDado) : 'Error';
              this.ui.notificar(traducirJS('notif_dado_lanzado', {restriccion: textoRestriccion}), 'info');
         }, 2000);
@@ -750,7 +752,7 @@ class JuegoDigital {
                 case 'boscosa': if (!zonas.boscosa.includes(claveRecinto)) cumpleRestriccion = false; break;
                 case 'llanura': if (!zonas.llanura.includes(claveRecinto)) cumpleRestriccion = false; break;
                 case 'vacio': if (dinosEnRecinto.length > 0) cumpleRestriccion = false; break;
-                case 'sin_t_rex':
+                case 'sin-t-rex':
                     if (dinosEnRecinto.some(d => d.especie === 't-rex')) {
                          cumpleRestriccion = false;
                     }
@@ -852,3 +854,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 });
+

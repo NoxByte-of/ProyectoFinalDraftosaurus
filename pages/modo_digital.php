@@ -214,8 +214,34 @@ $traductor = new Traductor($idioma_seleccionado);
       </div>
     </footer>
 
+<div id="end-game-modal" class="modal-overlay">
+    <div class="modal-content card-parchment">
+        <button id="btn-close-end-game-modal" class="modal-close-btn" aria-label="Cerrar ventana modal">&times;</button>
+        <h2 class="font-display"><?php echo $traductor->traducir('digital_modal_fin_titulo'); ?></h2>
+        <div id="final-scores-container" class="modal-scrollable-content"></div>
+        <div id="winner-container" class="ganador" style="margin-top: 1rem; flex-shrink: 0;"></div>
+        <div class="acciones-turno-grid" style="margin-top: 1.5rem; gap: 10px;">
+            <button class="btn btn-accion" onclick="window.location.href='modo_juego_digital.php'"><?php echo $traductor->traducir('digital_btn_jugar_nuevo'); ?></button>
+            <a href="../index.php" class="btn btn-accion"><?php echo $traductor->traducir('digital_btn_volver_menu'); ?></a>
+        </div>
+    </div>
+</div>
 
-
+<div id="guardar-partida-modal-overlay" class="modal-overlay">
+    <div class="modal-content card-parchment">
+        <button id="btn-cancelar-guardado-final" class="modal-close-btn" aria-label="Cancelar">&times;</button>
+        <h2 class="font-display"><?php echo $traductor->traducir('digital_modal_guardar_titulo'); ?></h2>
+        <p class="descripcion-panel" style="font-size: 1.2rem; margin-top: 1rem;">
+            <?php echo $traductor->traducir('digital_modal_guardar_texto'); ?>
+        </p>
+        <div class="form-group" style="margin-top: 1rem;">
+            <input type="text" id="nombre-partida-finalizada" class="form-control" placeholder="<?php echo $traductor->traducir('digital_modal_guardar_placeholder'); ?>" maxlength="50">
+        </div>
+        <div class="modal-acciones">
+            <button id="btn-confirmar-guardado-final" class="btn btn-accion" disabled><?php echo $traductor->traducir('digital_btn_guardar_final'); ?></button>
+        </div>
+    </div>
+</div>
 
 
 <?php require_once '../includes/modales_comunes.php'; ?>

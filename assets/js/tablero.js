@@ -659,7 +659,10 @@ class JuegoSeguimiento {
         const caras = ['boscosa', 'llanura', 'vacio', 'sin-t-rex', 'cafeteria', 'banos'];
         this.estado.restriccionDados = caras[Math.floor(Math.random() * caras.length)];
 
-        const claveDadoFormateada = this.estado.restriccionDados.replace('-', '_');
+        // --- INICIO DE LA CORRECCIÓN ---
+        // Se usa replace(/-/g, '_') para reemplazar TODOS los guiones
+        const claveDadoFormateada = this.estado.restriccionDados.replace(/-/g, '_');
+        // --- FIN DE LA CORRECCIÓN ---
         const claveTraduccionDado = 'tablero_dado_' + claveDadoFormateada;
         const textoRestriccion = traducirJS(claveTraduccionDado);
 
