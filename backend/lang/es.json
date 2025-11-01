@@ -316,6 +316,7 @@
     "notif_digital_fin_ronda": "Fin de la Ronda {rondaActual}. ¡Repartiendo nuevos dinos!",
     "digital_mano_esperando": "Esperando a los demás jugadores...",
     "digital_mano_partida_finalizada": "Partida finalizada.",
+    "digital_dado_label_restriccion": "Restricción:",
     "digital_dado_resultado_ninguna": "Lanza el dado",
     "digital_dado_guardando": "Guardando...",
     "btn_reanudar": "Reanudar",
@@ -343,4 +344,3 @@
     "ajustes_error_actualizar_idioma": "Error al actualizar el idioma preferido.",
     "ajustes_error_seleccionar_idioma": "Por favor, selecciona un idioma."
 }
-

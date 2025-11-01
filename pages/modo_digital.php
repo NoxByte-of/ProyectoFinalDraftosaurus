@@ -186,7 +186,7 @@ $traductor = new Traductor($idioma_seleccionado);
                 </div>
             </div>
             <button id="roll-dice-btn" class="btn btn-accion"><?php echo $traductor->traducir('tablero_btn_lanzar_dado'); ?></button>
-            <p class="text-sm mt-2">Restricción: <span id="dice-result-text" class="font-bold"></span></p>
+            <p class="text-sm mt-2"><?php echo $traductor->traducir('digital_dado_label_restriccion'); ?> <span id="dice-result-text" class="font-bold"></span></p>
         </section>
 
         <section id="player-hand-area" class="control-grupo">
@@ -259,4 +259,3 @@ $traductor = new Traductor($idioma_seleccionado);
 
 </body>
 </html>
-
