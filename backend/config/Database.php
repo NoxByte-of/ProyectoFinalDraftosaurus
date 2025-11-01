@@ -1,10 +1,10 @@
 <?php
 
 class Database {
-    private $host = 'localhost';
+    private $host = 'mysql';
     private $db_nombre = 'draftosaurus_db';
-    private $usuario = 'root';
-    private $contrasena = '';
+    private $usuario = 'noxbyte';
+    private $contrasena = 'proyectofinaldraftosaurus2025';
     private $conexion;
 
     private static $instancia = null;

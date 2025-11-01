@@ -1,4 +1,3 @@
-
 class PaginaHistorial {
     constructor() {
         this.tbodyHistorial = document.getElementById('tbody-historial-partidas');
@@ -24,7 +23,7 @@ class PaginaHistorial {
 
     async cargarHistorial() {
         try {
-            const respuesta = await fetch('../backend/partidas/obtener_partidas_finalizadas.php');
+            const respuesta = await fetch('/backend/partidas/obtener_partidas_finalizadas.php');
             if (!respuesta.ok) {
                 throw new Error(`Error HTTP: ${respuesta.status}`);
             }
@@ -73,7 +72,7 @@ class PaginaHistorial {
         boton.textContent = traducirJS('historial_btn_cargando');
 
         try {
-            const respuesta = await fetch(`../backend/partidas/cargar_partida_finalizada.php?id=${idPartida}`);
+            const respuesta = await fetch(`/backend/partidas/cargar_partida_finalizada.php?id=${idPartida}`);
             if (!respuesta.ok) {
                 throw new Error(`Error HTTP: ${respuesta.status}`);
             }
@@ -109,7 +108,7 @@ class PaginaHistorial {
             const formData = new FormData();
             formData.append('id_partida', idPartida);
 
-            const respuesta = await fetch('../backend/partidas/eliminar_partida_finalizada.php', {
+            const respuesta = await fetch('/backend/partidas/eliminar_partida_finalizada.php', {
                 method: 'POST',
                 body: formData
             });

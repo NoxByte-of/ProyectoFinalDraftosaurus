@@ -1,4 +1,3 @@
-
 class PaginaAdmin {
     constructor() {
         this.contenedorAdmin = document.getElementById('admin-container');
@@ -58,7 +57,7 @@ class PaginaAdmin {
         `;
 
         try {
-            const respuesta = await fetch('../backend/admin/obtener_usuarios.php');
+            const respuesta = await fetch('/backend/admin/obtener_usuarios.php');
             if (!respuesta.ok) {
                 const error = await respuesta.json();
                 throw new Error(error.mensaje || `Error HTTP: ${respuesta.status}`);
@@ -89,7 +88,7 @@ class PaginaAdmin {
         `;
 
         try {
-            const respuesta = await fetch('../backend/admin/obtener_estadisticas.php');
+            const respuesta = await fetch('/backend/admin/obtener_estadisticas.php');
             if (!respuesta.ok) {
                 const error = await respuesta.json();
                 throw new Error(error.mensaje || `Error HTTP: ${respuesta.status}`);
@@ -266,7 +265,7 @@ class PaginaAdmin {
             formData.append('campo', campo);
             formData.append('valor', nuevoValor);
             
-            const respuesta = await fetch('../backend/admin/actualizar_usuario.php', {
+            const respuesta = await fetch('/backend/admin/actualizar_usuario.php', {
                 method: 'POST',
                 body: formData
             });
@@ -324,7 +323,7 @@ class PaginaAdmin {
             const formData = new FormData();
             formData.append('id_usuario', idUsuario);
 
-            const respuesta = await fetch('../backend/admin/eliminar_usuario.php', {
+            const respuesta = await fetch('/backend/admin/eliminar_usuario.php', {
                 method: 'POST',
                 body: formData
             });
@@ -363,4 +362,3 @@ document.addEventListener('DOMContentLoaded', () => {
         paginaAdmin.inicializar();
     }
 });
-

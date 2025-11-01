@@ -540,7 +540,7 @@ class JuegoDigital {
 
         try {
             const estadoJuegoJSON = JSON.stringify(this.estado);
-            const respuesta = await fetch('../backend/partidas/guardar_partida.php', {
+            const respuesta = await fetch('/backend/partidas/guardar_partida.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: estadoJuegoJSON,
@@ -569,7 +569,7 @@ class JuegoDigital {
 
         try {
             const datosParaGuardar = { nombre_partida: nombrePartida, estado_juego: JSON.stringify(this.estado) };
-            const respuesta = await fetch('../backend/partidas/guardar_partida_finalizada.php', {
+            const respuesta = await fetch('/backend/partidas/guardar_partida_finalizada.php', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datosParaGuardar)
             });
              const datos = await respuesta.json();
@@ -854,4 +854,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 });
-

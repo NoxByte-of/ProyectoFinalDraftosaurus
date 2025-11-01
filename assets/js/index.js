@@ -23,7 +23,7 @@ class PaginaPrincipal {
 
     async cargarPartidasGuardadas() {
         try {
-            const respuesta = await fetch('backend/partidas/obtener_partidas.php');
+            const respuesta = await fetch('/backend/partidas/obtener_partidas.php');
             if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
             const datos = await respuesta.json();
 
@@ -45,7 +45,7 @@ class PaginaPrincipal {
         boton.textContent = typeof traducirJS === 'function' ? traducirJS('text_cargando') : 'Loading...';
 
         try {
-            const respuesta = await fetch(`backend/partidas/cargar_partida.php?id=${idPartida}`);
+            const respuesta = await fetch(`/backend/partidas/cargar_partida.php?id=${idPartida}`);
             if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
             const datos = await respuesta.json();
 
@@ -79,7 +79,7 @@ class PaginaPrincipal {
             const formData = new FormData();
             formData.append('id_partida', idPartida);
 
-            const respuesta = await fetch('backend/partidas/eliminar_partida.php', {
+            const respuesta = await fetch('/backend/partidas/eliminar_partida.php', {
                 method: 'POST',
                 body: formData
             });

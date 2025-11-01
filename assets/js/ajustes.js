@@ -86,7 +86,7 @@ class PaginaAjustes {
         }
 
         try {
-            const respuesta = await fetch('../backend/ajustes/cambiar_nombre.php', {
+            const respuesta = await fetch('/backend/ajustes/cambiar_nombre.php', {
                 method: 'POST',
                 body: formData
             });
@@ -139,7 +139,7 @@ class PaginaAjustes {
         }
 
         try {
-            const respuesta = await fetch('../backend/ajustes/cambiar_contrasena.php', {
+            const respuesta = await fetch('/backend/ajustes/cambiar_contrasena.php', {
                 method: 'POST',
                 body: formData
             });
@@ -176,7 +176,7 @@ class PaginaAjustes {
         }
 
         try {
-            const respuesta = await fetch('../backend/ajustes/cambiar_idioma.php', {
+            const respuesta = await fetch('/backend/ajustes/cambiar_idioma.php', {
                 method: 'POST',
                 body: formData
             });
@@ -207,7 +207,7 @@ class PaginaAjustes {
                 this.btnEliminarCuenta.textContent = traducirJS('ajustes_boton_eliminando');
 
                 try {
-                    const respuesta = await fetch('../backend/ajustes/eliminar_cuenta.php', {
+                    const respuesta = await fetch('/backend/ajustes/eliminar_cuenta.php', {
                         method: 'POST'
                     });
 
@@ -242,4 +242,3 @@ document.addEventListener('DOMContentLoaded', () => {
         pagina.inicializar();
     }
 });
-
