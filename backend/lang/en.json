@@ -316,6 +316,7 @@
     "notif_digital_fin_ronda": "End of Round {rondaActual}. Dealing new dinos!",
     "digital_mano_esperando": "Waiting for other players...",
     "digital_mano_partida_finalizada": "Game finished.",
+    "digital_dado_label_restriccion": "Restriction:",
     "digital_dado_resultado_ninguna": "Roll the die",
     "digital_dado_guardando": "Saving...",
     "btn_reanudar": "Resume",
@@ -343,4 +344,3 @@
     "ajustes_error_actualizar_idioma": "Error updating preferred language.",
     "ajustes_error_seleccionar_idioma": "Please select a language."
 }
-
