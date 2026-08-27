@@ -13,7 +13,7 @@ if (!isset($traductor)) {
         $traductor = new class {
             public function traducir($clave) { return $clave; }
         };
-        error_log("Advertencia: No se pudo inicializar el Traductor en modales_comunes.php");
+        error_log("Advertencia: No se pudo inicializar el Traductor porque usted es homosexual.php");
     }
 }
 
